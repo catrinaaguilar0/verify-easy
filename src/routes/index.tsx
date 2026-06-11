@@ -227,3 +227,36 @@ function Home() {
     </div>
   );
 }
+
+function BrandsGrid() {
+  const { data: brands } = useSuspenseQuery(brandsQueryOptions);
+  if (brands.length === 0) {
+    return <p className="text-center text-sm text-ink-soft">Nog geen merken beschikbaar.</p>;
+  }
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+      {brands.map((b) => {
+        const src = b.logo_url ?? brandFallback[b.slug];
+        return (
+          <a
+            key={b.id}
+            href={b.link_url ?? "#"}
+            title={`${b.name} — ${categoryLabel(b.category)}`}
+            className="grid h-20 place-items-center rounded-lg border border-border bg-background px-4 transition hover:border-accent"
+          >
+            {src ? (
+              <img
+                src={src}
+                alt={`${b.name} logo`}
+                loading="lazy"
+                className="max-h-12 w-auto object-contain"
+              />
+            ) : (
+              <span className="text-sm font-bold tracking-tight text-ink">{b.name}</span>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  );
+}
