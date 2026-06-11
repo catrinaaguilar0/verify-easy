@@ -15,7 +15,7 @@ const nav = [
   { label: "Grondverf", to: "/" },
   { label: "Buitenverf", to: "/" },
   { label: "Verfbenodigdheden", to: "/" },
-  { label: "Kleuren", to: "/" },
+  { label: "RAL kleuren", to: "/ral" },
   { label: "Merken", to: "/" },
   { label: "Verfmengservice", to: "/verfmengservice" },
   { label: "Blog", to: "/blog" },

@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerfmengserviceRouteImport } from './routes/verfmengservice'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RalRouteImport } from './routes/ral'
 import { Route as MuurverfRouteImport } from './routes/muurverf'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RalCodeRouteImport } from './routes/ral.$code'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const VerfmengserviceRoute = VerfmengserviceRouteImport.update({
@@ -24,6 +26,11 @@ const VerfmengserviceRoute = VerfmengserviceRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RalRoute = RalRouteImport.update({
+  id: '/ral',
+  path: '/ral',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MuurverfRoute = MuurverfRouteImport.update({
@@ -41,6 +48,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RalCodeRoute = RalCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => RalRoute,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -51,26 +63,32 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/muurverf': typeof MuurverfRoute
+  '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/ral/$code': typeof RalCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/muurverf': typeof MuurverfRoute
+  '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/ral/$code': typeof RalCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
   '/muurverf': typeof MuurverfRoute
+  '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/ral/$code': typeof RalCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -78,31 +96,38 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/muurverf'
+    | '/ral'
     | '/sitemap.xml'
     | '/verfmengservice'
     | '/blog/$slug'
+    | '/ral/$code'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/blog'
     | '/muurverf'
+    | '/ral'
     | '/sitemap.xml'
     | '/verfmengservice'
     | '/blog/$slug'
+    | '/ral/$code'
   id:
     | '__root__'
     | '/'
     | '/blog'
     | '/muurverf'
+    | '/ral'
     | '/sitemap.xml'
     | '/verfmengservice'
     | '/blog/$slug'
+    | '/ral/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
   MuurverfRoute: typeof MuurverfRoute
+  RalRoute: typeof RalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VerfmengserviceRoute: typeof VerfmengserviceRoute
 }
@@ -121,6 +146,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ral': {
+      id: '/ral'
+      path: '/ral'
+      fullPath: '/ral'
+      preLoaderRoute: typeof RalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/muurverf': {
@@ -144,6 +176,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ral/$code': {
+      id: '/ral/$code'
+      path: '/$code'
+      fullPath: '/ral/$code'
+      preLoaderRoute: typeof RalCodeRouteImport
+      parentRoute: typeof RalRoute
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -164,13 +203,34 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface RalRouteChildren {
+  RalCodeRoute: typeof RalCodeRoute
+}
+
+const RalRouteChildren: RalRouteChildren = {
+  RalCodeRoute: RalCodeRoute,
+}
+
+const RalRouteWithChildren = RalRoute._addFileChildren(RalRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
   MuurverfRoute: MuurverfRoute,
+  RalRoute: RalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VerfmengserviceRoute: VerfmengserviceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
