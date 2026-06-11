@@ -143,6 +143,20 @@ function MuurverfPage() {
                   Toepassen
                 </button>
               </div>
+              <label className="mt-2 flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-surface p-3">
+                <input
+                  type="checkbox"
+                  checked={onlyMatching}
+                  onChange={(e) => setOnlyMatching(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-border accent-accent"
+                />
+                <span className="text-sm text-ink">
+                  <span className="font-semibold">Toon alleen varianten die het beste passen</span>
+                  <span className="block text-xs text-ink-soft">
+                    Filtert op ondertoon <strong className="capitalize text-ink">{activeUndertone}</strong> van de gekozen kleur.
+                  </span>
+                </span>
+              </label>
             </div>
             <div className="relative min-h-48 md:min-h-full" style={{ background: activeColor.hex }}>
               <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent" />
