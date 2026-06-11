@@ -291,6 +291,9 @@ function BrandRowCard({
   const [editName, setEditName] = useState(brand.name);
   const [editCategory, setEditCategory] = useState(brand.category);
   const [editLink, setEditLink] = useState(brand.link_url ?? "");
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [pendingPreview, setPendingPreview] = useState<string | null>(null);
+  const [pendingError, setPendingError] = useState<string | null>(null);
   const dirty = useMemo(
     () =>
       editName !== brand.name ||
@@ -298,6 +301,11 @@ function BrandRowCard({
       (editLink || null) !== (brand.link_url || null),
     [editName, editCategory, editLink, brand],
   );
+
+  useEffect(() => {
+    if (!pendingPreview) return;
+    return () => URL.revokeObjectURL(pendingPreview);
+  }, [pendingPreview]);
 
   async function update(patch: Partial<BrandRow>) {
     setBusy(true);
@@ -312,20 +320,50 @@ function BrandRowCard({
     }
   }
 
-  async function handleUpload(file: File) {
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error("Maximaal 2 MB per logo");
+  const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+  const MAX_SIZE = 2 * 1024 * 1024;
+
+  function clearPending() {
+    if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+    setPendingFile(null);
+    setPendingPreview(null);
+    setPendingError(null);
+  }
+
+  function handleFileSelected(file: File) {
+    if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+    setPendingError(null);
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setPendingFile(file);
+      setPendingPreview(null);
+      setPendingError(
+        `Ongeldig formaat (${file.type || "onbekend"}). Toegestaan: PNG, JPG, WebP, SVG.`,
+      );
       return;
     }
+    if (file.size > MAX_SIZE) {
+      setPendingFile(file);
+      setPendingPreview(null);
+      setPendingError(
+        `Bestand is te groot (${(file.size / 1024 / 1024).toFixed(2)} MB). Max 2 MB.`,
+      );
+      return;
+    }
+    setPendingFile(file);
+    setPendingPreview(URL.createObjectURL(file));
+  }
+
+  async function confirmUpload() {
+    if (!pendingFile || pendingError) return;
     setBusy(true);
     try {
-      const ext = file.name.split(".").pop()?.toLowerCase() || "png";
+      const ext = pendingFile.name.split(".").pop()?.toLowerCase() || "png";
       const path = `${brand.slug}-${Date.now()}.${ext}`;
       const { error: upErr } = await supabase.storage
         .from("brand-logos")
-        .upload(path, file, { contentType: file.type, upsert: false });
+        .upload(path, pendingFile, { contentType: pendingFile.type, upsert: false });
       if (upErr) throw upErr;
-      // delete old
       if (brand.logo_path) {
         await supabase.storage.from("brand-logos").remove([brand.logo_path]);
       }
@@ -335,6 +373,7 @@ function BrandRowCard({
         .eq("id", brand.id);
       if (error) throw error;
       toast.success("Logo geüpload");
+      clearPending();
       onChanged();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Upload mislukt");
@@ -434,6 +473,44 @@ function BrandRowCard({
               maxLength={500}
             />
           </div>
+          {pendingFile && (
+            <div className="rounded-md border border-border bg-surface p-3">
+              <div className="flex items-start gap-3">
+                <div className="grid h-20 w-20 shrink-0 place-items-center rounded border border-border bg-background p-1">
+                  {pendingPreview ? (
+                    <img
+                      src={pendingPreview}
+                      alt="Voorbeeld"
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-[10px] text-ink-soft">Geen preview</span>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1 text-xs">
+                  <div className="truncate font-medium text-ink">{pendingFile.name}</div>
+                  <div className="text-ink-soft">
+                    {(pendingFile.size / 1024).toFixed(1)} KB · {pendingFile.type || "onbekend"}
+                  </div>
+                  {pendingError && (
+                    <div className="mt-1 text-destructive">{pendingError}</div>
+                  )}
+                  <div className="mt-2 flex gap-2">
+                    <Button
+                      size="sm"
+                      disabled={busy || !!pendingError}
+                      onClick={confirmUpload}
+                    >
+                      {busy ? "Bezig…" : "Bevestig upload"}
+                    </Button>
+                    <Button size="sm" variant="outline" disabled={busy} onClick={clearPending}>
+                      Annuleren
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm hover:border-accent">
               <Upload className="h-4 w-4" />
@@ -445,11 +522,12 @@ function BrandRowCard({
                 disabled={busy}
                 onChange={(e) => {
                   const f = e.target.files?.[0];
-                  if (f) void handleUpload(f);
+                  if (f) handleFileSelected(f);
                   e.target.value = "";
                 }}
               />
             </label>
+            <span className="text-xs text-ink-soft">PNG, JPG, WebP of SVG · max 2 MB</span>
             <div className="inline-flex items-center gap-2 text-sm">
               <Switch
                 checked={brand.visible}
