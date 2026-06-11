@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets, PaintRoller, Brush, Sparkles, Hammer, Layers, Wind, Clock } from "lucide-react";
+import { Play, ArrowLeft, ExternalLink, ShieldCheck, Droplets, PaintRoller, Brush, Sparkles, Hammer, Layers, Wind, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/demonstraties")({
   head: () => ({
@@ -23,32 +23,6 @@ export const Route = createFileRoute("/demonstraties")({
   component: DemonstratiesPage,
 });
 
-const categories = [
-  {
-    title: "Verftechnieken",
-    description:
-      "Leer de juiste verftechnieken voor een strak resultaat. Van rollen tot spuiten en alles daartussen.",
-    icon: Paintbrush,
-  },
-  {
-    title: "Kleuradvies",
-    description:
-      "Ontdek hoe je de perfecte kleur kiest voor je ruimte. Tips over licht, ruimtegevoel en sfeer.",
-    icon: Lightbulb,
-  },
-  {
-    title: "Grondverf & Voorbehandeling",
-    description:
-      "Zie hoe je ondergronden correct voorbereidt voor een duurzaam en professioneel eindresultaat.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Duurzaam schilderen",
-    description:
-      "Bekijk demonstraties over milieubewust verven en duurzame verfoplossingen voor elk project.",
-    icon: Droplets,
-  },
-];
 
 const demoFilms = [
   {
@@ -234,29 +208,6 @@ function DemonstratiesPage() {
                     </div>
                   </div>
                 </article>
-              );
-            })}
-          </div>
-
-          <h2 className="mt-16 text-2xl font-bold text-ink md:text-3xl">
-            Waar gaat het over?
-          </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((d) => {
-              const Icon = d.icon;
-              return (
-                <div
-                  key={d.title}
-                  className="flex flex-col rounded-xl border border-border bg-background p-6 transition hover:border-accent hover:shadow-md"
-                >
-                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent/10 text-accent">
-                    <Icon className="h-6 w-6" />
-                  </span>
-                  <h3 className="mt-5 text-lg font-bold text-ink">{d.title}</h3>
-                  <p className="mt-2 flex-1 text-sm text-ink-soft">
-                    {d.description}
-                  </p>
-                </div>
               );
             })}
           </div>
