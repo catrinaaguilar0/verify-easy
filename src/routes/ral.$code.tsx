@@ -2,7 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getRal, ralColors, type RalColor } from "@/lib/ral";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
+import { useState } from "react";
 
 const baseUrl = "https://cozy-check-hub.lovable.app";
 
@@ -66,6 +67,13 @@ function RalDetail() {
   const { ral } = Route.useLoaderData() as { ral: RalColor };
   const combos = ral.combinesWith.map((c: string) => getRal(c)).filter((x): x is RalColor => Boolean(x));
   const others = ralColors.filter((r: RalColor) => r.code !== ral.code).slice(0, 6);
+  const [copied, setCopied] = useState(false);
+
+  const copyHex = async () => {
+    await navigator.clipboard.writeText(ral.hex.toUpperCase());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -85,11 +93,17 @@ function RalDetail() {
             </Link>
 
             <div className="mt-6 grid gap-8 md:grid-cols-[260px_1fr] md:items-center">
-              <div
-                className="aspect-square w-full rounded-2xl border border-border shadow-[var(--shadow-card)]"
-                style={{ backgroundColor: ral.hex }}
-                aria-label={`Kleurstaal van RAL ${ral.code} ${ral.name}`}
-              />
+              <figure className="m-0">
+                <div
+                  className="aspect-square w-full rounded-2xl border border-border shadow-[var(--shadow-card)]"
+                  style={{ backgroundColor: ral.hex }}
+                  role="img"
+                  aria-label={`Kleurstaal van RAL ${ral.code} ${ral.name} in ${ral.hex.toUpperCase()}`}
+                />
+                <figcaption className="sr-only">
+                  Zichtbare kleurstaal weergegeven als gekleurd vlak in RAL {ral.code} {ral.name}
+                </figcaption>
+              </figure>
               <div>
                 <div className="text-xs font-semibold uppercase tracking-wider text-accent">
                   RAL {ral.code} · {ral.family}
@@ -99,9 +113,22 @@ function RalDetail() {
                 </h1>
                 <p className="mt-4 text-base text-ink-soft">{ral.description}</p>
                 <div className="mt-5 flex flex-wrap items-center gap-3 text-xs">
-                  <span className="rounded-md border border-border bg-card px-3 py-1.5 font-mono text-ink">
-                    HEX {ral.hex.toUpperCase()}
-                  </span>
+                  <button
+                    onClick={copyHex}
+                    className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 font-mono text-ink transition hover:border-accent hover:text-accent"
+                    title="Klik om HEX-code te kopiëren"
+                    aria-label={`Kopieer CSS-kleurcode ${ral.hex.toUpperCase()} naar klembord`}
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-emerald-500" />
+                        <span className="text-emerald-600">Gekopieerd</span>
+                      </>
+                    ) : (
+                      <span>HEX {ral.hex.toUpperCase()}</span>
+                    )}
+                  </button>
+                  <span className="text-ink-soft">CSS: <code className="rounded bg-card px-1.5 py-0.5 font-mono text-ink">{ral.hex.toLowerCase()}</code></span>
                   <Link
                     to="/verfmengservice"
                     className="inline-flex items-center gap-1 rounded-md bg-accent px-4 py-1.5 font-semibold text-accent-foreground hover:opacity-90"
@@ -135,11 +162,15 @@ function RalDetail() {
                     className="group rounded-lg border border-border bg-card p-3 transition hover:-translate-y-0.5 hover:border-accent"
                     aria-label={`Bekijk RAL ${c!.code} ${c!.name}`}
                   >
-                    <span
-                      className="block aspect-square w-full rounded border border-border"
-                      style={{ backgroundColor: c!.hex }}
-                      aria-hidden
-                    />
+                    <figure className="m-0">
+                      <span
+                        className="block aspect-square w-full rounded border border-border"
+                        style={{ backgroundColor: c!.hex }}
+                        role="img"
+                        aria-label={`Kleurstaal ${c!.name}: ${c!.hex.toUpperCase()}`}
+                      />
+                      <figcaption className="sr-only">{c!.name} swatch in {c!.hex.toUpperCase()}</figcaption>
+                    </figure>
                     <span className="mt-2 block text-[10px] font-semibold uppercase tracking-wider text-accent">
                       RAL {c!.code}
                     </span>
@@ -164,11 +195,15 @@ function RalDetail() {
                   params={{ code: c.code }}
                   className="group flex items-center gap-3 rounded-lg border border-border bg-card p-3 transition hover:border-accent"
                 >
-                  <span
-                    className="h-10 w-10 shrink-0 rounded border border-border"
-                    style={{ backgroundColor: c.hex }}
-                    aria-hidden
-                  />
+                  <figure className="m-0 shrink-0">
+                    <span
+                      className="block h-10 w-10 rounded border border-border"
+                      style={{ backgroundColor: c.hex }}
+                      role="img"
+                      aria-label={`Kleurstaal ${c.name}: ${c.hex.toUpperCase()}`}
+                    />
+                    <figcaption className="sr-only">{c.name} swatch in {c.hex.toUpperCase()}</figcaption>
+                  </figure>
                   <span className="flex flex-col">
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
                       RAL {c.code}
