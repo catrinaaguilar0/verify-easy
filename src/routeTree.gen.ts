@@ -14,6 +14,7 @@ import { Route as VerfcalculatorRouteImport } from './routes/verfcalculator'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RalRouteImport } from './routes/ral'
 import { Route as MuurverfRouteImport } from './routes/muurverf'
+import { Route as HulpEnAdviesRouteImport } from './routes/hulp-en-advies'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RalCodeRouteImport } from './routes/ral.$code'
@@ -44,6 +45,11 @@ const MuurverfRoute = MuurverfRouteImport.update({
   path: '/muurverf',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HulpEnAdviesRoute = HulpEnAdviesRouteImport.update({
+  id: '/hulp-en-advies',
+  path: '/hulp-en-advies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -68,6 +74,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/hulp-en-advies': typeof HulpEnAdviesRoute
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/hulp-en-advies': typeof HulpEnAdviesRoute
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/hulp-en-advies': typeof HulpEnAdviesRoute
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blog'
+    | '/hulp-en-advies'
     | '/muurverf'
     | '/ral'
     | '/sitemap.xml'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blog'
+    | '/hulp-en-advies'
     | '/muurverf'
     | '/ral'
     | '/sitemap.xml'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/blog'
+    | '/hulp-en-advies'
     | '/muurverf'
     | '/ral'
     | '/sitemap.xml'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
+  HulpEnAdviesRoute: typeof HulpEnAdviesRoute
   MuurverfRoute: typeof MuurverfRoute
   RalRoute: typeof RalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/muurverf'
       fullPath: '/muurverf'
       preLoaderRoute: typeof MuurverfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hulp-en-advies': {
+      id: '/hulp-en-advies'
+      path: '/hulp-en-advies'
+      fullPath: '/hulp-en-advies'
+      preLoaderRoute: typeof HulpEnAdviesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -236,6 +256,7 @@ const RalRouteWithChildren = RalRoute._addFileChildren(RalRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
+  HulpEnAdviesRoute: HulpEnAdviesRoute,
   MuurverfRoute: MuurverfRoute,
   RalRoute: RalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -245,13 +266,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
