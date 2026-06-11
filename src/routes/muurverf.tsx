@@ -212,10 +212,15 @@ function MuurverfPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-5 md:grid-cols-3">
-              {products.map((p) => {
+              {visibleProducts.map((p) => {
                 const selected = perProduct[p.name] ?? activeColor.hex;
                 return (
                 <article key={p.name} className="group relative rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
+                  {onlyMatching && (
+                    <span className="absolute left-3 top-3 z-10 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
+                      Match {p.matchScore}%
+                    </span>
+                  )}
                   <button aria-label="Bewaar" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft hover:text-accent">
                     <Heart className="h-4 w-4" />
                   </button>
