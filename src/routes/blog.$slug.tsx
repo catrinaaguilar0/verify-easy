@@ -76,7 +76,7 @@ function BlogPost() {
             <img src={post.image} alt={post.title} width={1024} height={1024} className="aspect-[16/9] w-full rounded-2xl object-cover shadow-[var(--shadow-card)]" />
 
             <div className="prose mt-10 max-w-none">
-              {post.body.map((block, i) => {
+              {post.body.map((block: { type: string; text?: string; items?: string[] }, i: number) => {
                 if (block.type === "h2") return <h2 key={i} className="mt-8 text-2xl font-bold text-ink">{block.text}</h2>;
                 if (block.type === "ul") return (
                   <ul key={i} className="mt-4 list-disc space-y-1 pl-6 text-sm text-ink-soft">
