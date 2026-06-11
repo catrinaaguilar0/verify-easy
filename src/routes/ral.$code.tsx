@@ -184,6 +184,155 @@ function RalDetail() {
           </div>
         </section>
 
+        <section className="border-t border-border">
+          <div className="container mx-auto max-w-5xl px-4 py-12">
+            <h2 className="text-xl font-bold text-ink">
+              RAL {ral.code} {ral.name} in toepassing
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+              Bekijk hoe RAL {ral.code} {ral.name} eruitziet binnenshuis op een muur én
+              buiten op een gevel met kozijnen. De getoonde kleur is gerenderd op basis
+              van de officiële HEX-waarde {ral.hex.toUpperCase()}.
+            </p>
+
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {/* Binnen scene */}
+              <figure className="m-0 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+                <div
+                  className="relative h-56 w-full"
+                  role="img"
+                  aria-label={`Voorbeeld binnen: woonkamermuur geschilderd in RAL ${ral.code} ${ral.name}`}
+                >
+                  {/* wall */}
+                  <div className="absolute inset-0" style={{ backgroundColor: ral.hex }} />
+                  {/* floor */}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-[#c9a87a] to-[#8c6a3f]" />
+                  {/* skirting */}
+                  <div className="absolute inset-x-0 bottom-16 h-1.5 bg-white/85" />
+                  {/* frame on wall */}
+                  <div className="absolute left-8 top-8 h-20 w-14 rounded-sm border-[3px] border-white/90 bg-white/10" />
+                  {/* lamp */}
+                  <div className="absolute right-10 top-0 h-10 w-px bg-white/40" />
+                  <div className="absolute right-7 top-9 h-3 w-7 rounded-b-full bg-white/85" />
+                  {/* sofa */}
+                  <div className="absolute bottom-16 left-10 right-10 h-12 rounded-t-lg bg-[#f3ede3]" />
+                  <div className="absolute bottom-20 left-14 h-6 w-8 rounded bg-[#d9c9a8]" />
+                  <div className="absolute bottom-20 right-16 h-6 w-8 rounded bg-[#b89c70]" />
+                </div>
+                <figcaption className="border-t border-border px-4 py-3 text-xs text-ink-soft">
+                  <span className="font-semibold text-ink">Binnen — woonkamermuur.</span>{" "}
+                  Sfeerimpressie van RAL {ral.code} als wandkleur, gecombineerd met een
+                  warme houten vloer en lichte meubels.
+                </figcaption>
+              </figure>
+
+              {/* Buiten scene */}
+              <figure className="m-0 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+                <div
+                  className="relative h-56 w-full"
+                  role="img"
+                  aria-label={`Voorbeeld buiten: gevel en kozijnen geschilderd in RAL ${ral.code} ${ral.name}`}
+                >
+                  {/* sky */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#cfe3f0] to-[#eaf2f7]" />
+                  {/* facade */}
+                  <div className="absolute inset-x-0 bottom-0 top-10 bg-[#f4ede0]" />
+                  {/* roof */}
+                  <div
+                    className="absolute inset-x-0 top-0 h-12"
+                    style={{
+                      background: `linear-gradient(180deg, ${ral.hex} 0%, ${ral.hex} 100%)`,
+                      clipPath: "polygon(0 100%, 50% 0, 100% 100%)",
+                    }}
+                  />
+                  {/* door */}
+                  <div
+                    className="absolute bottom-0 left-10 h-28 w-14 rounded-t-md border border-black/10 shadow-md"
+                    style={{ backgroundColor: ral.hex }}
+                  />
+                  <div className="absolute bottom-12 left-[5.6rem] h-1 w-1 rounded-full bg-yellow-300" />
+                  {/* windows with kozijn */}
+                  <div className="absolute right-10 top-16 h-20 w-24 p-1.5" style={{ backgroundColor: ral.hex }}>
+                    <div className="grid h-full w-full grid-cols-2 gap-1.5 bg-[#dbe7ef]">
+                      <div className="bg-[#dbe7ef]" />
+                      <div className="bg-[#cbd9e2]" />
+                      <div className="bg-[#cbd9e2]" />
+                      <div className="bg-[#dbe7ef]" />
+                    </div>
+                  </div>
+                  {/* ground */}
+                  <div className="absolute inset-x-0 bottom-0 h-3 bg-[#9aa097]" />
+                </div>
+                <figcaption className="border-t border-border px-4 py-3 text-xs text-ink-soft">
+                  <span className="font-semibold text-ink">Buiten — gevel & kozijnen.</span>{" "}
+                  Voorbeeld van RAL {ral.code} op kozijnen, voordeur en dakranden bij een
+                  lichte gevel.
+                </figcaption>
+              </figure>
+            </div>
+
+            {/* Product links */}
+            <div className="mt-10">
+              <h3 className="text-lg font-bold text-ink">
+                Producten in RAL {ral.code} {ral.name}
+              </h3>
+              <p className="mt-1 text-sm text-ink-soft">
+                De volgende verfsoorten laten wij op maat mengen in exact deze RAL-tint.
+                Bestel online of vraag advies aan onze kleurspecialist.
+              </p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <Link
+                  to="/muurverf"
+                  className="group rounded-xl border border-border bg-card p-4 transition hover:-translate-y-0.5 hover:border-accent"
+                  aria-label={`Muurverf laten mengen in RAL ${ral.code} ${ral.name}`}
+                >
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
+                    Binnenmuurverf
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-ink group-hover:text-accent">
+                    Muurverf in RAL {ral.code} {ral.name}
+                  </span>
+                  <span className="mt-1 block text-xs text-ink-soft">
+                    Matte, dekkende muurverf op maat gemengd voor binnenmuren en plafonds.
+                  </span>
+                </Link>
+
+                <Link
+                  to="/verfmengservice"
+                  className="group rounded-xl border border-border bg-card p-4 transition hover:-translate-y-0.5 hover:border-accent"
+                  aria-label={`Lakverf laten mengen in RAL ${ral.code} ${ral.name}`}
+                >
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
+                    Lakverf binnen & buiten
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-ink group-hover:text-accent">
+                    Hoogglans & zijdeglans lak in RAL {ral.code}
+                  </span>
+                  <span className="mt-1 block text-xs text-ink-soft">
+                    Voor kozijnen, deuren en trappen — laten mengen via onze verfmengservice.
+                  </span>
+                </Link>
+
+                <Link
+                  to="/verfmengservice"
+                  className="group rounded-xl border border-border bg-card p-4 transition hover:-translate-y-0.5 hover:border-accent"
+                  aria-label={`Buitenverf voor gevel en kozijnen laten mengen in RAL ${ral.code} ${ral.name}`}
+                >
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
+                    Buitenverf
+                  </span>
+                  <span className="mt-1 block text-sm font-bold text-ink group-hover:text-accent">
+                    Gevel- & houtverf in RAL {ral.code}
+                  </span>
+                  <span className="mt-1 block text-xs text-ink-soft">
+                    Weersbestendige buitenverf in {ral.name.toLowerCase()} — op maat gemengd.
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="border-t border-border bg-surface">
           <div className="container mx-auto max-w-5xl px-4 py-12">
             <h2 className="text-xl font-bold text-ink">Andere populaire RAL kleuren</h2>
