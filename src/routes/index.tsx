@@ -118,20 +118,22 @@ function ProductCard({ p }: { p: Product }) {
       <button aria-label="Bewaar" className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft transition hover:text-accent">
         <Heart className="h-4 w-4" />
       </button>
-      <div className="aspect-square overflow-hidden rounded-lg bg-surface">
-        <img src={p.image} alt={p.name} width={800} height={800} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
-      </div>
-      <div className="mt-3 text-[11px] uppercase tracking-wider text-ink-soft">{p.brand}</div>
-      <h3 className="mt-0.5 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h3>
-      <div className="mt-1 text-xs text-ink-soft">{p.volume}</div>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-base font-bold text-ink">{formatPrice(p.price)}</span>
-        {p.oldPrice && <span className="text-xs text-ink-soft line-through">{formatPrice(p.oldPrice)}</span>}
-      </div>
-      <div className="mt-1 flex items-center gap-2">
-        <Stars n={Math.round(p.rating)} />
-        <span className="text-xs text-ink-soft">({p.reviews})</span>
-      </div>
+      <Link to="/product/$slug" params={{ slug: p.slug }} className="block">
+        <div className="aspect-square overflow-hidden rounded-lg bg-surface">
+          <img src={p.image} alt={p.name} width={800} height={800} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
+        </div>
+        <div className="mt-3 text-[11px] uppercase tracking-wider text-ink-soft">{p.brand}</div>
+        <h3 className="mt-0.5 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h3>
+        <div className="mt-1 text-xs text-ink-soft">{p.volume}</div>
+        <div className="mt-2 flex items-baseline gap-2">
+          <span className="text-base font-bold text-ink">{formatPrice(p.price)}</span>
+          {p.oldPrice && <span className="text-xs text-ink-soft line-through">{formatPrice(p.oldPrice)}</span>}
+        </div>
+        <div className="mt-1 flex items-center gap-2">
+          <Stars n={Math.round(p.rating)} />
+          <span className="text-xs text-ink-soft">({p.reviews})</span>
+        </div>
+      </Link>
       <button
         type="button"
         onClick={() => add(p)}
