@@ -23,8 +23,8 @@ export function Header() {
   return (
     <header className="border-b border-border bg-background">
       {/* trust bar */}
-      <div className="bg-surface">
-        <div className="container mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-1 px-4 py-2 text-xs text-ink-soft">
+      <div className="bg-orange">
+        <div className="container mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-1 px-4 py-2 text-xs text-ink">
           {trust.map((t) => (
             <span key={t} className="inline-flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-accent" />
