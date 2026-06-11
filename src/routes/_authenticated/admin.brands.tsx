@@ -24,7 +24,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { BRAND_CATEGORIES, categoryLabel } from "@/lib/brand-categories";
+import { BRAND_CATEGORIES, type BrandCategory, categoryLabel } from "@/lib/brand-categories";
 import { toast } from "sonner";
 import { ArrowDown, ArrowUp, Eye, EyeOff, LogOut, Plus, Trash2, Upload } from "lucide-react";
 
@@ -42,7 +42,7 @@ type BrandRow = {
   id: string;
   name: string;
   slug: string;
-  category: string;
+  category: BrandCategory;
   logo_path: string | null;
   link_url: string | null;
   sort_order: number;
