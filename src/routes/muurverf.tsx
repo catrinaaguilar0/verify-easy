@@ -27,14 +27,30 @@ const colorOptions = [
   { name: "Antraciet", hex: "#3A3A3C" },
 ];
 
-const products = [
-  { name: "Sikkens Alphacryl Pure Mat SF", price: "€44,95", reviews: 128, img: prodSikkens },
-  { name: "Sigma Perfect Matt", price: "€38,95", reviews: 96, img: prodSigma },
-  { name: "Wijzonol Muurverf Extra Mat", price: "€36,50", reviews: 74, img: prodWijzonol },
-  { name: "Flexa Powerdek Muurverf Mat", price: "€42,95", reviews: 85, img: prodFlexa },
-  { name: "Sikkens Alphacryl Pure Mat", price: "€40,95", reviews: 40, img: prodSikkens },
-  { name: "Sigma S2U Allure Matt", price: "€46,95", reviews: 48, img: prodSigma },
+type Undertone = "neutral" | "warm" | "cool" | "earth" | "dark";
+
+const products: { name: string; price: string; reviews: number; img: string; undertones: Undertone[]; matchScore: number }[] = [
+  { name: "Sikkens Alphacryl Pure Mat SF", price: "€44,95", reviews: 128, img: prodSikkens, undertones: ["neutral", "cool", "dark"], matchScore: 98 },
+  { name: "Sigma Perfect Matt", price: "€38,95", reviews: 96, img: prodSigma, undertones: ["neutral", "warm", "earth"], matchScore: 95 },
+  { name: "Wijzonol Muurverf Extra Mat", price: "€36,50", reviews: 74, img: prodWijzonol, undertones: ["warm", "earth"], matchScore: 92 },
+  { name: "Flexa Powerdek Muurverf Mat", price: "€42,95", reviews: 85, img: prodFlexa, undertones: ["neutral", "cool"], matchScore: 90 },
+  { name: "Sikkens Alphacryl Pure Mat", price: "€40,95", reviews: 40, img: prodSikkens, undertones: ["neutral", "warm", "cool", "earth", "dark"], matchScore: 99 },
+  { name: "Sigma S2U Allure Matt", price: "€46,95", reviews: 48, img: prodSigma, undertones: ["cool", "dark"], matchScore: 94 },
 ];
+
+function undertoneOf(hex: string): Undertone {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  const lum = (r + g + b) / 3;
+  if (lum < 80) return "dark";
+  if (r > g && r > b && r - b > 30) return "warm";
+  if (b > r && b - r > 20) return "cool";
+  if (g >= r && g >= b) return "earth";
+  if (Math.abs(r - g) < 15 && Math.abs(g - b) < 15) return "neutral";
+  return "warm";
+}
 
 const filterGroups = [
   { title: "Categorie", items: [["Binnen", 120], ["Buiten", 14]] },
@@ -55,6 +71,11 @@ function MuurverfPage() {
   const [activeColor, setActiveColor] = useState(colorOptions[0]);
   const [perProduct, setPerProduct] = useState<Record<string, string>>({});
   const [customHex, setCustomHex] = useState("#A8B89A");
+  const [onlyMatching, setOnlyMatching] = useState(false);
+  const activeUndertone = undertoneOf(activeColor.hex);
+  const visibleProducts = onlyMatching
+    ? products.filter((p) => p.undertones.includes(activeUndertone))
+    : products;
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -122,6 +143,20 @@ function MuurverfPage() {
                   Toepassen
                 </button>
               </div>
+              <label className="mt-2 flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-surface p-3">
+                <input
+                  type="checkbox"
+                  checked={onlyMatching}
+                  onChange={(e) => setOnlyMatching(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-border accent-accent"
+                />
+                <span className="text-sm text-ink">
+                  <span className="font-semibold">Toon alleen varianten die het beste passen</span>
+                  <span className="block text-xs text-ink-soft">
+                    Filtert op ondertoon <strong className="capitalize text-ink">{activeUndertone}</strong> van de gekozen kleur.
+                  </span>
+                </span>
+              </label>
             </div>
             <div className="relative min-h-48 md:min-h-full" style={{ background: activeColor.hex }}>
               <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent" />
@@ -162,7 +197,10 @@ function MuurverfPage() {
           {/* grid */}
           <section>
             <div className="mb-5 flex items-center justify-between">
-              <span className="text-sm text-ink-soft"><strong className="text-ink">125</strong> producten</span>
+              <span className="text-sm text-ink-soft">
+                <strong className="text-ink">{onlyMatching ? visibleProducts.length : 125}</strong> producten
+                {onlyMatching && <span className="ml-2 rounded-full bg-accent/10 px-2 py-0.5 text-xs text-accent">Color match actief</span>}
+              </span>
               <label className="flex items-center gap-2 text-sm text-ink-soft">
                 Sorteren op:
                 <select className="rounded border border-border bg-background px-2 py-1.5 text-sm text-ink">
@@ -174,10 +212,15 @@ function MuurverfPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-5 md:grid-cols-3">
-              {products.map((p) => {
+              {visibleProducts.map((p) => {
                 const selected = perProduct[p.name] ?? activeColor.hex;
                 return (
                 <article key={p.name} className="group relative rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
+                  {onlyMatching && (
+                    <span className="absolute left-3 top-3 z-10 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
+                      Match {p.matchScore}%
+                    </span>
+                  )}
                   <button aria-label="Bewaar" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft hover:text-accent">
                     <Heart className="h-4 w-4" />
                   </button>
@@ -213,6 +256,11 @@ function MuurverfPage() {
                 );
               })}
             </div>
+            {onlyMatching && visibleProducts.length === 0 && (
+              <div className="rounded-xl border border-dashed border-border p-10 text-center text-sm text-ink-soft">
+                Geen varianten gevonden die bij deze kleur passen. Kies een andere tint of zet het filter uit.
+              </div>
+            )}
 
             <div className="mt-10 flex justify-center gap-1 text-sm">
               {[1, 2, 3, "…", 9].map((n, i) => (
