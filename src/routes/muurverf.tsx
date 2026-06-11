@@ -75,6 +75,64 @@ function MuurverfPage() {
           </div>
         </header>
 
+        {/* Color match */}
+        <section className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+          <div className="grid gap-0 md:grid-cols-[1.1fr,1fr]">
+            <div className="flex flex-col gap-4 p-6 md:p-8">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                <Pipette className="h-4 w-4" /> Color Match
+              </div>
+              <h2 className="text-2xl font-extrabold text-ink">Kies jouw kleur — wij mengen het in elke variant</h2>
+              <p className="text-sm text-ink-soft">
+                Selecteer een populaire tint of voer een eigen kleurcode in. De gekozen kleur wordt gekoppeld aan alle muurverf hieronder, zodat je per merk en afwerking dezelfde kleur kunt vergelijken.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {colorOptions.map((c) => {
+                  const active = activeColor.hex === c.hex;
+                  return (
+                    <button
+                      key={c.hex}
+                      onClick={() => setActiveColor(c)}
+                      className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs transition ${active ? "border-accent bg-accent/10 text-ink" : "border-border bg-background text-ink-soft hover:border-accent"}`}
+                    >
+                      <span className="h-4 w-4 rounded-full border border-border" style={{ background: c.hex }} />
+                      {c.name}
+                      {active && <Check className="h-3.5 w-3.5 text-accent" />}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mt-2 flex flex-wrap items-center gap-3 border-t border-border pt-4">
+                <label className="text-sm font-semibold text-ink">Eigen kleurcode:</label>
+                <input
+                  type="color"
+                  value={customHex}
+                  onChange={(e) => setCustomHex(e.target.value)}
+                  className="h-9 w-12 cursor-pointer rounded border border-border bg-background"
+                />
+                <input
+                  value={customHex.toUpperCase()}
+                  onChange={(e) => setCustomHex(e.target.value)}
+                  className="w-28 rounded border border-border bg-background px-2 py-1.5 text-sm text-ink"
+                />
+                <button
+                  onClick={() => setActiveColor({ name: `Custom ${customHex.toUpperCase()}`, hex: customHex })}
+                  className="rounded-full bg-accent px-4 py-2 text-xs font-semibold text-accent-foreground hover:opacity-90"
+                >
+                  Toepassen
+                </button>
+              </div>
+            </div>
+            <div className="relative min-h-48 md:min-h-full" style={{ background: activeColor.hex }}>
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent" />
+              <div className="absolute bottom-4 left-4 rounded-md bg-background/90 px-3 py-2 text-xs">
+                <div className="font-semibold text-ink">{activeColor.name}</div>
+                <div className="text-ink-soft">{activeColor.hex.toUpperCase()}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div className="mt-8 grid gap-8 lg:grid-cols-[260px,1fr]">
           {/* filters */}
           <aside className="space-y-6">
