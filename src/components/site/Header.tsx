@@ -35,7 +35,7 @@ export function Header() {
       </div>
 
       {/* main */}
-      <div className="container mx-auto flex items-center gap-8 px-4 py-5">
+      <div className="container mx-auto flex items-center gap-4 px-4 py-5">
         <Link to="/" className="flex shrink-0 items-center gap-2">
           <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-bold">
             V
@@ -64,7 +64,7 @@ export function Header() {
           </div>
         </div>
 
-        <nav className="hidden items-center gap-6 text-sm md:flex">
+        <nav className="hidden items-center gap-4 text-sm md:flex">
           <a href="#" className="flex flex-col items-center text-ink hover:text-accent">
             <User className="h-5 w-5" />
             <span className="mt-0.5 text-xs">Account</span>
@@ -83,7 +83,7 @@ export function Header() {
 
       {/* category nav */}
       <div className="border-t border-border">
-        <div className="container mx-auto flex flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm font-medium">
+        <div className="container mx-auto flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2 text-sm font-medium">
           {nav.map((n) => (
             <Link
               key={n.label}
