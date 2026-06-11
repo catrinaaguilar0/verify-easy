@@ -27,8 +27,30 @@ const finishes: { id: Finish; label: string; sheen: string }[] = [
 export function RoomVisualizer({ hex, code, name }: { hex: string; code: string; name: string }) {
   const [surface, setSurface] = useState<Surface>("muur");
   const [finish, setFinish] = useState<Finish>("mat");
+  const [userImage, setUserImage] = useState<string | null>(null);
+  const [blend, setBlend] = useState<Blend>("multiply");
+  const [opacity, setOpacity] = useState(0.85);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sheen = finishes.find((f) => f.id === finish)!.sheen;
+
+  const handleFile = (file: File | null) => {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      alert("Kies een afbeelding (JPG, PNG of WEBP).");
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      alert("Afbeelding is te groot. Max 8 MB.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result;
+      if (typeof result === "string") setUserImage(result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <section className="border-t border-border bg-surface">
