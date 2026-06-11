@@ -1,7 +1,8 @@
-Verklein de witruimte in de header op twee plekken in `src/components/site/Header.tsx`:
+## Hero-afbeelding vergroten
 
-1. **Hoofdheader** (regel 38): `gap-8` → `gap-4` om logo, zoekbalk en iconen compacter te plaatsen.
-2. **Account/Winkelwagen nav** (regel 67): `gap-6` → `gap-4`.
-3. **Categorie-navigatie** (regel 86): `gap-x-6` → `gap-x-3` om de categorie-links dichter op elkaar te zetten.
+De geselecteerde hero-afbeelding (verfblikken) wordt groter gemaakt op twee manieren:
 
-Eventueel ook de verticale padding in de categoriebalk (regel 86 `py-3` → `py-2`) verkleinen voor een nog compactere look.
+1. **Grid-verhouding aanpassen** — wijzig `md:grid-cols-2` naar `md:grid-cols-[1fr_1.3fr]` zodat de afbeeldingkolom ~30% meer ruimte krijgt dan de tekstkolom.
+2. **Visuele vergroting** — voeg `scale-105` of vergelijkbaar toe zodat de afbeelding iets uitvergroot binnen zijn kolom, en/of verhoog de sectie-padding (`md:py-20` → `md:py-24`) voor meer aanwezigheid.
+
+Dit maakt de afbeelding proportioneel groter zonder de tekst te verdringen.
