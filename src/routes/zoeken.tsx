@@ -13,13 +13,14 @@ const searchSchema = z.object({
 
 export const Route = createFileRoute("/zoeken")({
   validateSearch: zodValidator(searchSchema),
-  head: ({ search }) => ({
+  head: () => ({
     meta: [
-      { title: `Zoekresultaten${search.q ? ` voor "${search.q}"` : ""} | VerfOnlineWinkel` },
+      { title: "Zoekresultaten | VerfOnlineWinkel" },
       { name: "description", content: "Zoek in onze webshop op product, merk, RAL-kleur of toepassing." },
       { name: "robots", content: "noindex, follow" },
     ],
   }),
+
   component: SearchPage,
 });
 
