@@ -18,6 +18,15 @@ export const Route = createFileRoute("/muurverf")({
   component: MuurverfPage,
 });
 
+const colorOptions = [
+  { name: "Wit RAL 9010", hex: "#F7F4EC" },
+  { name: "Warm Zand", hex: "#E7D9BE" },
+  { name: "Salie Groen", hex: "#A8B89A" },
+  { name: "Diep Oceaan", hex: "#2E4756" },
+  { name: "Terracotta", hex: "#B8674A" },
+  { name: "Antraciet", hex: "#3A3A3C" },
+];
+
 const products = [
   { name: "Sikkens Alphacryl Pure Mat SF", price: "€44,95", reviews: 128, img: prodSikkens },
   { name: "Sigma Perfect Matt", price: "€38,95", reviews: 96, img: prodSigma },
