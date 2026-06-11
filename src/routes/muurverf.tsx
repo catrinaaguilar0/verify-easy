@@ -256,6 +256,11 @@ function MuurverfPage() {
                 );
               })}
             </div>
+            {onlyMatching && visibleProducts.length === 0 && (
+              <div className="rounded-xl border border-dashed border-border p-10 text-center text-sm text-ink-soft">
+                Geen varianten gevonden die bij deze kleur passen. Kies een andere tint of zet het filter uit.
+              </div>
+            )}
 
             <div className="mt-10 flex justify-center gap-1 text-sm">
               {[1, 2, 3, "…", 9].map((n, i) => (
