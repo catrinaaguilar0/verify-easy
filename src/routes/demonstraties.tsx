@@ -187,37 +187,51 @@ function DemonstratiesPage() {
               return (
                 <article
                   key={film.title}
-                  className="flex flex-col rounded-xl border border-border bg-background p-6 transition hover:border-accent hover:shadow-md"
+                  className="group flex flex-col overflow-hidden rounded-xl border border-border bg-background transition hover:border-accent hover:shadow-md"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-accent/10 text-accent">
-                      <Icon className="h-5 w-5" />
+                  <a
+                    href={film.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Bekijk video: ${film.title}`}
+                    className="relative block aspect-video overflow-hidden bg-gradient-to-br from-accent/90 via-accent to-primary"
+                  >
+                    <Icon
+                      className="absolute -right-4 -bottom-4 h-28 w-28 text-white/15"
+                      aria-hidden="true"
+                    />
+                    <span className="absolute inset-0 grid place-items-center">
+                      <span className="grid h-14 w-14 place-items-center rounded-full bg-white/95 text-primary shadow-lg transition group-hover:scale-110">
+                        <Play className="h-6 w-6 translate-x-0.5 fill-current" />
+                      </span>
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2.5 py-1 text-xs font-medium text-ink-soft">
+                    <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
                       <Clock className="h-3 w-3" />
                       {film.duration}
                     </span>
-                  </div>
-                  <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-accent">
-                    {film.category}
-                  </p>
-                  <h3 className="mt-1 text-lg font-bold text-ink">{film.title}</h3>
-                  <p className="mt-2 flex-1 text-sm text-ink-soft">
-                    {film.description}
-                  </p>
-                  <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
-                    <span className="text-xs text-ink-soft">
-                      Bron: <span className="font-medium text-ink">{film.source}</span>
+                    <span className="absolute top-2 left-2 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                      {film.category}
                     </span>
-                    <a
-                      href={film.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
-                    >
-                      Bekijk
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
+                  </a>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="text-lg font-bold text-ink">{film.title}</h3>
+                    <p className="mt-2 flex-1 text-sm text-ink-soft">
+                      {film.description}
+                    </p>
+                    <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+                      <span className="text-xs text-ink-soft">
+                        Bron: <span className="font-medium text-ink">{film.source}</span>
+                      </span>
+                      <a
+                        href={film.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
+                      >
+                        Bekijk
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
                   </div>
                 </article>
               );
