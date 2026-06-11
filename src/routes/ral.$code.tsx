@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { getRal, ralColors } from "@/lib/ral";
+import { getRal, ralColors, type RalColor } from "@/lib/ral";
 import { ArrowLeft } from "lucide-react";
 
 const baseUrl = "https://cozy-check-hub.lovable.app";
@@ -63,9 +63,9 @@ export const Route = createFileRoute("/ral/$code")({
 });
 
 function RalDetail() {
-  const { ral } = Route.useLoaderData();
-  const combos = ral.combinesWith.map((c) => getRal(c)).filter(Boolean) as ReturnType<typeof getRal>[];
-  const others = ralColors.filter((r) => r.code !== ral.code).slice(0, 6);
+  const { ral } = Route.useLoaderData() as { ral: RalColor };
+  const combos = ral.combinesWith.map((c: string) => getRal(c)).filter((x): x is RalColor => Boolean(x));
+  const others = ralColors.filter((r: RalColor) => r.code !== ral.code).slice(0, 6);
 
   return (
     <div className="min-h-screen bg-background">
@@ -119,7 +119,7 @@ function RalDetail() {
             <div>
               <h2 className="text-xl font-bold text-ink">Toepassing van RAL {ral.code}</h2>
               <ul className="mt-4 list-disc space-y-2 pl-6 text-sm text-ink-soft">
-                {ral.usage.map((u) => (
+                {ral.usage.map((u: string) => (
                   <li key={u}>{u}</li>
                 ))}
               </ul>
