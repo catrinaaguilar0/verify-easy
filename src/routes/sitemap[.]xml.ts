@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { posts } from "@/lib/blog";
+import { ralColors } from "@/lib/ral";
 
 const BASE_URL = "https://cozy-check-hub.lovable.app";
 
@@ -19,10 +20,16 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/muurverf", changefreq: "weekly", priority: "0.9" },
           { path: "/verfmengservice", changefreq: "monthly", priority: "0.8" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
+          { path: "/ral", changefreq: "monthly", priority: "0.7" },
           ...posts.map((p) => ({
             path: `/blog/${p.slug}`,
             changefreq: "monthly" as const,
             priority: "0.6",
+          })),
+          ...ralColors.map((r) => ({
+            path: `/ral/${r.code}`,
+            changefreq: "monthly" as const,
+            priority: "0.5",
           })),
         ];
 
