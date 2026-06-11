@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload, X } from "lucide-react";
+import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload, X, Download, Loader2 } from "lucide-react";
+import { toPng } from "html-to-image";
 
 type Surface = "muur" | "kozijn" | "deur" | "foto";
 type Finish = "mat" | "zijdeglans" | "hoogglans";
