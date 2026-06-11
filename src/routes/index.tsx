@@ -116,7 +116,7 @@ function Home() {
                 alt="Sikkens, Sigma en Wijzonol professionele verfblikken"
                 width={1600}
                 height={1100}
-                className="w-full rounded-xl object-cover shadow-[var(--shadow-soft)] md:scale-105 lg:scale-110 origin-right"
+                className="w-full rounded-xl object-cover shadow-[var(--shadow-soft)] md:scale-110 lg:scale-125 origin-right"
               />
             </div>
           </div>
