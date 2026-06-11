@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets, Roller, Brush, Sparkles, Hammer, Layers, Wind } from "lucide-react";
+import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets, PaintRoller, Brush, Sparkles, Hammer, Layers, Wind, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/demonstraties")({
   head: () => ({
