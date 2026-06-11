@@ -100,6 +100,16 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
               ruimte om de RAL-kleur erop te simuleren.
             </p>
           </div>
+          <button
+            type="button"
+            onClick={handleExport}
+            disabled={exporting}
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs font-semibold text-ink shadow-sm transition hover:bg-accent hover:text-accent-foreground disabled:opacity-60"
+            aria-label="Download huidige simulatie als PNG"
+          >
+            {exporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+            {exporting ? "Bezig…" : "Download als PNG"}
+          </button>
         </div>
 
         {/* Controls */}
