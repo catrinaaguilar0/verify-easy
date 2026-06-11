@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets } from "lucide-react";
+import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets, Roller, Brush, Sparkles, Hammer, Layers, Wind } from "lucide-react";
 
 export const Route = createFileRoute("/demonstraties")({
   head: () => ({
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/demonstraties")({
   component: DemonstratiesPage,
 });
 
-const demos = [
+const categories = [
   {
     title: "Verftechnieken",
     description:
@@ -49,6 +49,90 @@ const demos = [
     icon: Droplets,
   },
 ];
+
+const demoFilms = [
+  {
+    title: "Muren rollen als een pro",
+    description:
+      "Stap-voor-stap demonstratie van de juiste rol-techniek voor een egaal en streeploos eindresultaat op grote muurvlakken.",
+    duration: "4 min",
+    category: "Verftechnieken",
+    icon: Roller,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Snijden langs plafond en plinten",
+    description:
+      "Leer met een goede kwast strakke randen aftrekken zonder masking tape. Tips voor houvast, doseren en doorhalen.",
+    duration: "3 min",
+    category: "Verftechnieken",
+    icon: Brush,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Hout schilderen: lakwerk binnen",
+    description:
+      "Van schuren tot aflakken. Bekijk hoe je deuren, kozijnen en plinten een professionele finish geeft met watergedragen lak.",
+    duration: "6 min",
+    category: "Verftechnieken",
+    icon: Hammer,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Kleur kiezen voor je woonkamer",
+    description:
+      "Praktische kleuradvies-demo: hoe lichtinval, ruimte en stijl je kleurkeuze bepalen. Inclusief uitprobeer-tips.",
+    duration: "5 min",
+    category: "Kleuradvies",
+    icon: Sparkles,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Grondverf: wanneer en welke?",
+    description:
+      "Overzicht van primers voor hout, metaal, gips en probleemondergronden. Voorkom hechtingsproblemen met de juiste basis.",
+    duration: "4 min",
+    category: "Grondverf & Voorbehandeling",
+    icon: Layers,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Buitenwerk voorbereiden",
+    description:
+      "Demonstratie van reinigen, schuren, plamuren en isoleren van houten buitenkozijnen voor langdurig resultaat.",
+    duration: "7 min",
+    category: "Grondverf & Voorbehandeling",
+    icon: ShieldCheck,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Duurzaam schilderen binnen",
+    description:
+      "Hoe kies je verf met lage emissies en goede milieuprestaties? Praktische uitleg over keurmerken en watergedragen systemen.",
+    duration: "5 min",
+    category: "Duurzaam schilderen",
+    icon: Droplets,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Spuiten met airless",
+    description:
+      "Introductie tot airless spuiten: voorbereiding, afplakken, juiste druk en spuittechniek voor een vlakke afwerking.",
+    duration: "8 min",
+    category: "Verftechnieken",
+    icon: Wind,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+];
+
 
 function DemonstratiesPage() {
   return (
