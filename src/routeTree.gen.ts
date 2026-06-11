@@ -15,6 +15,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RalRouteImport } from './routes/ral'
 import { Route as MuurverfRouteImport } from './routes/muurverf'
 import { Route as HulpEnAdviesRouteImport } from './routes/hulp-en-advies'
+import { Route as DemonstratiesRouteImport } from './routes/demonstraties'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RalCodeRouteImport } from './routes/ral.$code'
@@ -50,6 +51,11 @@ const HulpEnAdviesRoute = HulpEnAdviesRouteImport.update({
   path: '/hulp-en-advies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemonstratiesRoute = DemonstratiesRouteImport.update({
+  id: '/demonstraties',
+  path: '/demonstraties',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -74,6 +80,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blog'
+    | '/demonstraties'
     | '/hulp-en-advies'
     | '/muurverf'
     | '/ral'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blog'
+    | '/demonstraties'
     | '/hulp-en-advies'
     | '/muurverf'
     | '/ral'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/blog'
+    | '/demonstraties'
     | '/hulp-en-advies'
     | '/muurverf'
     | '/ral'
@@ -150,6 +162,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
+  DemonstratiesRoute: typeof DemonstratiesRoute
   HulpEnAdviesRoute: typeof HulpEnAdviesRoute
   MuurverfRoute: typeof MuurverfRoute
   RalRoute: typeof RalRouteWithChildren
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/hulp-en-advies'
       fullPath: '/hulp-en-advies'
       preLoaderRoute: typeof HulpEnAdviesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demonstraties': {
+      id: '/demonstraties'
+      path: '/demonstraties'
+      fullPath: '/demonstraties'
+      preLoaderRoute: typeof DemonstratiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -256,6 +276,7 @@ const RalRouteWithChildren = RalRoute._addFileChildren(RalRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
+  DemonstratiesRoute: DemonstratiesRoute,
   HulpEnAdviesRoute: HulpEnAdviesRoute,
   MuurverfRoute: MuurverfRoute,
   RalRoute: RalRouteWithChildren,

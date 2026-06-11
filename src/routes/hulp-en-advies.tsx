@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Calculator, Palette, BookOpen, ArrowRight } from "lucide-react";
+import { Calculator, Palette, BookOpen, Play, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/hulp-en-advies")({
   head: () => ({
@@ -45,6 +45,13 @@ const subpages = [
       "Lees praktische tips, kleurtrends en stap-voor-stap-gidsen van onze verfspecialisten.",
     icon: BookOpen,
   },
+  {
+    to: "/demonstraties" as const,
+    title: "Demonstraties",
+    description:
+      "Bekijk professionele demonstratiefilms over verftechnieken, kleurkeuzes en duurzaam schilderen.",
+    icon: Play,
+  },
 ];
 
 const faqs = [
@@ -84,7 +91,7 @@ function HulpEnAdviesPage() {
         </section>
 
         <section className="container mx-auto px-4 py-16">
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {subpages.map((p) => {
               const Icon = p.icon;
               return (
