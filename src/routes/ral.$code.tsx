@@ -2,7 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getRal, ralColors, type RalColor } from "@/lib/ral";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
+import { useState } from "react";
 
 const baseUrl = "https://cozy-check-hub.lovable.app";
 
