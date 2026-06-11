@@ -38,8 +38,33 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
   const [blend, setBlend] = useState<Blend>("multiply");
   const [opacity, setOpacity] = useState(0.85);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [exporting, setExporting] = useState(false);
 
   const sheen = finishes.find((f) => f.id === finish)!.sheen;
+
+  const handleExport = async () => {
+    if (!stageRef.current) return;
+    setExporting(true);
+    try {
+      const dataUrl = await toPng(stageRef.current, {
+        pixelRatio: 2,
+        cacheBust: true,
+        backgroundColor: "#ffffff",
+      });
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `ral-${code}-${surface}-${finish}.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (err) {
+      console.error(err);
+      alert("Exporteren is niet gelukt. Probeer het opnieuw.");
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const handleFile = (file: File | null) => {
     if (!file) return;
