@@ -27,14 +27,30 @@ const colorOptions = [
   { name: "Antraciet", hex: "#3A3A3C" },
 ];
 
-const products = [
-  { name: "Sikkens Alphacryl Pure Mat SF", price: "€44,95", reviews: 128, img: prodSikkens },
-  { name: "Sigma Perfect Matt", price: "€38,95", reviews: 96, img: prodSigma },
-  { name: "Wijzonol Muurverf Extra Mat", price: "€36,50", reviews: 74, img: prodWijzonol },
-  { name: "Flexa Powerdek Muurverf Mat", price: "€42,95", reviews: 85, img: prodFlexa },
-  { name: "Sikkens Alphacryl Pure Mat", price: "€40,95", reviews: 40, img: prodSikkens },
-  { name: "Sigma S2U Allure Matt", price: "€46,95", reviews: 48, img: prodSigma },
+type Undertone = "neutral" | "warm" | "cool" | "earth" | "dark";
+
+const products: { name: string; price: string; reviews: number; img: string; undertones: Undertone[]; matchScore: number }[] = [
+  { name: "Sikkens Alphacryl Pure Mat SF", price: "€44,95", reviews: 128, img: prodSikkens, undertones: ["neutral", "cool", "dark"], matchScore: 98 },
+  { name: "Sigma Perfect Matt", price: "€38,95", reviews: 96, img: prodSigma, undertones: ["neutral", "warm", "earth"], matchScore: 95 },
+  { name: "Wijzonol Muurverf Extra Mat", price: "€36,50", reviews: 74, img: prodWijzonol, undertones: ["warm", "earth"], matchScore: 92 },
+  { name: "Flexa Powerdek Muurverf Mat", price: "€42,95", reviews: 85, img: prodFlexa, undertones: ["neutral", "cool"], matchScore: 90 },
+  { name: "Sikkens Alphacryl Pure Mat", price: "€40,95", reviews: 40, img: prodSikkens, undertones: ["neutral", "warm", "cool", "earth", "dark"], matchScore: 99 },
+  { name: "Sigma S2U Allure Matt", price: "€46,95", reviews: 48, img: prodSigma, undertones: ["cool", "dark"], matchScore: 94 },
 ];
+
+function undertoneOf(hex: string): Undertone {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  const lum = (r + g + b) / 3;
+  if (lum < 80) return "dark";
+  if (r > g && r > b && r - b > 30) return "warm";
+  if (b > r && b - r > 20) return "cool";
+  if (g >= r && g >= b) return "earth";
+  if (Math.abs(r - g) < 15 && Math.abs(g - b) < 15) return "neutral";
+  return "warm";
+}
 
 const filterGroups = [
   { title: "Categorie", items: [["Binnen", 120], ["Buiten", 14]] },
