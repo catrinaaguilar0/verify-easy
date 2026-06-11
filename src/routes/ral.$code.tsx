@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { RoomVisualizer } from "@/components/ral/RoomVisualizer";
 import { getRal, ralColors, type RalColor } from "@/lib/ral";
 import { ArrowLeft, Check } from "lucide-react";
 import { useState } from "react";
@@ -183,6 +184,10 @@ function RalDetail() {
             </div>
           </div>
         </section>
+
+        <RoomVisualizer hex={ral.hex} code={ral.code} name={ral.name} />
+
+
 
         <section className="border-t border-border">
           <div className="container mx-auto max-w-5xl px-4 py-12">
