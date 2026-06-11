@@ -11,6 +11,19 @@ import prodSikkens from "@/assets/prod-sikkens.jpg";
 import prodSigma from "@/assets/prod-sigma.jpg";
 import prodWijzonol from "@/assets/prod-wijzonol.jpg";
 import prodFlexa from "@/assets/prod-flexa.jpg";
+import brandSikkens from "@/assets/brand-sikkens.png";
+import brandSigma from "@/assets/brand-sigma.png";
+import brandWijzonol from "@/assets/brand-wijzonol.png";
+import brandFlexa from "@/assets/brand-flexa.png";
+import brandHistor from "@/assets/brand-histor.png";
+
+const brands = [
+  { name: "Sikkens", logo: brandSikkens },
+  { name: "Sigma Coatings", logo: brandSigma },
+  { name: "Wijzonol", logo: brandWijzonol },
+  { name: "Flexa", logo: brandFlexa },
+  { name: "Histor", logo: brandHistor },
+];
 import inspInterior from "@/assets/insp-interior.jpg";
 import inspColors from "@/assets/insp-colors.jpg";
 
@@ -137,9 +150,9 @@ function Home() {
           <div className="container mx-auto px-4 py-12">
             <h2 className="mb-8 text-2xl font-bold text-ink md:text-3xl">Shop per merk</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-              {["sikkens", "SIGMA", "WIJZONOL", "Flexa", "HISTOR"].map((b) => (
-                <a key={b} href="#" className="grid h-20 place-items-center rounded-lg border border-border bg-background text-lg font-extrabold tracking-tight text-ink transition hover:border-accent hover:text-accent">
-                  {b}
+              {brands.map((b) => (
+                <a key={b.name} href="#" className="grid h-20 place-items-center rounded-lg border border-border bg-background px-4 transition hover:border-accent">
+                  <img src={b.logo} alt={`${b.name} logo`} loading="lazy" className="max-h-12 w-auto object-contain" />
                 </a>
               ))}
             </div>
