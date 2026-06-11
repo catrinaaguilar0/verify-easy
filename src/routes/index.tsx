@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Heart, Star, Truck, Palette, Headphones, Check } from "lucide-react";
+import { ArrowRight, Heart, Star } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import hero from "@/assets/hero-cans.jpg";
@@ -51,12 +51,6 @@ const bestsellers = [
   { name: "Flexa Powerdek Muurverf Mat", price: "€42,95", reviews: 85, img: prodFlexa },
 ];
 
-const trustMini = [
-  { icon: Truck, title: "Gratis verzending", sub: "vanaf €50" },
-  { icon: Palette, title: "Kleur op maat", sub: "gemaakt" },
-  { icon: Headphones, title: "Deskundig advies", sub: "van specialisten" },
-  { icon: Check, title: "Voor 23:00 besteld", sub: "morgen in huis" },
-];
 
 function Stars({ n = 5 }: { n?: number }) {
   return (
@@ -104,22 +98,6 @@ function Home() {
             </div>
           </div>
 
-          {/* mini trust */}
-          <div className="border-t border-border bg-background">
-            <div className="container mx-auto grid gap-6 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4">
-              {trustMini.map(({ icon: Icon, title, sub }) => (
-                <div key={title} className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-full bg-surface text-accent">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <div className="text-sm">
-                    <div className="font-semibold text-ink">{title}</div>
-                    <div className="text-xs text-ink-soft">{sub}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* CATEGORIES */}
