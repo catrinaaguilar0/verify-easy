@@ -195,11 +195,15 @@ function RalDetail() {
                   params={{ code: c.code }}
                   className="group flex items-center gap-3 rounded-lg border border-border bg-card p-3 transition hover:border-accent"
                 >
-                  <span
-                    className="h-10 w-10 shrink-0 rounded border border-border"
-                    style={{ backgroundColor: c.hex }}
-                    aria-hidden
-                  />
+                  <figure className="m-0 shrink-0">
+                    <span
+                      className="block h-10 w-10 rounded border border-border"
+                      style={{ backgroundColor: c.hex }}
+                      role="img"
+                      aria-label={`Kleurstaal ${c.name}: ${c.hex.toUpperCase()}`}
+                    />
+                    <figcaption className="sr-only">{c.name} swatch in {c.hex.toUpperCase()}</figcaption>
+                  </figure>
                   <span className="flex flex-col">
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
                       RAL {c.code}
