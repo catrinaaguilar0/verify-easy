@@ -159,13 +159,10 @@ function Home() {
         <section className="border-y border-border bg-surface">
           <div className="container mx-auto px-4 py-12">
             <h2 className="mb-8 text-2xl font-bold text-ink md:text-3xl">Shop per merk</h2>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-              {brands.map((b) => (
-                <a key={b.name} href="#" className="grid h-20 place-items-center rounded-lg border border-border bg-background px-4 transition hover:border-accent">
-                  <img src={b.logo} alt={`${b.name} logo`} loading="lazy" className="max-h-12 w-auto object-contain" />
-                </a>
-              ))}
-            </div>
+            <Suspense fallback={<div className="h-20 animate-pulse rounded-lg bg-background" />}>
+              <BrandsGrid />
+            </Suspense>
+
             <div className="mt-5 flex justify-center">
               <a href="#" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-ink hover:border-ink">
                 Bekijk alle merken
