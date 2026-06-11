@@ -61,16 +61,18 @@ function SearchPage() {
           <div className="mt-8 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
             {matches.map((p) => (
               <article key={p.id} className="group relative rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
-                <button aria-label="Bewaar" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft hover:text-accent">
+                <button aria-label="Bewaar" className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft hover:text-accent">
                   <Heart className="h-4 w-4" />
                 </button>
-                <div className="aspect-square overflow-hidden rounded-lg bg-surface">
-                  <img src={p.image} alt={p.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
-                </div>
-                <div className="mt-3 text-[11px] uppercase tracking-wider text-ink-soft">{p.brand}</div>
-                <h2 className="mt-0.5 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h2>
-                <div className="mt-1 text-xs text-ink-soft">{p.volume}</div>
-                <div className="mt-1 text-base font-bold text-ink">{formatPrice(p.price)}</div>
+                <Link to="/product/$slug" params={{ slug: p.slug }} className="block">
+                  <div className="aspect-square overflow-hidden rounded-lg bg-surface">
+                    <img src={p.image} alt={p.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                  <div className="mt-3 text-[11px] uppercase tracking-wider text-ink-soft">{p.brand}</div>
+                  <h2 className="mt-0.5 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h2>
+                  <div className="mt-1 text-xs text-ink-soft">{p.volume}</div>
+                  <div className="mt-1 text-base font-bold text-ink">{formatPrice(p.price)}</div>
+                </Link>
                 <button
                   type="button"
                   onClick={() => add(p)}
