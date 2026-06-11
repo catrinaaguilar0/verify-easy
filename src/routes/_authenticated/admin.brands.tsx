@@ -291,6 +291,9 @@ function BrandRowCard({
   const [editName, setEditName] = useState(brand.name);
   const [editCategory, setEditCategory] = useState(brand.category);
   const [editLink, setEditLink] = useState(brand.link_url ?? "");
+  const [pendingFile, setPendingFile] = useState<File | null>(null);
+  const [pendingPreview, setPendingPreview] = useState<string | null>(null);
+  const [pendingError, setPendingError] = useState<string | null>(null);
   const dirty = useMemo(
     () =>
       editName !== brand.name ||
@@ -298,6 +301,11 @@ function BrandRowCard({
       (editLink || null) !== (brand.link_url || null),
     [editName, editCategory, editLink, brand],
   );
+
+  useEffect(() => {
+    if (!pendingPreview) return;
+    return () => URL.revokeObjectURL(pendingPreview);
+  }, [pendingPreview]);
 
   async function update(patch: Partial<BrandRow>) {
     setBusy(true);
@@ -312,20 +320,50 @@ function BrandRowCard({
     }
   }
 
-  async function handleUpload(file: File) {
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error("Maximaal 2 MB per logo");
+  const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+  const MAX_SIZE = 2 * 1024 * 1024;
+
+  function clearPending() {
+    if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+    setPendingFile(null);
+    setPendingPreview(null);
+    setPendingError(null);
+  }
+
+  function handleFileSelected(file: File) {
+    if (pendingPreview) URL.revokeObjectURL(pendingPreview);
+    setPendingError(null);
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      setPendingFile(file);
+      setPendingPreview(null);
+      setPendingError(
+        `Ongeldig formaat (${file.type || "onbekend"}). Toegestaan: PNG, JPG, WebP, SVG.`,
+      );
       return;
     }
+    if (file.size > MAX_SIZE) {
+      setPendingFile(file);
+      setPendingPreview(null);
+      setPendingError(
+        `Bestand is te groot (${(file.size / 1024 / 1024).toFixed(2)} MB). Max 2 MB.`,
+      );
+      return;
+    }
+    setPendingFile(file);
+    setPendingPreview(URL.createObjectURL(file));
+  }
+
+  async function confirmUpload() {
+    if (!pendingFile || pendingError) return;
     setBusy(true);
     try {
-      const ext = file.name.split(".").pop()?.toLowerCase() || "png";
+      const ext = pendingFile.name.split(".").pop()?.toLowerCase() || "png";
       const path = `${brand.slug}-${Date.now()}.${ext}`;
       const { error: upErr } = await supabase.storage
         .from("brand-logos")
-        .upload(path, file, { contentType: file.type, upsert: false });
+        .upload(path, pendingFile, { contentType: pendingFile.type, upsert: false });
       if (upErr) throw upErr;
-      // delete old
       if (brand.logo_path) {
         await supabase.storage.from("brand-logos").remove([brand.logo_path]);
       }
@@ -335,6 +373,7 @@ function BrandRowCard({
         .eq("id", brand.id);
       if (error) throw error;
       toast.success("Logo geüpload");
+      clearPending();
       onChanged();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Upload mislukt");
