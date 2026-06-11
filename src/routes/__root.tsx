@@ -67,24 +67,60 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = "https://cozy-check-hub.lovable.app";
+const SITE_NAME = "Verfwinkel";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Verfwinkel — Professionele verf voor elk project" },
+      { name: "description", content: "Topmerken verf voor vakman en doe-het-zelver. Sikkens, Sigma, Wijzonol, Flexa en Histor. Kleur op maat gemengd, snel geleverd." },
+      { name: "robots", content: "index, follow" },
+      { name: "author", content: SITE_NAME },
+      { property: "og:site_name", content: SITE_NAME },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:locale", content: "nl_NL" },
+      { property: "og:title", content: "Verfwinkel — Professionele verf voor elk project" },
+      { property: "og:description", content: "Topmerken verf, kleur op maat en deskundig advies. Snel in huis." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@verfwinkel" },
+      { name: "twitter:title", content: "Verfwinkel — Professionele verf voor elk project" },
+      { name: "twitter:description", content: "Topmerken verf, kleur op maat en deskundig advies." },
+      { name: "theme-color", content: "#ffffff" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "alternate", hrefLang: "nl-nl", href: SITE_URL + "/" },
+      { rel: "alternate", hrefLang: "x-default", href: SITE_URL + "/" },
+    ],
+    scripts: [
       {
-        rel: "stylesheet",
-        href: appCss,
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: SITE_URL,
+          logo: `${SITE_URL}/favicon.ico`,
+          sameAs: ["https://nl.trustpilot.com/review/verfwinkel.nl"],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: SITE_NAME,
+          url: SITE_URL,
+          inLanguage: "nl-NL",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${SITE_URL}/?q={search_term_string}`,
+            "query-input": "required name=search_term_string",
+          },
+        }),
       },
     ],
   }),
@@ -96,7 +132,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="nl">
       <head>
         <HeadContent />
       </head>
@@ -107,6 +143,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
