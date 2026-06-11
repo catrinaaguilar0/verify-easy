@@ -1,6 +1,70 @@
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
+import prodSikkens from "@/assets/prod-sikkens.jpg";
+import prodSigma from "@/assets/prod-sigma.jpg";
+import prodWijzonol from "@/assets/prod-wijzonol.jpg";
+import prodFlexa from "@/assets/prod-flexa.jpg";
+
+export type RelatedProduct = {
+  slug: string;
+  name: string;
+  brand: string;
+  price: string;
+  image: string;
+  // Descriptive anchor text used to link to the product from a blog post
+  anchor: string;
+  // Where the product currently lives on the site
+  to: "/muurverf" | "/verfmengservice";
+};
+
+export const productsCatalog: Record<string, RelatedProduct> = {
+  "sikkens-alphacryl-pure-mat": {
+    slug: "sikkens-alphacryl-pure-mat",
+    name: "Sikkens Alphacryl Pure Mat",
+    brand: "Sikkens",
+    price: "€40,95",
+    image: prodSikkens,
+    anchor: "Sikkens Alphacryl Pure Mat — fluweelmatte muurverf voor woon- en slaapkamer",
+    to: "/muurverf",
+  },
+  "sigma-perfect-matt": {
+    slug: "sigma-perfect-matt",
+    name: "Sigma Perfect Matt",
+    brand: "Sigma",
+    price: "€38,95",
+    image: prodSigma,
+    anchor: "Sigma Perfect Matt — warme aardetinten op een matte muur",
+    to: "/muurverf",
+  },
+  "wijzonol-muurverf-extra-mat": {
+    slug: "wijzonol-muurverf-extra-mat",
+    name: "Wijzonol Muurverf Extra Mat",
+    brand: "Wijzonol",
+    price: "€36,50",
+    image: prodWijzonol,
+    anchor: "Wijzonol Muurverf Extra Mat — diepe dekking voor terracotta en oker",
+    to: "/muurverf",
+  },
+  "flexa-powerdek-mat": {
+    slug: "flexa-powerdek-mat",
+    name: "Flexa Powerdek Muurverf Mat",
+    brand: "Flexa",
+    price: "€42,95",
+    image: prodFlexa,
+    anchor: "Flexa Powerdek Muurverf Mat — koele tinten en strakke afwerking",
+    to: "/muurverf",
+  },
+  "verfmengservice": {
+    slug: "verfmengservice",
+    name: "Verfmengservice op maat",
+    brand: "Verfwinkel",
+    price: "Gratis advies",
+    image: blog1,
+    anchor: "Laat jouw kleur gratis mengen met onze verfmengservice",
+    to: "/verfmengservice",
+  },
+};
 
 export type BlogPost = {
   slug: string;
@@ -11,6 +75,8 @@ export type BlogPost = {
   author: string;
   date: string;
   readMin: number;
+  tags: string[];
+  relatedProductSlugs: string[];
   body: { type: "p" | "h2" | "ul"; text?: string; items?: string[] }[];
 };
 
@@ -24,6 +90,8 @@ export const posts: BlogPost[] = [
     author: "Lisa van der Berg",
     date: "12 mei 2026",
     readMin: 5,
+    tags: ["kleur", "trends", "muurverf", "inspiratie"],
+    relatedProductSlugs: ["sigma-perfect-matt", "wijzonol-muurverf-extra-mat", "verfmengservice"],
     body: [
       { type: "p", text: "Na jaren van koele grijstinten en strakke witten gaat 2026 over warmte, textuur en natuurlijke verbinding. Interieurontwerpers wereldwijd kiezen voor kleuren die teruggrijpen op de natuur — denk aan klei, mos en avondlucht." },
       { type: "h2", text: "Warme aardetinten" },
@@ -44,6 +112,8 @@ export const posts: BlogPost[] = [
     author: "Mark de Wit",
     date: "28 april 2026",
     readMin: 6,
+    tags: ["muurverf", "advies", "glansgraad"],
+    relatedProductSlugs: ["sikkens-alphacryl-pure-mat", "flexa-powerdek-mat", "sigma-perfect-matt"],
     body: [
       { type: "p", text: "De keuze voor het juiste type muurverf bepaalt voor een groot deel hoe je kamer er straks uitziet — en hoelang dat resultaat mooi blijft. Wij leggen het verschil uit." },
       { type: "h2", text: "Mat: rustig en stijlvol" },
@@ -63,6 +133,8 @@ export const posts: BlogPost[] = [
     author: "Sanne Hoekstra",
     date: "15 april 2026",
     readMin: 8,
+    tags: ["lak", "doe-het-zelf", "advies"],
+    relatedProductSlugs: ["sikkens-alphacryl-pure-mat", "verfmengservice"],
     body: [
       { type: "p", text: "Lakken lijkt simpel, maar het verschil tussen een amateurklus en een vakmanschap-resultaat zit in de voorbereiding. Met dit stappenplan kom je heel ver." },
       { type: "h2", text: "1. Voorbereiding" },
@@ -77,3 +149,26 @@ export const posts: BlogPost[] = [
 ];
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
+
+// Returns related posts ranked by shared tag overlap (excludes the current post).
+export function getRelatedPosts(slug: string, limit = 2): BlogPost[] {
+  const current = getPost(slug);
+  if (!current) return [];
+  return posts
+    .filter((p) => p.slug !== slug)
+    .map((p) => ({
+      post: p,
+      score: p.tags.filter((t) => current.tags.includes(t)).length,
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((x) => x.post);
+}
+
+export function getRelatedProducts(slug: string): RelatedProduct[] {
+  const post = getPost(slug);
+  if (!post) return [];
+  return post.relatedProductSlugs
+    .map((s) => productsCatalog[s])
+    .filter((p): p is RelatedProduct => Boolean(p));
+}
