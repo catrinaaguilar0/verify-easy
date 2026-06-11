@@ -1,5 +1,4 @@
 import { Check, Palette, Headphones, ShieldCheck, Phone, Mail } from "lucide-react";
-import painterSupport from "@/assets/painter-support.jpg";
 
 const services = [
   { icon: Check, title: "Gratis verzending", sub: "vanaf €50" },
@@ -23,33 +22,6 @@ export function Footer() {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* customer service - painter */}
-      <div className="border-b border-border bg-surface">
-        <div className="container mx-auto grid items-center gap-8 px-4 py-10 md:grid-cols-[auto,1fr]">
-          <div className="flex items-center gap-5">
-            <img
-              src={painterSupport}
-              alt="Mark, schilder en klantenservice bij VerfOnlineWinkel"
-              className="h-24 w-24 rounded-full object-cover ring-4 ring-accent/20"
-              loading="lazy"
-            />
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-accent">Klantenservice</div>
-              <div className="text-lg font-bold text-ink">Mark — onze schilder</div>
-              <p className="text-sm text-ink-soft">Persoonlijk verfadvies van een vakman</p>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-3 md:justify-end">
-            <a href="tel:+31201234567" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent">
-              <Phone className="h-4 w-4" /> 020 - 123 45 67
-            </a>
-            <a href="mailto:advies@verfonlinewinkel.nl" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent">
-              <Mail className="h-4 w-4" /> Stel je vraag
-            </a>
-          </div>
         </div>
       </div>
 
