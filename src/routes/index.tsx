@@ -19,14 +19,14 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Verfwinkel — Professionele verf voor elk project" },
+      { title: "VerfOnlineWinkel — Professionele verf voor elk project" },
       { name: "description", content: "De beste kwaliteit verf en materialen voor vakman en doe-het-zelver. Sikkens, Sigma, Wijzonol, Flexa en Histor — gratis verzending vanaf €50." },
-      { property: "og:title", content: "Verfwinkel — Professionele verf voor elk project" },
+      { property: "og:title", content: "VerfOnlineWinkel — Professionele verf voor elk project" },
       { property: "og:description", content: "Topmerken verf, kleur op maat en deskundig advies. Snel in huis." },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
       { property: "og:image", content: `${SITE_URL}/og-home.jpg` },
-      { name: "twitter:title", content: "Verfwinkel — Professionele verf voor elk project" },
+      { name: "twitter:title", content: "VerfOnlineWinkel — Professionele verf voor elk project" },
       { name: "twitter:description", content: "Topmerken verf, kleur op maat en deskundig advies." },
     ],
     links: [
