@@ -57,7 +57,7 @@ const demoFilms = [
       "Stap-voor-stap demonstratie van de juiste rol-techniek voor een egaal en streeploos eindresultaat op grote muurvlakken.",
     duration: "4 min",
     category: "Verftechnieken",
-    icon: Roller,
+    icon: PaintRoller,
     source: "Sigma Coatings",
     sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
   },
@@ -171,11 +171,64 @@ function DemonstratiesPage() {
         </section>
 
         <section className="container mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold text-ink md:text-3xl">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="text-2xl font-bold text-ink md:text-3xl">
+                Demonstratiefilms in het overzicht
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+                Een selectie van praktische demonstraties, geordend per onderwerp. Bekijk de volledige film op de Sigma-website.
+              </p>
+            </div>
+          </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {demoFilms.map((film) => {
+              const Icon = film.icon;
+              return (
+                <article
+                  key={film.title}
+                  className="flex flex-col rounded-xl border border-border bg-background p-6 transition hover:border-accent hover:shadow-md"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2.5 py-1 text-xs font-medium text-ink-soft">
+                      <Clock className="h-3 w-3" />
+                      {film.duration}
+                    </span>
+                  </div>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-accent">
+                    {film.category}
+                  </p>
+                  <h3 className="mt-1 text-lg font-bold text-ink">{film.title}</h3>
+                  <p className="mt-2 flex-1 text-sm text-ink-soft">
+                    {film.description}
+                  </p>
+                  <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+                    <span className="text-xs text-ink-soft">
+                      Bron: <span className="font-medium text-ink">{film.source}</span>
+                    </span>
+                    <a
+                      href={film.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
+                    >
+                      Bekijk
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <h2 className="mt-16 text-2xl font-bold text-ink md:text-3xl">
             Waar gaat het over?
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {demos.map((d) => {
+            {categories.map((d) => {
               const Icon = d.icon;
               return (
                 <div
