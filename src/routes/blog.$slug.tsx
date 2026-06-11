@@ -128,7 +128,7 @@ function BlogPost() {
             {post.tags.length > 0 && (
               <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-border pt-6">
                 <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Onderwerpen:</span>
-                {post.tags.map((tag) => (
+                {post.tags.map((tag: string) => (
                   <Link
                     key={tag}
                     to="/blog"
