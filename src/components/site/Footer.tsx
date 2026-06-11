@@ -1,5 +1,4 @@
 import { Check, Palette, Headphones, ShieldCheck, Phone, Mail } from "lucide-react";
-import painterSupport from "@/assets/painter-support.jpg";
 
 const services = [
   { icon: Check, title: "Gratis verzending", sub: "vanaf €50" },
