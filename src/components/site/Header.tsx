@@ -17,8 +17,8 @@ const nav = [
   { label: "Verfbenodigdheden", to: "/" },
   { label: "Kleuren", to: "/" },
   { label: "Merken", to: "/" },
-  { label: "Acties", to: "/" },
-  { label: "Advies", to: "/" },
+  { label: "Verfmengservice", to: "/verfmengservice" },
+  { label: "Blog", to: "/blog" },
 ];
 
 export function Header() {
