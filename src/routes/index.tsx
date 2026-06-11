@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { ArrowRight, Heart, Star } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -16,14 +18,22 @@ import brandSigma from "@/assets/brand-sigma.png";
 import brandWijzonol from "@/assets/brand-wijzonol.png";
 import brandFlexa from "@/assets/brand-flexa.png";
 import brandHistor from "@/assets/brand-histor.png";
+import { getVisibleBrands } from "@/lib/brands.functions";
+import { categoryLabel } from "@/lib/brand-categories";
 
-const brands = [
-  { name: "Sikkens", logo: brandSikkens },
-  { name: "Sigma Coatings", logo: brandSigma },
-  { name: "Wijzonol", logo: brandWijzonol },
-  { name: "Flexa", logo: brandFlexa },
-  { name: "Histor", logo: brandHistor },
-];
+const brandFallback: Record<string, string> = {
+  sikkens: brandSikkens,
+  sigma: brandSigma,
+  wijzonol: brandWijzonol,
+  flexa: brandFlexa,
+  histor: brandHistor,
+};
+
+const brandsQueryOptions = queryOptions({
+  queryKey: ["visible-brands"],
+  queryFn: () => getVisibleBrands(),
+});
+
 import inspInterior from "@/assets/insp-interior.jpg";
 import inspColors from "@/assets/insp-colors.jpg";
 
