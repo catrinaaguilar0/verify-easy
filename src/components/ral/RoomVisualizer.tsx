@@ -1,13 +1,21 @@
-import { useState } from "react";
-import { Paintbrush, RectangleHorizontal, DoorClosed } from "lucide-react";
+import { useRef, useState } from "react";
+import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload, X } from "lucide-react";
 
-type Surface = "muur" | "kozijn" | "deur";
+type Surface = "muur" | "kozijn" | "deur" | "foto";
 type Finish = "mat" | "zijdeglans" | "hoogglans";
+type Blend = "multiply" | "overlay" | "soft-light";
 
 const surfaces: { id: Surface; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: "muur", label: "Muur", icon: Paintbrush },
   { id: "kozijn", label: "Kozijn", icon: RectangleHorizontal },
   { id: "deur", label: "Voordeur", icon: DoorClosed },
+  { id: "foto", label: "Eigen foto", icon: ImageIcon },
+];
+
+const blendModes: { id: Blend; label: string; hint: string }[] = [
+  { id: "multiply", label: "Muur / donker oppervlak", hint: "multiply" },
+  { id: "overlay", label: "Gemiddeld oppervlak", hint: "overlay" },
+  { id: "soft-light", label: "Licht oppervlak", hint: "soft-light" },
 ];
 
 const finishes: { id: Finish; label: string; sheen: string }[] = [
@@ -19,8 +27,30 @@ const finishes: { id: Finish; label: string; sheen: string }[] = [
 export function RoomVisualizer({ hex, code, name }: { hex: string; code: string; name: string }) {
   const [surface, setSurface] = useState<Surface>("muur");
   const [finish, setFinish] = useState<Finish>("mat");
+  const [userImage, setUserImage] = useState<string | null>(null);
+  const [blend, setBlend] = useState<Blend>("multiply");
+  const [opacity, setOpacity] = useState(0.85);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sheen = finishes.find((f) => f.id === finish)!.sheen;
+
+  const handleFile = (file: File | null) => {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      alert("Kies een afbeelding (JPG, PNG of WEBP).");
+      return;
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      alert("Afbeelding is te groot. Max 8 MB.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result;
+      if (typeof result === "string") setUserImage(result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <section className="border-t border-border bg-surface">
@@ -34,8 +64,8 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
               Bekijk RAL {code} {name} in jouw ruimte
             </h2>
             <p className="mt-1 max-w-2xl text-sm text-ink-soft">
-              Kies een oppervlak en een glansgraad om te zien hoe deze RAL-tint eruitziet
-              op een muur, kozijn of voordeur.
+              Kies een oppervlak en een glansgraad, of upload een eigen foto van jouw
+              ruimte om de RAL-kleur erop te simuleren.
             </p>
           </div>
         </div>
@@ -160,13 +190,113 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
                 <div className="absolute bottom-8 left-1/2 h-2 w-[170px] -translate-x-1/2 rounded bg-[#7d7160]" />
               </>
             )}
+
+            {surface === "foto" && (
+              <>
+                {userImage ? (
+                  <>
+                    <img
+                      src={userImage}
+                      alt="Door bezoeker geüploade foto van eigen ruimte"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        backgroundColor: hex,
+                        mixBlendMode: blend,
+                        opacity,
+                      }}
+                      aria-hidden="true"
+                    />
+                    {sheen !== "none" && (
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: sheen }} />
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => setUserImage(null)}
+                      className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-md bg-black/60 px-2 py-1 text-[11px] font-semibold text-white backdrop-blur transition hover:bg-black/80"
+                      aria-label="Verwijder geüploade foto"
+                    >
+                      <X className="h-3 w-3" /> Verwijder foto
+                    </button>
+                  </>
+                ) : (
+                  <label
+                    htmlFor="ral-photo-upload"
+                    className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center gap-3 bg-[#f5f0e6] text-center transition hover:bg-[#ede6d6]"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      handleFile(e.dataTransfer.files?.[0] ?? null);
+                    }}
+                  >
+                    <div className="rounded-full bg-accent/10 p-4 text-accent">
+                      <Upload className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-ink">Upload een foto van jouw ruimte</div>
+                      <div className="mt-1 text-xs text-ink-soft">
+                        JPG, PNG of WEBP · max 8 MB · sleep een bestand hierheen of klik om te kiezen
+                      </div>
+                    </div>
+                    <input
+                      ref={fileInputRef}
+                      id="ral-photo-upload"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      className="sr-only"
+                      onChange={(e) => handleFile(e.target.files?.[0] ?? null)}
+                    />
+                  </label>
+                )}
+              </>
+            )}
           </div>
+
+          {/* Foto-modus controls */}
+          {surface === "foto" && userImage && (
+            <div className="grid gap-3 border-t border-border bg-surface px-4 py-3 sm:grid-cols-2">
+              <label className="flex flex-col gap-1 text-[11px] font-semibold uppercase tracking-wider text-ink-soft">
+                Type oppervlak
+                <select
+                  value={blend}
+                  onChange={(e) => setBlend(e.target.value as Blend)}
+                  className="rounded-md border border-border bg-card px-2 py-1.5 text-xs font-medium text-ink"
+                  aria-label="Type oppervlak voor menging"
+                >
+                  {blendModes.map((b) => (
+                    <option key={b.id} value={b.id}>{b.label}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="flex flex-col gap-1 text-[11px] font-semibold uppercase tracking-wider text-ink-soft">
+                Dekking: {Math.round(opacity * 100)}%
+                <input
+                  type="range"
+                  min={0.2}
+                  max={1}
+                  step={0.05}
+                  value={opacity}
+                  onChange={(e) => setOpacity(parseFloat(e.target.value))}
+                  className="accent-accent"
+                  aria-label="Dekking van de kleur"
+                />
+              </label>
+            </div>
+          )}
 
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3 text-xs text-ink-soft">
             <span>
               <span className="font-semibold text-ink">RAL {code} {name}</span> ·{" "}
-              {surface === "muur" ? "Binnenmuur" : surface === "kozijn" ? "Kozijn met glas" : "Voordeur"} ·{" "}
-              {finish}
+              {surface === "muur"
+                ? "Binnenmuur"
+                : surface === "kozijn"
+                ? "Kozijn met glas"
+                : surface === "deur"
+                ? "Voordeur"
+                : "Eigen foto"}{" "}
+              · {finish}
             </span>
             <span className="font-mono">{hex.toUpperCase()}</span>
           </div>
