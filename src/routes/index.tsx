@@ -93,9 +93,9 @@ function Home() {
       <main>
         {/* HERO */}
         <section className="bg-surface">
-          <div className="container mx-auto grid gap-8 px-4 py-14 md:grid-cols-[1fr_1.5fr] md:items-center md:gap-12 md:py-24 lg:grid-cols-[1fr_1.6fr]">
+          <div className="container mx-auto grid gap-8 px-4 py-14 md:grid-cols-[1fr_1.4fr] md:items-center md:gap-10 md:py-20 lg:grid-cols-[1fr_1.55fr] lg:gap-14 lg:py-24">
             <div>
-              <h1 className="text-4xl font-extrabold leading-[1.1] text-ink md:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-extrabold leading-[1.1] text-ink sm:text-5xl lg:text-6xl">
                 Professionele verf<br />voor elk project
               </h1>
               <p className="mt-5 max-w-md text-base text-ink-soft md:text-lg">
@@ -110,13 +110,13 @@ function Home() {
                 </a>
               </div>
             </div>
-            <div>
+            <div className="md:-mr-4 lg:-mr-8">
               <img
                 src={hero}
                 alt="Sikkens, Sigma en Wijzonol professionele verfblikken"
                 width={1600}
                 height={1100}
-                className="w-full rounded-xl object-cover shadow-[var(--shadow-soft)] md:scale-110 lg:scale-125 origin-right"
+                className="w-full rounded-xl object-cover shadow-[var(--shadow-soft)] aspect-[16/11] md:aspect-[4/3] lg:aspect-[16/11]"
               />
             </div>
           </div>
