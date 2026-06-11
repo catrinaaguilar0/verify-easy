@@ -1,7 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Calculator, Palette, BookOpen, ArrowRight } from "lucide-react";
+import {
+  Calculator,
+  Palette,
+  BookOpen,
+  ArrowRight,
+  ChevronRight,
+} from "lucide-react";
 
 export const Route = createFileRoute("/hulp-en-advies")({
   head: () => ({
