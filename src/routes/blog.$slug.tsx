@@ -2,16 +2,21 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { posts, getPost } from "@/lib/blog";
+import { getRequestOrigin } from "@/lib/origin.functions";
 import { Clock, User, ArrowLeft } from "lucide-react";
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const post = getPost(params.slug);
     if (!post) throw notFound();
-    return { post };
+    const origin = await getRequestOrigin();
+    return { post, origin };
   },
-  head: ({ loaderData }) => {
+  head: ({ params, loaderData }) => {
     const post = loaderData?.post;
+    const origin = loaderData?.origin ?? "https://cozy-check-hub.lovable.app";
+    const url = `${origin}/blog/${params.slug}`;
+    const image = post ? `${origin}${post.image}` : undefined;
     return {
       meta: post
         ? [
@@ -19,9 +24,41 @@ export const Route = createFileRoute("/blog/$slug")({
             { name: "description", content: post.excerpt },
             { property: "og:title", content: post.title },
             { property: "og:description", content: post.excerpt },
-            { property: "og:image", content: post.image },
+            { property: "og:type", content: "article" },
+            { property: "og:url", content: url },
+            { property: "og:image", content: image },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:title", content: post.title },
+            { name: "twitter:description", content: post.excerpt },
+            { name: "twitter:image", content: image },
           ]
         : [{ title: "Artikel niet gevonden" }],
+      links: [
+        { rel: "canonical", href: url },
+      ],
+      scripts: post
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: post.title,
+                description: post.excerpt,
+                image: image,
+                author: {
+                  "@type": "Person",
+                  name: post.author,
+                },
+                datePublished: post.date,
+                mainEntityOfPage: {
+                  "@type": "WebPage",
+                  "@id": url,
+                },
+              }),
+            },
+          ]
+        : undefined,
     };
   },
   notFoundComponent: () => (
