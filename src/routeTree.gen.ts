@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerfmengserviceRouteImport } from './routes/verfmengservice'
+import { Route as VerfcalculatorRouteImport } from './routes/verfcalculator'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RalRouteImport } from './routes/ral'
 import { Route as MuurverfRouteImport } from './routes/muurverf'
@@ -21,6 +22,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const VerfmengserviceRoute = VerfmengserviceRouteImport.update({
   id: '/verfmengservice',
   path: '/verfmengservice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerfcalculatorRoute = VerfcalculatorRouteImport.update({
+  id: '/verfcalculator',
+  path: '/verfcalculator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/verfcalculator': typeof VerfcalculatorRoute
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/verfcalculator': typeof VerfcalculatorRoute
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/muurverf': typeof MuurverfRoute
   '/ral': typeof RalRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/verfcalculator': typeof VerfcalculatorRoute
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/muurverf'
     | '/ral'
     | '/sitemap.xml'
+    | '/verfcalculator'
     | '/verfmengservice'
     | '/blog/$slug'
     | '/ral/$code'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/muurverf'
     | '/ral'
     | '/sitemap.xml'
+    | '/verfcalculator'
     | '/verfmengservice'
     | '/blog/$slug'
     | '/ral/$code'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/muurverf'
     | '/ral'
     | '/sitemap.xml'
+    | '/verfcalculator'
     | '/verfmengservice'
     | '/blog/$slug'
     | '/ral/$code'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   MuurverfRoute: typeof MuurverfRoute
   RalRoute: typeof RalRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VerfcalculatorRoute: typeof VerfcalculatorRoute
   VerfmengserviceRoute: typeof VerfmengserviceRoute
 }
 
@@ -139,6 +152,13 @@ declare module '@tanstack/react-router' {
       path: '/verfmengservice'
       fullPath: '/verfmengservice'
       preLoaderRoute: typeof VerfmengserviceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verfcalculator': {
+      id: '/verfcalculator'
+      path: '/verfcalculator'
+      fullPath: '/verfcalculator'
+      preLoaderRoute: typeof VerfcalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -219,8 +239,19 @@ const rootRouteChildren: RootRouteChildren = {
   MuurverfRoute: MuurverfRoute,
   RalRoute: RalRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VerfcalculatorRoute: VerfcalculatorRoute,
   VerfmengserviceRoute: VerfmengserviceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
