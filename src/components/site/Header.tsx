@@ -16,9 +16,7 @@ const nav = [
   { label: "Buitenverf", to: "/" },
   { label: "Verfbenodigdheden", to: "/" },
   { label: "RAL kleuren", to: "/ral" },
-  { label: "Verfcalculator", to: "/verfcalculator" },
-  { label: "Verfmengservice", to: "/verfmengservice" },
-  { label: "Blog", to: "/blog" },
+  { label: "Hulp & Advies", to: "/hulp-en-advies" },
 ];
 
 export function Header() {
