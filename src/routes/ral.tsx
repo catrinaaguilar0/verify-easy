@@ -59,11 +59,15 @@ function RalIndex() {
               title={`RAL ${c.code} ${c.name}`}
               aria-label={`Bekijk RAL ${c.code} ${c.name}`}
             >
-              <span
-                className="h-16 w-16 shrink-0 rounded-lg border border-border"
-                style={{ backgroundColor: c.hex }}
-                aria-hidden
-              />
+              <figure className="m-0 shrink-0">
+                <span
+                  className="block h-16 w-16 rounded-lg border border-border"
+                  style={{ backgroundColor: c.hex }}
+                  role="img"
+                  aria-label={`Kleurstaal RAL ${c.code} ${c.name}: ${c.hex.toUpperCase()}`}
+                />
+                <figcaption className="sr-only">RAL {c.code} {c.name} swatch in {c.hex.toUpperCase()}</figcaption>
+              </figure>
               <span className="flex flex-col">
                 <span className="text-xs font-semibold uppercase tracking-wider text-accent">
                   RAL {c.code}
