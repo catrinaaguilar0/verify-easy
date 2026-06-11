@@ -3,7 +3,7 @@ import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload
 
 type Surface = "muur" | "kozijn" | "deur" | "foto";
 type Finish = "mat" | "zijdeglans" | "hoogglans";
-type Blend = "multiply" | "overlay" | "soft-light";
+type Blend = "multiply" | "overlay" | "soft-light" | "color" | "darken" | "lighten" | "screen" | "hard-light" | "luminosity";
 
 const surfaces: { id: Surface; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: "muur", label: "Muur", icon: Paintbrush },
@@ -12,10 +12,16 @@ const surfaces: { id: Surface; label: string; icon: React.ComponentType<{ classN
   { id: "foto", label: "Eigen foto", icon: ImageIcon },
 ];
 
-const blendModes: { id: Blend; label: string; hint: string }[] = [
-  { id: "multiply", label: "Muur / donker oppervlak", hint: "multiply" },
-  { id: "overlay", label: "Gemiddeld oppervlak", hint: "overlay" },
-  { id: "soft-light", label: "Licht oppervlak", hint: "soft-light" },
+const blendModes: { id: Blend; label: string; description: string }[] = [
+  { id: "multiply", label: "Multiply", description: "Ideaal voor donkere muren en diepe kleuren" },
+  { id: "overlay", label: "Overlay", description: "Past kleur op lichte en donkere plekken apart aan" },
+  { id: "soft-light", label: "Soft Light", description: "Zachte, subtiele kleuring voor elk oppervlak" },
+  { id: "hard-light", label: "Hard Light", description: "Sterk contrast, perfect voor heldere accenten" },
+  { id: "color", label: "Color", description: "Behoudt structuur van de foto, kleurt tint over" },
+  { id: "screen", label: "Screen", description: "Licht op, goed voor lichte muren en bewolkte lucht" },
+  { id: "darken", label: "Darken", description: "Alleen donkerder, werkt goed bij hout en steen" },
+  { id: "lighten", label: "Lighten", description: "Alleen lichter, ideaal voor kozijnen en details" },
+  { id: "luminosity", label: "Luminosity", description: "Behoudt helderheid van foto, RAL als tint" },
 ];
 
 const finishes: { id: Finish; label: string; sheen: string }[] = [
@@ -256,17 +262,17 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
 
           {/* Foto-modus controls */}
           {surface === "foto" && userImage && (
-            <div className="grid gap-3 border-t border-border bg-surface px-4 py-3 sm:grid-cols-2">
+            <div className="grid gap-3 border-t border-border bg-surface px-4 py-3 sm:grid-cols-[1.4fr_1fr]">
               <label className="flex flex-col gap-1 text-[11px] font-semibold uppercase tracking-wider text-ink-soft">
-                Type oppervlak
+                Blend-modus
                 <select
                   value={blend}
                   onChange={(e) => setBlend(e.target.value as Blend)}
                   className="rounded-md border border-border bg-card px-2 py-1.5 text-xs font-medium text-ink"
-                  aria-label="Type oppervlak voor menging"
+                  aria-label="Blend-modus voor kleuroverlay"
                 >
                   {blendModes.map((b) => (
-                    <option key={b.id} value={b.id}>{b.label}</option>
+                    <option key={b.id} value={b.id}>{b.label} — {b.description}</option>
                   ))}
                 </select>
               </label>
