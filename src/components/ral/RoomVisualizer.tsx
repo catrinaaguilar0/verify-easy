@@ -159,6 +159,7 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
 
         {/* Stage */}
         <div
+          ref={stageRef}
           className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]"
           role="img"
           aria-label={`Simulatie van RAL ${code} ${name} op ${surface} met ${finish} afwerking`}
