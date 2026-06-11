@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, Star, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Heart, Star, ChevronDown, Pipette, Check } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import prodSikkens from "@/assets/prod-sikkens.jpg";
@@ -16,6 +17,15 @@ export const Route = createFileRoute("/muurverf")({
   }),
   component: MuurverfPage,
 });
+
+const colorOptions = [
+  { name: "Wit RAL 9010", hex: "#F7F4EC" },
+  { name: "Warm Zand", hex: "#E7D9BE" },
+  { name: "Salie Groen", hex: "#A8B89A" },
+  { name: "Diep Oceaan", hex: "#2E4756" },
+  { name: "Terracotta", hex: "#B8674A" },
+  { name: "Antraciet", hex: "#3A3A3C" },
+];
 
 const products = [
   { name: "Sikkens Alphacryl Pure Mat SF", price: "€44,95", reviews: 128, img: prodSikkens },
@@ -42,6 +52,9 @@ function Stars() {
 }
 
 function MuurverfPage() {
+  const [activeColor, setActiveColor] = useState(colorOptions[0]);
+  const [perProduct, setPerProduct] = useState<Record<string, string>>({});
+  const [customHex, setCustomHex] = useState("#A8B89A");
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -61,6 +74,64 @@ function MuurverfPage() {
             ))}
           </div>
         </header>
+
+        {/* Color match */}
+        <section className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+          <div className="grid gap-0 md:grid-cols-[1.1fr,1fr]">
+            <div className="flex flex-col gap-4 p-6 md:p-8">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                <Pipette className="h-4 w-4" /> Color Match
+              </div>
+              <h2 className="text-2xl font-extrabold text-ink">Kies jouw kleur — wij mengen het in elke variant</h2>
+              <p className="text-sm text-ink-soft">
+                Selecteer een populaire tint of voer een eigen kleurcode in. De gekozen kleur wordt gekoppeld aan alle muurverf hieronder, zodat je per merk en afwerking dezelfde kleur kunt vergelijken.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {colorOptions.map((c) => {
+                  const active = activeColor.hex === c.hex;
+                  return (
+                    <button
+                      key={c.hex}
+                      onClick={() => setActiveColor(c)}
+                      className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs transition ${active ? "border-accent bg-accent/10 text-ink" : "border-border bg-background text-ink-soft hover:border-accent"}`}
+                    >
+                      <span className="h-4 w-4 rounded-full border border-border" style={{ background: c.hex }} />
+                      {c.name}
+                      {active && <Check className="h-3.5 w-3.5 text-accent" />}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mt-2 flex flex-wrap items-center gap-3 border-t border-border pt-4">
+                <label className="text-sm font-semibold text-ink">Eigen kleurcode:</label>
+                <input
+                  type="color"
+                  value={customHex}
+                  onChange={(e) => setCustomHex(e.target.value)}
+                  className="h-9 w-12 cursor-pointer rounded border border-border bg-background"
+                />
+                <input
+                  value={customHex.toUpperCase()}
+                  onChange={(e) => setCustomHex(e.target.value)}
+                  className="w-28 rounded border border-border bg-background px-2 py-1.5 text-sm text-ink"
+                />
+                <button
+                  onClick={() => setActiveColor({ name: `Custom ${customHex.toUpperCase()}`, hex: customHex })}
+                  className="rounded-full bg-accent px-4 py-2 text-xs font-semibold text-accent-foreground hover:opacity-90"
+                >
+                  Toepassen
+                </button>
+              </div>
+            </div>
+            <div className="relative min-h-48 md:min-h-full" style={{ background: activeColor.hex }}>
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent" />
+              <div className="absolute bottom-4 left-4 rounded-md bg-background/90 px-3 py-2 text-xs">
+                <div className="font-semibold text-ink">{activeColor.name}</div>
+                <div className="text-ink-soft">{activeColor.hex.toUpperCase()}</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[260px,1fr]">
           {/* filters */}
@@ -103,13 +174,16 @@ function MuurverfPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-5 md:grid-cols-3">
-              {products.map((p) => (
+              {products.map((p) => {
+                const selected = perProduct[p.name] ?? activeColor.hex;
+                return (
                 <article key={p.name} className="group relative rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
                   <button aria-label="Bewaar" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft hover:text-accent">
                     <Heart className="h-4 w-4" />
                   </button>
-                  <div className="aspect-square overflow-hidden rounded-lg bg-surface">
-                    <img src={p.img} alt={p.name} width={800} height={800} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
+                  <div className="relative aspect-square overflow-hidden rounded-lg bg-surface">
+                    <div className="absolute inset-0 transition-colors" style={{ background: selected, opacity: 0.35 }} />
+                    <img src={p.img} alt={p.name} width={800} height={800} loading="lazy" className="relative h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <h3 className="mt-4 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h3>
                   <div className="mt-1 text-xs text-ink-soft">Vanaf</div>
@@ -118,8 +192,26 @@ function MuurverfPage() {
                     <Stars />
                     <span className="text-xs text-ink-soft">({p.reviews})</span>
                   </div>
+                  <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+                    <div className="flex items-center gap-1">
+                      {colorOptions.slice(0, 5).map((c) => {
+                        const active = selected === c.hex;
+                        return (
+                          <button
+                            key={c.hex}
+                            aria-label={`Kies ${c.name}`}
+                            onClick={() => setPerProduct((s) => ({ ...s, [p.name]: c.hex }))}
+                            className={`h-5 w-5 rounded-full border transition ${active ? "ring-2 ring-accent ring-offset-1 ring-offset-card border-transparent" : "border-border hover:scale-110"}`}
+                            style={{ background: c.hex }}
+                          />
+                        );
+                      })}
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider text-ink-soft">Color match</span>
+                  </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-10 flex justify-center gap-1 text-sm">
