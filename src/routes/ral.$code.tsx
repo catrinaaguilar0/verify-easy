@@ -162,11 +162,15 @@ function RalDetail() {
                     className="group rounded-lg border border-border bg-card p-3 transition hover:-translate-y-0.5 hover:border-accent"
                     aria-label={`Bekijk RAL ${c!.code} ${c!.name}`}
                   >
-                    <span
-                      className="block aspect-square w-full rounded border border-border"
-                      style={{ backgroundColor: c!.hex }}
-                      aria-hidden
-                    />
+                    <figure className="m-0">
+                      <span
+                        className="block aspect-square w-full rounded border border-border"
+                        style={{ backgroundColor: c!.hex }}
+                        role="img"
+                        aria-label={`Kleurstaal ${c!.name}: ${c!.hex.toUpperCase()}`}
+                      />
+                      <figcaption className="sr-only">{c!.name} swatch in {c!.hex.toUpperCase()}</figcaption>
+                    </figure>
                     <span className="mt-2 block text-[10px] font-semibold uppercase tracking-wider text-accent">
                       RAL {c!.code}
                     </span>
