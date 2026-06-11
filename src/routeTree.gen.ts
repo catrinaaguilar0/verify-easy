@@ -23,6 +23,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RalCodeRouteImport } from './routes/ral.$code'
+import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAdminBrandsRouteImport } from './routes/_authenticated/admin.brands'
 
@@ -95,6 +96,11 @@ const RalCodeRoute = RalCodeRouteImport.update({
   path: '/$code',
   getParentRoute: () => RalRoute,
 } as any)
+const ProductSlugRoute = ProductSlugRouteImport.update({
+  id: '/product/$slug',
+  path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/winkelwagen': typeof WinkelwagenRoute
   '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/product/$slug': typeof ProductSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/winkelwagen': typeof WinkelwagenRoute
   '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/product/$slug': typeof ProductSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/winkelwagen': typeof WinkelwagenRoute
   '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/product/$slug': typeof ProductSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/_authenticated/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
     | '/winkelwagen'
     | '/zoeken'
     | '/blog/$slug'
+    | '/product/$slug'
     | '/ral/$code'
     | '/admin/brands'
   fileRoutesByTo: FileRoutesByTo
@@ -193,6 +203,7 @@ export interface FileRouteTypes {
     | '/winkelwagen'
     | '/zoeken'
     | '/blog/$slug'
+    | '/product/$slug'
     | '/ral/$code'
     | '/admin/brands'
   id:
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/winkelwagen'
     | '/zoeken'
     | '/blog/$slug'
+    | '/product/$slug'
     | '/ral/$code'
     | '/_authenticated/admin/brands'
   fileRoutesById: FileRoutesById
@@ -229,6 +241,7 @@ export interface RootRouteChildren {
   VerfmengserviceRoute: typeof VerfmengserviceRoute
   WinkelwagenRoute: typeof WinkelwagenRoute
   ZoekenRoute: typeof ZoekenRoute
+  ProductSlugRoute: typeof ProductSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -331,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RalCodeRouteImport
       parentRoute: typeof RalRoute
     }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -393,6 +413,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerfmengserviceRoute: VerfmengserviceRoute,
   WinkelwagenRoute: WinkelwagenRoute,
   ZoekenRoute: ZoekenRoute,
+  ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
