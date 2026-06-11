@@ -197,7 +197,10 @@ function MuurverfPage() {
           {/* grid */}
           <section>
             <div className="mb-5 flex items-center justify-between">
-              <span className="text-sm text-ink-soft"><strong className="text-ink">125</strong> producten</span>
+              <span className="text-sm text-ink-soft">
+                <strong className="text-ink">{onlyMatching ? visibleProducts.length : 125}</strong> producten
+                {onlyMatching && <span className="ml-2 rounded-full bg-accent/10 px-2 py-0.5 text-xs text-accent">Color match actief</span>}
+              </span>
               <label className="flex items-center gap-2 text-sm text-ink-soft">
                 Sorteren op:
                 <select className="rounded border border-border bg-background px-2 py-1.5 text-sm text-ink">
