@@ -4,6 +4,8 @@ import { Footer } from "@/components/site/Footer";
 import { posts } from "@/lib/blog";
 import { Clock, User } from "lucide-react";
 
+const baseUrl = "https://cozy-check-hub.lovable.app";
+
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
@@ -11,6 +13,14 @@ export const Route = createFileRoute("/blog")({
       { name: "description", content: "Lees onze laatste artikelen over kleurtrends, schildertechnieken en praktisch advies van onze kleurspecialisten." },
       { property: "og:title", content: "Blog — Verfwinkel" },
       { property: "og:description", content: "Kleurinspiratie, advies en doe-het-zelf tips." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${baseUrl}/blog` },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Blog — Verfwinkel" },
+      { name: "twitter:description", content: "Kleurinspiratie, advies en doe-het-zelf tips." },
+    ],
+    links: [
+      { rel: "canonical", href: `${baseUrl}/blog` },
     ],
   }),
   component: BlogIndex,
