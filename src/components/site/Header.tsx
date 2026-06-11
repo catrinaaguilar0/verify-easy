@@ -39,10 +39,14 @@ export function Header() {
       {/* main */}
       <div className="container mx-auto flex items-center gap-8 px-4 py-5">
         <Link to="/" className="flex shrink-0 items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-bold">V</span>
+          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-bold">
+            V
+          </span>
           <span className="flex flex-col leading-tight">
-            <span className="text-lg font-extrabold tracking-tight text-ink">VERFWINKEL</span>
-            <span className="text-[10px] uppercase tracking-wider text-ink-soft">Alles voor het perfecte resultaat</span>
+            <span className="text-lg font-extrabold tracking-tight text-ink">VERFONLINEWINKEL</span>
+            <span className="text-[10px] uppercase tracking-wider text-ink-soft">
+              Alles voor het perfecte resultaat
+            </span>
           </span>
         </Link>
 
@@ -53,7 +57,10 @@ export function Header() {
               placeholder="Zoek op verf, kleur, merk, product…"
               className="h-11 w-full rounded-md border border-border bg-background pl-4 pr-12 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
-            <button aria-label="Zoeken" className="absolute right-1 top-1 grid h-9 w-10 place-items-center rounded text-ink-soft hover:text-ink">
+            <button
+              aria-label="Zoeken"
+              className="absolute right-1 top-1 grid h-9 w-10 place-items-center rounded text-ink-soft hover:text-ink"
+            >
               <Search className="h-4 w-4" />
             </button>
           </div>
@@ -67,7 +74,9 @@ export function Header() {
           <a href="#" className="relative flex flex-col items-center text-ink hover:text-accent">
             <span className="relative">
               <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -right-2 -top-1 grid h-4 w-4 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">0</span>
+              <span className="absolute -right-2 -top-1 grid h-4 w-4 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                0
+              </span>
             </span>
             <span className="mt-0.5 text-xs">Winkelwagen</span>
           </a>
