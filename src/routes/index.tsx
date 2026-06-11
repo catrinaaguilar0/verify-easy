@@ -200,8 +200,70 @@ function Home() {
           </div>
         </section>
 
+        {/* KLEURTRENDS 2026 */}
+        <section id="kleurtrends-2026" className="border-y border-border bg-surface">
+          <div className="container mx-auto px-4 py-16">
+            <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-xl">
+                <span className="text-xs font-semibold uppercase tracking-wider text-accent">Kleurtrends 2026</span>
+                <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">De kleuren van het jaar 2026</h2>
+                <p className="mt-3 text-sm text-ink-soft">
+                  Toonaangevende verfmerken bepalen samen de richting voor 2026: een rustgevende olijfgroene tint van Sigma en een veelzijdige familie indigoblauwen van Flexa. Wij mengen ze precies op kleur.
+                </p>
+              </div>
+              <Link to="/verfmengservice" className="inline-flex w-fit items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-accent-foreground hover:bg-accent-strong">
+                Laat mengen <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {/* Sigma Secret Safari — featured */}
+              <article className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] md:col-span-2 lg:row-span-2">
+                <div className="relative aspect-[4/3] w-full md:aspect-auto md:flex-1" style={{ backgroundColor: "#9A9A6E" }}>
+                  <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-ink">
+                    Sigma · Kleur van het Jaar
+                  </span>
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-block h-4 w-4 rounded-full border border-border" style={{ backgroundColor: "#9A9A6E" }} />
+                    <span className="text-xs font-mono text-ink-soft">PPG1110-4</span>
+                  </div>
+                  <h3 className="mt-2 text-xl font-bold text-ink">Secret Safari</h3>
+                  <p className="mt-2 text-sm text-ink-soft">
+                    Een subtiel olijf-limoengroen met een organische, minerale uitstraling. Brengt balans, optimisme en veerkracht in elke ruimte — werkt prachtig samen met natuurlijke materialen of glanzende accenten.
+                  </p>
+                </div>
+              </article>
+
+              {/* Flexa trio — The Rhythm of Blues */}
+              {[
+                { name: "Free Groove", desc: "Levendig indigo voor energieke woonruimtes.", hex: "#3F4FA8", brand: "Flexa" },
+                { name: "Mellow Flow", desc: "Luchtig lichtblauw, kalm en ruimtelijk.", hex: "#A8C0DA", brand: "Flexa" },
+                { name: "Slow Swing", desc: "Meditatief donkerblauw met diepte en rust.", hex: "#1F2A5C", brand: "Flexa" },
+              ].map((c) => (
+                <article key={c.name} className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)]">
+                  <div className="aspect-[4/3]" style={{ backgroundColor: c.hex }} />
+                  <div className="p-5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">{c.brand}</span>
+                      <span className="inline-block h-3 w-3 rounded-full border border-border" style={{ backgroundColor: c.hex }} />
+                    </div>
+                    <h3 className="mt-1.5 text-base font-bold text-ink">{c.name}</h3>
+                    <p className="mt-1 text-xs text-ink-soft">{c.desc}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <p className="mt-6 text-xs text-ink-soft">
+              Bronnen: <a href="https://www.sigma.nl/blog/secret-safari-sigma-kleur-van-het-jaar-2026" target="_blank" rel="noreferrer noopener" className="underline hover:text-accent">Sigma — Secret Safari</a>, <a href="https://www.sigma.nl/kleur/trendkleuren" target="_blank" rel="noreferrer noopener" className="underline hover:text-accent">Sigma PARALLELS</a> en <a href="https://www.flexa.nl/nl/flexa-kleurfamilie-van-2026" target="_blank" rel="noreferrer noopener" className="underline hover:text-accent">Flexa The Rhythm of Blues</a>.
+            </p>
+          </div>
+        </section>
+
         {/* INSPIRATION */}
-        <section id="inspiratie" className="container mx-auto px-4 pb-20">
+        <section id="inspiratie" className="container mx-auto px-4 py-20">
           <h2 className="mb-8 text-2xl font-bold text-ink md:text-3xl">Inspiratie & kleuradvies</h2>
           <div className="grid gap-5 md:grid-cols-2">
             {[
