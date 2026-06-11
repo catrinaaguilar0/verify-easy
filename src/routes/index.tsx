@@ -52,7 +52,7 @@ const bestsellers = [
 ];
 
 const trustMini = [
-  { icon: Truck, title: "Gratis verzending", sub: "vanaf €30" },
+  { icon: Truck, title: "Gratis verzending", sub: "vanaf €50" },
   { icon: Palette, title: "Kleur op maat", sub: "gemaakt" },
   { icon: Headphones, title: "Deskundig advies", sub: "van specialisten" },
   { icon: Check, title: "Voor 23:00 besteld", sub: "morgen in huis" },
