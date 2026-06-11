@@ -1,13 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import {
-  Calculator,
-  Palette,
-  BookOpen,
-  ArrowRight,
-  ChevronRight,
-} from "lucide-react";
+import { Calculator, Palette, BookOpen, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/hulp-en-advies")({
   head: () => ({
@@ -89,44 +83,7 @@ function HulpEnAdviesPage() {
           </div>
         </section>
 
-        {/* Index / inhoudsopgave */}
-        <section className="border-b border-border bg-surface">
-          <div className="container mx-auto px-4 py-10">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-accent">
-              Op deze pagina
-            </h2>
-            <nav className="mt-4">
-              <ul className="flex flex-wrap gap-3">
-                {subpages.map((p) => {
-                  const Icon = p.icon;
-                  return (
-                    <li key={p.to}>
-                      <a
-                        href={`#${p.to.replace("/", "")}`}
-                        className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-ink transition hover:border-accent hover:text-accent"
-                      >
-                        <Icon className="h-4 w-4 text-accent" />
-                        {p.title}
-                      </a>
-                    </li>
-                  );
-                })}
-                <li>
-                  <a
-                    href="#faq"
-                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium text-ink transition hover:border-accent hover:text-accent"
-                  >
-                    <ChevronRight className="h-4 w-4 text-accent" />
-                    Veelgestelde vragen
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </section>
-
-        {/* Tools grid */}
-        <section id="tools" className="container mx-auto px-4 py-16">
+        <section className="container mx-auto px-4 py-16">
           <div className="grid gap-6 md:grid-cols-3">
             {subpages.map((p) => {
               const Icon = p.icon;
@@ -134,7 +91,6 @@ function HulpEnAdviesPage() {
                 <Link
                   key={p.to}
                   to={p.to}
-                  id={p.to.replace("/", "")}
                   className="group flex flex-col rounded-xl border border-border bg-background p-6 transition hover:border-accent hover:shadow-md"
                 >
                   <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent/10 text-accent">
@@ -154,8 +110,7 @@ function HulpEnAdviesPage() {
           </div>
         </section>
 
-        {/* FAQ */}
-        <section id="faq" className="border-t border-border bg-surface">
+        <section className="border-t border-border bg-surface">
           <div className="container mx-auto px-4 py-16">
             <h2 className="text-2xl font-bold text-ink md:text-3xl">
               Veelgestelde vragen
