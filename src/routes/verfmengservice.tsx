@@ -11,14 +11,14 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/verfmengservice")({
   head: () => ({
     meta: [
-      { title: "Verfmengservice — laat jouw kleur op maat mengen | Verfwinkel" },
+      { title: "Verfmengservice — laat jouw kleur op maat mengen | VerfOnlineWinkel" },
       { name: "description", content: "Onze verfmengservice mengt iedere kleur op maat uit RAL, NCS, Sikkens, Flexa, Histor, Farrow & Ball en meer. Snel, exact en in elke verfsoort." },
-      { property: "og:title", content: "Verfmengservice — kleur op maat | Verfwinkel" },
+      { property: "og:title", content: "Verfmengservice — kleur op maat | VerfOnlineWinkel" },
       { property: "og:description", content: "Iedere kleur, iedere verfsoort. Op maat gemengd door onze kleurspecialisten." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/verfmengservice` },
       { property: "og:image", content: `${SITE_URL}${mixHero}` },
-      { name: "twitter:title", content: "Verfmengservice | Verfwinkel" },
+      { name: "twitter:title", content: "Verfmengservice | VerfOnlineWinkel" },
       { name: "twitter:description", content: "Iedere kleur, op maat gemengd." },
       { name: "twitter:image", content: `${SITE_URL}${mixHero}` },
     ],
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/verfmengservice")({
           "@context": "https://schema.org",
           "@type": "Service",
           name: "Verfmengservice",
-          provider: { "@type": "Organization", name: "Verfwinkel", url: SITE_URL },
+          provider: { "@type": "Organization", name: "VerfOnlineWinkel", url: SITE_URL },
           areaServed: "NL",
           serviceType: "Kleur op maat mengen",
           description: "Iedere kleur uit RAL, NCS, Sikkens, Flexa, Histor en Farrow & Ball, op maat gemengd in elke verfsoort.",

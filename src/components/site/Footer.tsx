@@ -61,7 +61,7 @@ export function Footer() {
         <div className="container mx-auto grid gap-8 px-4 py-12 md:grid-cols-4">
           {[
             { h: "Klantenservice", links: ["Contact", "Veelgestelde vragen", "Verzending", "Retourneren", "Betalen"] },
-            { h: "Over Verfwinkel", links: ["Over ons", "Vestigingen", "Werken bij", "Nieuws", "Algemene voorwaarden"] },
+            { h: "Over VerfOnlineWinkel", links: ["Over ons", "Vestigingen", "Werken bij", "Nieuws", "Algemene voorwaarden"] },
             { h: "Merken", links: ["Sikkens", "Sigma", "Wijzonol", "Flexa", "Histor"] },
             { h: "Inspiratie", links: ["Kleurinspiratie", "Verftips", "Kleuradvies", "Lookbook", "Blog"] },
           ].map((c) => (
@@ -75,7 +75,7 @@ export function Footer() {
         </div>
         <div className="border-t border-border">
           <div className="container mx-auto flex flex-wrap items-center justify-between gap-4 px-4 py-5 text-xs text-ink-soft">
-            <span>© {new Date().getFullYear()} Verfwinkel.nl — Alle rechten voorbehouden</span>
+            <span>© {new Date().getFullYear()} VerfOnlineWinkel.nl — Alle rechten voorbehouden</span>
             <span>KvK 12345678 · BTW NL000000000B01</span>
           </div>
         </div>
