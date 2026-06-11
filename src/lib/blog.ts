@@ -58,7 +58,7 @@ export const productsCatalog: Record<string, RelatedProduct> = {
   "verfmengservice": {
     slug: "verfmengservice",
     name: "Verfmengservice op maat",
-    brand: "Verfwinkel",
+    brand: "VerfOnlineWinkel",
     price: "Gratis advies",
     image: blog1,
     anchor: "Laat jouw kleur gratis mengen met onze verfmengservice",

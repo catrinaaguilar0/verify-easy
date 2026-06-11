@@ -18,7 +18,7 @@ export const Route = createFileRoute("/ral/$code")({
     const ral = loaderData?.ral;
     const url = `${baseUrl}/ral/${params.code}`;
     if (!ral) return { meta: [{ title: "RAL kleur niet gevonden" }] };
-    const title = `RAL ${ral.code} ${ral.name} — kleurinfo & toepassing | Verfwinkel`;
+    const title = `RAL ${ral.code} ${ral.name} — kleurinfo & toepassing | VerfOnlineWinkel`;
     const description = `${ral.description.slice(0, 150)}`;
     return {
       meta: [

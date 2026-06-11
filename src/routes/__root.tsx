@@ -68,25 +68,25 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 const SITE_URL = "https://cozy-check-hub.lovable.app";
-const SITE_NAME = "Verfwinkel";
+const SITE_NAME = "VerfOnlineWinkel";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Verfwinkel — Professionele verf voor elk project" },
+      { title: "VerfOnlineWinkel — Professionele verf voor elk project" },
       { name: "description", content: "Topmerken verf voor vakman en doe-het-zelver. Sikkens, Sigma, Wijzonol, Flexa en Histor. Kleur op maat gemengd, snel geleverd." },
       { name: "robots", content: "index, follow" },
       { name: "author", content: SITE_NAME },
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "nl_NL" },
-      { property: "og:title", content: "Verfwinkel — Professionele verf voor elk project" },
+      { property: "og:title", content: "VerfOnlineWinkel — Professionele verf voor elk project" },
       { property: "og:description", content: "Topmerken verf, kleur op maat en deskundig advies. Snel in huis." },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@verfwinkel" },
-      { name: "twitter:title", content: "Verfwinkel — Professionele verf voor elk project" },
+      { name: "twitter:site", content: "@verfonlinewinkel" },
+      { name: "twitter:title", content: "VerfOnlineWinkel — Professionele verf voor elk project" },
       { name: "twitter:description", content: "Topmerken verf, kleur op maat en deskundig advies." },
       { name: "theme-color", content: "#ffffff" },
     ],
