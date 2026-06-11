@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, Star, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Heart, Star, ChevronDown, Pipette, Check } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import prodSikkens from "@/assets/prod-sikkens.jpg";
