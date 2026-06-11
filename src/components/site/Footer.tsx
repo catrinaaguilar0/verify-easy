@@ -70,17 +70,18 @@ export function Footer() {
               </button>
             </form>
           </div>
-          <div className="flex items-center gap-4 md:justify-end">
-            <div>
-              <div className="text-sm font-semibold text-ink">Klanten beoordelen ons met een 9,4/10</div>
-              <div className="mt-1 flex items-center gap-1 text-rating">
-                {"★★★★★".split("").map((s, i) => (<span key={i}>{s}</span>))}
-                <span className="ml-2 text-xs text-ink-soft">Gebaseerd op 2.345 reviews</span>
-              </div>
+          <div className="md:justify-self-end">
+            <h3 className="text-lg font-bold text-ink">Klantenservice</h3>
+            <p className="mt-1 text-sm text-ink-soft">Wij helpen je graag verder. Bereik ons via telefoon of e-mail.</p>
+            <div className="mt-4 flex flex-col gap-2">
+              <a href="tel:+31201234567" className="inline-flex items-center gap-3 rounded-md border border-border bg-background px-4 py-2.5 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent">
+                <Phone className="h-4 w-4 text-accent" /> 020 - 123 45 67
+              </a>
+              <a href="mailto:advies@verfonlinewinkel.nl" className="inline-flex items-center gap-3 rounded-md border border-border bg-background px-4 py-2.5 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent">
+                <Mail className="h-4 w-4 text-accent" /> advies@verfonlinewinkel.nl
+              </a>
             </div>
-            <div className="grid h-16 w-16 place-items-center rounded-full border-4 border-rating font-bold text-ink">
-              9.4
-            </div>
+            <p className="mt-3 text-xs text-ink-soft">Ma-vr 08:00-18:00 · Za 09:00-17:00</p>
           </div>
         </div>
       </div>
