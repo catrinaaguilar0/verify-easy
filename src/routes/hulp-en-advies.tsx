@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Calculator, Palette, BookOpen, ArrowRight } from "lucide-react";
+import { Calculator, Palette, BookOpen, Play, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/hulp-en-advies")({
   head: () => ({
@@ -44,6 +44,13 @@ const subpages = [
     description:
       "Lees praktische tips, kleurtrends en stap-voor-stap-gidsen van onze verfspecialisten.",
     icon: BookOpen,
+  },
+  {
+    to: "/demonstraties" as const,
+    title: "Demonstraties",
+    description:
+      "Bekijk professionele demonstratiefilms over verftechnieken, kleurkeuzes en duurzaam schilderen.",
+    icon: Play,
   },
 ];
 
