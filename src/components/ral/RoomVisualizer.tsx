@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload, X } from "lucide-react";
+import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload, X, Download, Loader2 } from "lucide-react";
+import { toPng } from "html-to-image";
 
 type Surface = "muur" | "kozijn" | "deur" | "foto";
 type Finish = "mat" | "zijdeglans" | "hoogglans";
@@ -37,8 +38,33 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
   const [blend, setBlend] = useState<Blend>("multiply");
   const [opacity, setOpacity] = useState(0.85);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [exporting, setExporting] = useState(false);
 
   const sheen = finishes.find((f) => f.id === finish)!.sheen;
+
+  const handleExport = async () => {
+    if (!stageRef.current) return;
+    setExporting(true);
+    try {
+      const dataUrl = await toPng(stageRef.current, {
+        pixelRatio: 2,
+        cacheBust: true,
+        backgroundColor: "#ffffff",
+      });
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = `ral-${code}-${surface}-${finish}.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (err) {
+      console.error(err);
+      alert("Exporteren is niet gelukt. Probeer het opnieuw.");
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const handleFile = (file: File | null) => {
     if (!file) return;
@@ -74,6 +100,16 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
               ruimte om de RAL-kleur erop te simuleren.
             </p>
           </div>
+          <button
+            type="button"
+            onClick={handleExport}
+            disabled={exporting}
+            className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-xs font-semibold text-ink shadow-sm transition hover:bg-accent hover:text-accent-foreground disabled:opacity-60"
+            aria-label="Download huidige simulatie als PNG"
+          >
+            {exporting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
+            {exporting ? "Bezig…" : "Download als PNG"}
+          </button>
         </div>
 
         {/* Controls */}
@@ -123,6 +159,7 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
 
         {/* Stage */}
         <div
+          ref={stageRef}
           className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]"
           role="img"
           aria-label={`Simulatie van RAL ${code} ${name} op ${surface} met ${finish} afwerking`}
