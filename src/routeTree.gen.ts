@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZoekenRouteImport } from './routes/zoeken'
+import { Route as WinkelwagenRouteImport } from './routes/winkelwagen'
 import { Route as VerfmengserviceRouteImport } from './routes/verfmengservice'
 import { Route as VerfcalculatorRouteImport } from './routes/verfcalculator'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -24,6 +26,16 @@ import { Route as RalCodeRouteImport } from './routes/ral.$code'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAdminBrandsRouteImport } from './routes/_authenticated/admin.brands'
 
+const ZoekenRoute = ZoekenRouteImport.update({
+  id: '/zoeken',
+  path: '/zoeken',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WinkelwagenRoute = WinkelwagenRouteImport.update({
+  id: '/winkelwagen',
+  path: '/winkelwagen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VerfmengserviceRoute = VerfmengserviceRouteImport.update({
   id: '/verfmengservice',
   path: '/verfmengservice',
@@ -106,6 +118,8 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verfcalculator': typeof VerfcalculatorRoute
   '/verfmengservice': typeof VerfmengserviceRoute
+  '/winkelwagen': typeof WinkelwagenRoute
+  '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/admin/brands': typeof AuthenticatedAdminBrandsRoute
@@ -121,6 +135,8 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verfcalculator': typeof VerfcalculatorRoute
   '/verfmengservice': typeof VerfmengserviceRoute
+  '/winkelwagen': typeof WinkelwagenRoute
+  '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/admin/brands': typeof AuthenticatedAdminBrandsRoute
@@ -138,6 +154,8 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/verfcalculator': typeof VerfcalculatorRoute
   '/verfmengservice': typeof VerfmengserviceRoute
+  '/winkelwagen': typeof WinkelwagenRoute
+  '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/_authenticated/admin/brands': typeof AuthenticatedAdminBrandsRoute
@@ -155,6 +173,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/verfcalculator'
     | '/verfmengservice'
+    | '/winkelwagen'
+    | '/zoeken'
     | '/blog/$slug'
     | '/ral/$code'
     | '/admin/brands'
@@ -170,6 +190,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/verfcalculator'
     | '/verfmengservice'
+    | '/winkelwagen'
+    | '/zoeken'
     | '/blog/$slug'
     | '/ral/$code'
     | '/admin/brands'
@@ -186,6 +208,8 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/verfcalculator'
     | '/verfmengservice'
+    | '/winkelwagen'
+    | '/zoeken'
     | '/blog/$slug'
     | '/ral/$code'
     | '/_authenticated/admin/brands'
@@ -203,10 +227,26 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VerfcalculatorRoute: typeof VerfcalculatorRoute
   VerfmengserviceRoute: typeof VerfmengserviceRoute
+  WinkelwagenRoute: typeof WinkelwagenRoute
+  ZoekenRoute: typeof ZoekenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zoeken': {
+      id: '/zoeken'
+      path: '/zoeken'
+      fullPath: '/zoeken'
+      preLoaderRoute: typeof ZoekenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/winkelwagen': {
+      id: '/winkelwagen'
+      path: '/winkelwagen'
+      fullPath: '/winkelwagen'
+      preLoaderRoute: typeof WinkelwagenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/verfmengservice': {
       id: '/verfmengservice'
       path: '/verfmengservice'
@@ -351,7 +391,19 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VerfcalculatorRoute: VerfcalculatorRoute,
   VerfmengserviceRoute: VerfmengserviceRoute,
+  WinkelwagenRoute: WinkelwagenRoute,
+  ZoekenRoute: ZoekenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
