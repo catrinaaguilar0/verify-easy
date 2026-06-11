@@ -262,17 +262,17 @@ export function RoomVisualizer({ hex, code, name }: { hex: string; code: string;
 
           {/* Foto-modus controls */}
           {surface === "foto" && userImage && (
-            <div className="grid gap-3 border-t border-border bg-surface px-4 py-3 sm:grid-cols-2">
+            <div className="grid gap-3 border-t border-border bg-surface px-4 py-3 sm:grid-cols-[1.4fr_1fr]">
               <label className="flex flex-col gap-1 text-[11px] font-semibold uppercase tracking-wider text-ink-soft">
-                Type oppervlak
+                Blend-modus
                 <select
                   value={blend}
                   onChange={(e) => setBlend(e.target.value as Blend)}
                   className="rounded-md border border-border bg-card px-2 py-1.5 text-xs font-medium text-ink"
-                  aria-label="Type oppervlak voor menging"
+                  aria-label="Blend-modus voor kleuroverlay"
                 >
                   {blendModes.map((b) => (
-                    <option key={b.id} value={b.id}>{b.label}</option>
+                    <option key={b.id} value={b.id}>{b.label} — {b.description}</option>
                   ))}
                 </select>
               </label>
