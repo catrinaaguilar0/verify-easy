@@ -174,13 +174,16 @@ function MuurverfPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-5 md:grid-cols-3">
-              {products.map((p) => (
+              {products.map((p) => {
+                const selected = perProduct[p.name] ?? activeColor.hex;
+                return (
                 <article key={p.name} className="group relative rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
                   <button aria-label="Bewaar" className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft hover:text-accent">
                     <Heart className="h-4 w-4" />
                   </button>
-                  <div className="aspect-square overflow-hidden rounded-lg bg-surface">
-                    <img src={p.img} alt={p.name} width={800} height={800} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
+                  <div className="relative aspect-square overflow-hidden rounded-lg bg-surface">
+                    <div className="absolute inset-0 transition-colors" style={{ background: selected, opacity: 0.35 }} />
+                    <img src={p.img} alt={p.name} width={800} height={800} loading="lazy" className="relative h-full w-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105" />
                   </div>
                   <h3 className="mt-4 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h3>
                   <div className="mt-1 text-xs text-ink-soft">Vanaf</div>
@@ -189,8 +192,26 @@ function MuurverfPage() {
                     <Stars />
                     <span className="text-xs text-ink-soft">({p.reviews})</span>
                   </div>
+                  <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+                    <div className="flex items-center gap-1">
+                      {colorOptions.slice(0, 5).map((c) => {
+                        const active = selected === c.hex;
+                        return (
+                          <button
+                            key={c.hex}
+                            aria-label={`Kies ${c.name}`}
+                            onClick={() => setPerProduct((s) => ({ ...s, [p.name]: c.hex }))}
+                            className={`h-5 w-5 rounded-full border transition ${active ? "ring-2 ring-accent ring-offset-1 ring-offset-card border-transparent" : "border-border hover:scale-110"}`}
+                            style={{ background: c.hex }}
+                          />
+                        );
+                      })}
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider text-ink-soft">Color match</span>
+                  </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-10 flex justify-center gap-1 text-sm">
