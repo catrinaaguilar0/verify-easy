@@ -52,6 +52,9 @@ function Stars() {
 }
 
 function MuurverfPage() {
+  const [activeColor, setActiveColor] = useState(colorOptions[0]);
+  const [perProduct, setPerProduct] = useState<Record<string, string>>({});
+  const [customHex, setCustomHex] = useState("#A8B89A");
   return (
     <div className="min-h-screen bg-background">
       <Header />
