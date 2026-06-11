@@ -92,7 +92,7 @@ function Home() {
 
       <main>
         {/* HERO */}
-        <section className="bg-lavender">
+        <section className="bg-surface">
           <div className="container mx-auto grid gap-8 px-4 py-14 md:grid-cols-[1fr_1.4fr] md:items-center md:gap-10 md:py-20 lg:grid-cols-[1fr_1.55fr] lg:gap-14 lg:py-24">
             <div>
               <h1 className="text-4xl font-extrabold leading-[1.1] text-ink sm:text-5xl lg:text-6xl">
