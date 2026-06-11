@@ -1,13 +1,21 @@
-import { useState } from "react";
-import { Paintbrush, RectangleHorizontal, DoorClosed } from "lucide-react";
+import { useRef, useState } from "react";
+import { Paintbrush, RectangleHorizontal, DoorClosed, Image as ImageIcon, Upload, X } from "lucide-react";
 
-type Surface = "muur" | "kozijn" | "deur";
+type Surface = "muur" | "kozijn" | "deur" | "foto";
 type Finish = "mat" | "zijdeglans" | "hoogglans";
+type Blend = "multiply" | "overlay" | "soft-light";
 
 const surfaces: { id: Surface; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
   { id: "muur", label: "Muur", icon: Paintbrush },
   { id: "kozijn", label: "Kozijn", icon: RectangleHorizontal },
   { id: "deur", label: "Voordeur", icon: DoorClosed },
+  { id: "foto", label: "Eigen foto", icon: ImageIcon },
+];
+
+const blendModes: { id: Blend; label: string; hint: string }[] = [
+  { id: "multiply", label: "Muur / donker oppervlak", hint: "multiply" },
+  { id: "overlay", label: "Gemiddeld oppervlak", hint: "overlay" },
+  { id: "soft-light", label: "Licht oppervlak", hint: "soft-light" },
 ];
 
 const finishes: { id: Finish; label: string; sheen: string }[] = [
