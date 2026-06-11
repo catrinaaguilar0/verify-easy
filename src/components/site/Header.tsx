@@ -35,14 +35,14 @@ export function Header() {
       </div>
 
       {/* main */}
-      <div className="container mx-auto flex items-center gap-4 px-4 py-5">
+      <div className="container mx-auto flex items-center gap-4 px-4 py-3">
         <Link to="/" className="flex shrink-0 items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-bold">
+          <span className="grid h-8 w-8 place-items-center rounded-md bg-primary text-primary-foreground text-sm font-bold">
             V
           </span>
           <span className="flex flex-col leading-tight">
-            <span className="text-lg font-extrabold tracking-tight text-ink">VERFONLINEWINKEL</span>
-            <span className="text-[10px] uppercase tracking-wider text-ink-soft">
+            <span className="text-base font-extrabold tracking-tight text-ink">VERFONLINEWINKEL</span>
+            <span className="text-[9px] uppercase tracking-wider text-ink-soft">
               Alles voor het perfecte resultaat
             </span>
           </span>
@@ -53,37 +53,37 @@ export function Header() {
             <input
               type="search"
               placeholder="Zoek op verf, kleur, merk, product…"
-              className="h-11 w-full rounded-md border border-border bg-background pl-4 pr-12 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+              className="h-9 w-full rounded-md border border-border bg-background pl-3 pr-10 text-sm outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
             <button
               aria-label="Zoeken"
-              className="absolute right-1 top-1 grid h-9 w-10 place-items-center rounded text-ink-soft hover:text-ink"
+              className="absolute right-1 top-1 grid h-7 w-8 place-items-center rounded text-ink-soft hover:text-ink"
             >
               <Search className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        <nav className="hidden items-center gap-4 text-sm md:flex">
+        <nav className="hidden items-center gap-3 text-sm md:flex">
           <a href="#" className="flex flex-col items-center text-ink hover:text-accent">
-            <User className="h-5 w-5" />
-            <span className="mt-0.5 text-xs">Account</span>
+            <User className="h-4 w-4" />
+            <span className="mt-0.5 text-[10px]">Account</span>
           </a>
           <a href="#" className="relative flex flex-col items-center text-ink hover:text-accent">
             <span className="relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -right-2 -top-1 grid h-4 w-4 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+              <ShoppingBag className="h-4 w-4" />
+              <span className="absolute -right-2 -top-1 grid h-3.5 w-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
                 0
               </span>
             </span>
-            <span className="mt-0.5 text-xs">Winkelwagen</span>
+            <span className="mt-0.5 text-[10px]">Winkelwagen</span>
           </a>
         </nav>
       </div>
 
       {/* category nav */}
       <div className="border-t border-border">
-        <div className="container mx-auto flex flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2 text-sm font-medium">
+        <div className="container mx-auto flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-1.5 text-[13px] font-medium">
           {nav.map((n) => (
             <Link
               key={n.label}
