@@ -410,7 +410,7 @@ function BrandRowCard({
             </div>
             <div>
               <Label className="text-xs">Categorie ({categoryLabel(brand.category)})</Label>
-              <Select value={editCategory} onValueChange={setEditCategory}>
+              <Select value={editCategory} onValueChange={(v) => setEditCategory(v as BrandCategory)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
