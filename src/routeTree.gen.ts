@@ -17,9 +17,12 @@ import { Route as MuurverfRouteImport } from './routes/muurverf'
 import { Route as HulpEnAdviesRouteImport } from './routes/hulp-en-advies'
 import { Route as DemonstratiesRouteImport } from './routes/demonstraties'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RalCodeRouteImport } from './routes/ral.$code'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthenticatedAdminBrandsRouteImport } from './routes/_authenticated/admin.brands'
 
 const VerfmengserviceRoute = VerfmengserviceRouteImport.update({
   id: '/verfmengservice',
@@ -61,6 +64,15 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -76,9 +88,16 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AuthenticatedAdminBrandsRoute =
+  AuthenticatedAdminBrandsRouteImport.update({
+    id: '/admin/brands',
+    path: '/admin/brands',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
@@ -89,9 +108,11 @@ export interface FileRoutesByFullPath {
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
+  '/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
@@ -102,10 +123,13 @@ export interface FileRoutesByTo {
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
+  '/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
@@ -116,11 +140,13 @@ export interface FileRoutesById {
   '/verfmengservice': typeof VerfmengserviceRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/ral/$code': typeof RalCodeRoute
+  '/_authenticated/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/blog'
     | '/demonstraties'
     | '/hulp-en-advies'
@@ -131,9 +157,11 @@ export interface FileRouteTypes {
     | '/verfmengservice'
     | '/blog/$slug'
     | '/ral/$code'
+    | '/admin/brands'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/blog'
     | '/demonstraties'
     | '/hulp-en-advies'
@@ -144,9 +172,12 @@ export interface FileRouteTypes {
     | '/verfmengservice'
     | '/blog/$slug'
     | '/ral/$code'
+    | '/admin/brands'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/blog'
     | '/demonstraties'
     | '/hulp-en-advies'
@@ -157,10 +188,13 @@ export interface FileRouteTypes {
     | '/verfmengservice'
     | '/blog/$slug'
     | '/ral/$code'
+    | '/_authenticated/admin/brands'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRouteWithChildren
   DemonstratiesRoute: typeof DemonstratiesRoute
   HulpEnAdviesRoute: typeof HulpEnAdviesRoute
@@ -229,6 +263,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -250,8 +298,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/_authenticated/admin/brands': {
+      id: '/_authenticated/admin/brands'
+      path: '/admin/brands'
+      fullPath: '/admin/brands'
+      preLoaderRoute: typeof AuthenticatedAdminBrandsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminBrandsRoute: typeof AuthenticatedAdminBrandsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminBrandsRoute: AuthenticatedAdminBrandsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
@@ -275,6 +341,8 @@ const RalRouteWithChildren = RalRoute._addFileChildren(RalRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   BlogRoute: BlogRouteWithChildren,
   DemonstratiesRoute: DemonstratiesRoute,
   HulpEnAdviesRoute: HulpEnAdviesRoute,

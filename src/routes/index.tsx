@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { ArrowRight, Heart, Star } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -16,14 +18,22 @@ import brandSigma from "@/assets/brand-sigma.png";
 import brandWijzonol from "@/assets/brand-wijzonol.png";
 import brandFlexa from "@/assets/brand-flexa.png";
 import brandHistor from "@/assets/brand-histor.png";
+import { getVisibleBrands } from "@/lib/brands.functions";
+import { categoryLabel } from "@/lib/brand-categories";
 
-const brands = [
-  { name: "Sikkens", logo: brandSikkens },
-  { name: "Sigma Coatings", logo: brandSigma },
-  { name: "Wijzonol", logo: brandWijzonol },
-  { name: "Flexa", logo: brandFlexa },
-  { name: "Histor", logo: brandHistor },
-];
+const brandFallback: Record<string, string> = {
+  sikkens: brandSikkens,
+  sigma: brandSigma,
+  wijzonol: brandWijzonol,
+  flexa: brandFlexa,
+  histor: brandHistor,
+};
+
+const brandsQueryOptions = queryOptions({
+  queryKey: ["visible-brands"],
+  queryFn: () => getVisibleBrands(),
+});
+
 import inspInterior from "@/assets/insp-interior.jpg";
 import inspColors from "@/assets/insp-colors.jpg";
 
@@ -149,13 +159,10 @@ function Home() {
         <section className="border-y border-border bg-surface">
           <div className="container mx-auto px-4 py-12">
             <h2 className="mb-8 text-2xl font-bold text-ink md:text-3xl">Shop per merk</h2>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-              {brands.map((b) => (
-                <a key={b.name} href="#" className="grid h-20 place-items-center rounded-lg border border-border bg-background px-4 transition hover:border-accent">
-                  <img src={b.logo} alt={`${b.name} logo`} loading="lazy" className="max-h-12 w-auto object-contain" />
-                </a>
-              ))}
-            </div>
+            <Suspense fallback={<div className="h-20 animate-pulse rounded-lg bg-background" />}>
+              <BrandsGrid />
+            </Suspense>
+
             <div className="mt-5 flex justify-center">
               <a href="#" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-ink hover:border-ink">
                 Bekijk alle merken
@@ -217,6 +224,39 @@ function Home() {
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+function BrandsGrid() {
+  const { data: brands } = useSuspenseQuery(brandsQueryOptions);
+  if (brands.length === 0) {
+    return <p className="text-center text-sm text-ink-soft">Nog geen merken beschikbaar.</p>;
+  }
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+      {brands.map((b) => {
+        const src = b.logo_url ?? brandFallback[b.slug];
+        return (
+          <a
+            key={b.id}
+            href={b.link_url ?? "#"}
+            title={`${b.name} — ${categoryLabel(b.category)}`}
+            className="grid h-20 place-items-center rounded-lg border border-border bg-background px-4 transition hover:border-accent"
+          >
+            {src ? (
+              <img
+                src={src}
+                alt={`${b.name} logo`}
+                loading="lazy"
+                className="max-h-12 w-auto object-contain"
+              />
+            ) : (
+              <span className="text-sm font-bold tracking-tight text-ink">{b.name}</span>
+            )}
+          </a>
+        );
+      })}
     </div>
   );
 }
