@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets } from "lucide-react";
+import { Play, ArrowLeft, ExternalLink, Paintbrush, Lightbulb, ShieldCheck, Droplets, PaintRoller, Brush, Sparkles, Hammer, Layers, Wind, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/demonstraties")({
   head: () => ({
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/demonstraties")({
   component: DemonstratiesPage,
 });
 
-const demos = [
+const categories = [
   {
     title: "Verftechnieken",
     description:
@@ -49,6 +49,90 @@ const demos = [
     icon: Droplets,
   },
 ];
+
+const demoFilms = [
+  {
+    title: "Muren rollen als een pro",
+    description:
+      "Stap-voor-stap demonstratie van de juiste rol-techniek voor een egaal en streeploos eindresultaat op grote muurvlakken.",
+    duration: "4 min",
+    category: "Verftechnieken",
+    icon: PaintRoller,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Snijden langs plafond en plinten",
+    description:
+      "Leer met een goede kwast strakke randen aftrekken zonder masking tape. Tips voor houvast, doseren en doorhalen.",
+    duration: "3 min",
+    category: "Verftechnieken",
+    icon: Brush,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Hout schilderen: lakwerk binnen",
+    description:
+      "Van schuren tot aflakken. Bekijk hoe je deuren, kozijnen en plinten een professionele finish geeft met watergedragen lak.",
+    duration: "6 min",
+    category: "Verftechnieken",
+    icon: Hammer,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Kleur kiezen voor je woonkamer",
+    description:
+      "Praktische kleuradvies-demo: hoe lichtinval, ruimte en stijl je kleurkeuze bepalen. Inclusief uitprobeer-tips.",
+    duration: "5 min",
+    category: "Kleuradvies",
+    icon: Sparkles,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Grondverf: wanneer en welke?",
+    description:
+      "Overzicht van primers voor hout, metaal, gips en probleemondergronden. Voorkom hechtingsproblemen met de juiste basis.",
+    duration: "4 min",
+    category: "Grondverf & Voorbehandeling",
+    icon: Layers,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Buitenwerk voorbereiden",
+    description:
+      "Demonstratie van reinigen, schuren, plamuren en isoleren van houten buitenkozijnen voor langdurig resultaat.",
+    duration: "7 min",
+    category: "Grondverf & Voorbehandeling",
+    icon: ShieldCheck,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Duurzaam schilderen binnen",
+    description:
+      "Hoe kies je verf met lage emissies en goede milieuprestaties? Praktische uitleg over keurmerken en watergedragen systemen.",
+    duration: "5 min",
+    category: "Duurzaam schilderen",
+    icon: Droplets,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+  {
+    title: "Spuiten met airless",
+    description:
+      "Introductie tot airless spuiten: voorbereiding, afplakken, juiste druk en spuittechniek voor een vlakke afwerking.",
+    duration: "8 min",
+    category: "Verftechnieken",
+    icon: Wind,
+    source: "Sigma Coatings",
+    sourceUrl: "https://www.sigma.nl/diensten/trainingen/demonstratiefilms",
+  },
+];
+
 
 function DemonstratiesPage() {
   return (
@@ -87,11 +171,64 @@ function DemonstratiesPage() {
         </section>
 
         <section className="container mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold text-ink md:text-3xl">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="text-2xl font-bold text-ink md:text-3xl">
+                Demonstratiefilms in het overzicht
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+                Een selectie van praktische demonstraties, geordend per onderwerp. Bekijk de volledige film op de Sigma-website.
+              </p>
+            </div>
+          </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {demoFilms.map((film) => {
+              const Icon = film.icon;
+              return (
+                <article
+                  key={film.title}
+                  className="flex flex-col rounded-xl border border-border bg-background p-6 transition hover:border-accent hover:shadow-md"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2.5 py-1 text-xs font-medium text-ink-soft">
+                      <Clock className="h-3 w-3" />
+                      {film.duration}
+                    </span>
+                  </div>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-accent">
+                    {film.category}
+                  </p>
+                  <h3 className="mt-1 text-lg font-bold text-ink">{film.title}</h3>
+                  <p className="mt-2 flex-1 text-sm text-ink-soft">
+                    {film.description}
+                  </p>
+                  <div className="mt-5 flex items-center justify-between border-t border-border pt-4">
+                    <span className="text-xs text-ink-soft">
+                      Bron: <span className="font-medium text-ink">{film.source}</span>
+                    </span>
+                    <a
+                      href={film.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-accent hover:underline"
+                    >
+                      Bekijk
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <h2 className="mt-16 text-2xl font-bold text-ink md:text-3xl">
             Waar gaat het over?
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {demos.map((d) => {
+            {categories.map((d) => {
               const Icon = d.icon;
               return (
                 <div
