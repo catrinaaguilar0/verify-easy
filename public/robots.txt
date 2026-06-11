@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cozy-check-hub.lovable.app/sitemap.xml

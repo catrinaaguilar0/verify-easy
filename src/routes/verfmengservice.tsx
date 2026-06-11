@@ -6,18 +6,54 @@ import { Footer } from "@/components/site/Footer";
 import mixHero from "@/assets/mix-hero.jpg";
 import mixSwatches from "@/assets/mix-swatches.jpg";
 
+const SITE_URL = "https://cozy-check-hub.lovable.app";
+
 export const Route = createFileRoute("/verfmengservice")({
   head: () => ({
     meta: [
       { title: "Verfmengservice — laat jouw kleur op maat mengen | Verfwinkel" },
       { name: "description", content: "Onze verfmengservice mengt iedere kleur op maat uit RAL, NCS, Sikkens, Flexa, Histor, Farrow & Ball en meer. Snel, exact en in elke verfsoort." },
-      { property: "og:title", content: "Verfmengservice — kleur op maat" },
+      { property: "og:title", content: "Verfmengservice — kleur op maat | Verfwinkel" },
       { property: "og:description", content: "Iedere kleur, iedere verfsoort. Op maat gemengd door onze kleurspecialisten." },
-      { property: "og:image", content: mixHero },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/verfmengservice` },
+      { property: "og:image", content: `${SITE_URL}${mixHero}` },
+      { name: "twitter:title", content: "Verfmengservice | Verfwinkel" },
+      { name: "twitter:description", content: "Iedere kleur, op maat gemengd." },
+      { name: "twitter:image", content: `${SITE_URL}${mixHero}` },
+    ],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/verfmengservice` },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Verfmengservice",
+          provider: { "@type": "Organization", name: "Verfwinkel", url: SITE_URL },
+          areaServed: "NL",
+          serviceType: "Kleur op maat mengen",
+          description: "Iedere kleur uit RAL, NCS, Sikkens, Flexa, Histor en Farrow & Ball, op maat gemengd in elke verfsoort.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+            { "@type": "ListItem", position: 2, name: "Verfmengservice", item: `${SITE_URL}/verfmengservice` },
+          ],
+        }),
+      },
     ],
   }),
   component: VerfmengservicePage,
 });
+
 
 const collections = [
   { name: "RAL Classic", count: 213 },

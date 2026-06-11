@@ -22,7 +22,21 @@ export const Route = createFileRoute("/blog")({
     links: [
       { rel: "canonical", href: `${baseUrl}/blog` },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${baseUrl}/` },
+            { "@type": "ListItem", position: 2, name: "Blog", item: `${baseUrl}/blog` },
+          ],
+        }),
+      },
+    ],
   }),
+
   component: BlogIndex,
 });
 

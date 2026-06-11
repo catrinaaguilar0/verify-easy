@@ -8,15 +8,40 @@ import prodSigma from "@/assets/prod-sigma.jpg";
 import prodWijzonol from "@/assets/prod-wijzonol.jpg";
 import prodFlexa from "@/assets/prod-flexa.jpg";
 
+const SITE_URL = "https://cozy-check-hub.lovable.app";
+
 export const Route = createFileRoute("/muurverf")({
   head: () => ({
     meta: [
-      { title: "Muurverf — Verfwinkel" },
-      { name: "description", content: "Muurverf voor binnenmuren en plafonds. Kies uit ons ruime assortiment muurverf met topkwaliteit voor een perfect en duurzaam resultaat." },
+      { title: "Muurverf kopen — binnen en buiten | Verfwinkel" },
+      { name: "description", content: "Muurverf voor binnenmuren en plafonds. Ruim assortiment met topkwaliteit voor een perfect en duurzaam resultaat. Voor 23:00 besteld, morgen in huis." },
+      { property: "og:title", content: "Muurverf kopen — binnen en buiten | Verfwinkel" },
+      { property: "og:description", content: "Muurverf van Sikkens, Sigma, Wijzonol en Flexa — kleur op maat gemengd." },
+      { property: "og:type", content: "product.group" },
+      { property: "og:url", content: `${SITE_URL}/muurverf` },
+      { name: "twitter:title", content: "Muurverf kopen | Verfwinkel" },
+      { name: "twitter:description", content: "Muurverf van topmerken, kleur op maat." },
+    ],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/muurverf` },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+            { "@type": "ListItem", position: 2, name: "Muurverf", item: `${SITE_URL}/muurverf` },
+          ],
+        }),
+      },
     ],
   }),
   component: MuurverfPage,
 });
+
 
 const colorOptions = [
   { name: "Wit RAL 9010", hex: "#F7F4EC" },
