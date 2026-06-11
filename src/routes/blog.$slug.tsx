@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { posts, getPost } from "@/lib/blog";
+import { getPost, getRelatedPosts, getRelatedProducts } from "@/lib/blog";
 import { getRequestOrigin } from "@/lib/origin.functions";
 import { Clock, User, ArrowLeft } from "lucide-react";
 
