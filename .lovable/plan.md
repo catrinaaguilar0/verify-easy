@@ -1,18 +1,18 @@
-## Trust Bar Orange Achtergrond
+## Hero Lavender Achtergrond
 
 ### Doel
-De bovenste trust bar in de header krijgt een fel oranje achtergrondkleur met donkere tekst voor goed contrast.
+De hero-sectie op de homepage krijgt een zachte lavender achtergrondkleur, geïnspireerd op Flexa Pure Lavender.
 
 ### Wijzigingen
 
 1. **Design token toevoegen** (`src/styles.css`)
-   - Voeg een nieuwe `--color-orange` variabele toe in `:root` (vibrant orange, bijv. `oklch(0.65 0.2 55)` of hex `#F97316`)
-   - Registreer het in `@theme inline` als `--color-orange` zodat Tailwind `bg-orange` begrijpt
+   - Voeg een nieuwe `--lavender` variabele toe in `:root` met een zachte paarse/lavender tint (`oklch(0.88 0.04 290)`)
+   - Registreer het in `@theme inline` als `--color-lavender` zodat Tailwind `bg-lavender` begrijpt
 
-2. **Header component aanpassen** (`src/components/site/Header.tsx`)
-   - Wijzig `bg-surface` → `bg-orange` op de trust bar wrapper
-   - Wijzig `text-ink-soft` → `text-ink` (donkere tekst) op de trust bar tekst
-   - Behoud het groene check-icoon (`text-accent`) voor consistentie met de rest van het design
+2. **Hero component aanpassen** (`src/routes/index.tsx`)
+   - Wijzig `bg-surface` → `bg-lavender` op de hero `<section>`
 
-### Resultaat
-Een opvallende, fel oranje trust bar met donkere, goed leesbare tekst die direct de aandacht trekt bij het openen van de pagina.
+### Technische details
+- De lavender kleur (`oklch(0.88 0.04 290)`) is een zachte, lichte paarse tint die goed contrasteert met de donkere tekst (`text-ink`) en het groene accent (`text-accent`)
+- De kleur is subtiel genoeg om professioneel te blijven, maar geeft de hero een karakteristiek en herkenbaar uiterlijk
+- Alle bestaande elementen (tekst, buttons, afbeelding) blijven ongewijzigd
