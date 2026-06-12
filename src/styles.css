@@ -36,6 +36,13 @@
   --color-surface: var(--surface);
   --color-rating: var(--rating);
   --color-orange: var(--orange);
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta-strong: var(--cta-strong);
+  --color-success: var(--success);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
