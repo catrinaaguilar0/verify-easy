@@ -1,20 +1,24 @@
-# Plan: Footer kolomvolgorde aanpassen
+# Plan: Klantbeoordeling in trust strip verplaatsen
 
 ## Wijziging
-De kolomvolgorde in de footer wordt exact volgens jouw opdracht:
+Op de homepage staat een trust strip met 5 elementen. De klantbeoordeling (9,2/10 · Kiyoh) staat nu links als eerste element. Deze wordt:
 
-1. **Contact**
-2. **Verfkeuze**
-3. **Over ons**
-4. **Populair producten**
-5. **Ralkleuren**
+1. **Verplaatst** naar rechts van "Veilig betalen" (laatste positie in de strip)
+2. **Kleiner gemaakt** — compactere opmaak zodat het visueel lichter oogt
 
 ## Bestand
-- `src/components/site/Footer.tsx` — de `columns` array herschikken.
+- `src/routes/index.tsx` — de trust strip sectie aanpassen
 
-## Kolominhoud
-- **Contact** → links: Contact, Veelgestelde vragen, Verzending, Retourneren, Betalen
-- **Verfkeuze** → links: Verfkeuze, Kleuradvies, Kluswijzer, Blogs & inspiratie, Video's
-- **Over ons** → links: Over ons, Zakelijk bestellen, Onze winkels, Vacatures, Algemene voorwaarden
-- **Populair producten** → eerste 5 producten uit catalogus
-- **Ralkleuren** → 4 RAL-codes + "Alle RAL-kleuren"
+## Huidige volgorde
+1. Klantbeoordeling (9,2/10)
+2. Gratis verzending
+3. Voor 21:00 besteld
+4. Gratis retourneren
+5. Veilig betalen
+
+## Nieuwe volgorde
+1. Gratis verzending
+2. Voor 21:00 besteld
+3. Gratis retourneren
+4. Veilig betalen
+5. Klantbeoordeling (verkleind)
