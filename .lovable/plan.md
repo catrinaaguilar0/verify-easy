@@ -1,10 +1,7 @@
-Zet de "RAL-kleuren" en "Merken" kolommen naast elkaar in één rij, vervang "Merken" door "Populaire producten" (5 items, 5 rijen totaal).
+## Wijzigingen footer
 
-Wijzigingen in `src/components/site/Footer.tsx`:
+1. **RAL-kleuren kolom** — Verwijder de gekleurde swatch-blokjes (huidige 2-koloms grid met 10 items). Vervang door een platte `<ul>` lijst met 5 tekstlinks: `RAL {code} – {name}` als gewone linkjes zonder achtergrondkleur.
 
-1. **Verwijder** de bestaande "Merken" kolom uit het `columns`-array.
-2. **Vervang** door een nieuwe kolom "Populaire producten" met 5 bestseller-producten uit `PRODUCTS` (filter op `bestseller: true`, neem de eerste 5). Elke link gaat naar `/product/$slug`.
-3. **RAL-kleuren kolom** blijft een 2-koloms grid met 10 kleuren — dat is al 5 rijen.
-4. De grid blijft `lg:grid-cols-5`: Klantenservice, Advies & inspiratie, Over VerfOnlineWinkel, Populaire producten, RAL-kleuren — waarbij "Populaire producten" en "RAL-kleuren" als laatste twee kolommen naast elkaar staan.
+2. **Gelijke rijhoogte** — De vier bestaande kolommen hebben elk al 5 links. Door de RAL-kleuren kolook ook op 5 links te beperken (`slice(0, 5)`) staan alle 5 kolommen netjes op gelijke hoogte (5 rijen).
 
-Resultaat: footer toont nu populaire producten naast het RAL-blok, beide 5 rijen hoog.
+Aangepast bestand: `src/components/site/Footer.tsx`
