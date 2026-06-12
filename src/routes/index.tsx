@@ -36,6 +36,13 @@ import brandSigma from "@/assets/brand-sigma.png";
 import brandWijzonol from "@/assets/brand-wijzonol.png";
 import brandFlexa from "@/assets/brand-flexa.png";
 import brandHistor from "@/assets/brand-histor.png";
+import catMuurverf from "@/assets/cat-muurverf.jpg";
+import catBinnenlak from "@/assets/cat-binnenlak.jpg";
+import catBuitenlak from "@/assets/cat-buitenlak.jpg";
+import catBeits from "@/assets/cat-beits.jpg";
+import catGrondverf from "@/assets/cat-grondverf.jpg";
+import catBenodigdheden from "@/assets/cat-benodigdheden.jpg";
+
 import { getVisibleBrands } from "@/lib/brands.functions";
 import { PRODUCTS, formatPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
@@ -79,13 +86,14 @@ const klusKeuze = [
 ];
 
 const klusBlokken = [
-  { icon: PaintRoller, title: "Muurverf", sub: "Voor muren en plafonds", slug: "muurverf", tint: "bg-success/10", icoTint: "text-success" },
-  { icon: Brush, title: "Binnenlak", sub: "Voor deuren, kozijnen en meubels", slug: "lakverf", tint: "bg-navy/10", icoTint: "text-navy" },
-  { icon: Building2, title: "Buitenlak", sub: "Weerbestendige lakken", slug: "buitenverf", tint: "bg-navy/15", icoTint: "text-navy" },
-  { icon: TreePine, title: "Beits", sub: "Bescherming voor hout", slug: "beits", tint: "bg-cta/20", icoTint: "text-cta-foreground" },
-  { icon: Layers, title: "Grondverf", sub: "De perfecte basis", slug: "grondverf", tint: "bg-success/10", icoTint: "text-success" },
-  { icon: PaintBucket, title: "Benodigdheden", sub: "Alles voor een strak resultaat", slug: "benodigdheden", tint: "bg-surface", icoTint: "text-ink" },
+  { img: catMuurverf, title: "Muurverf", sub: "Voor muren en plafonds", slug: "muurverf" },
+  { img: catBinnenlak, title: "Binnenlak", sub: "Voor deuren, kozijnen en meubels", slug: "lakverf" },
+  { img: catBuitenlak, title: "Buitenlak", sub: "Weerbestendige lakken", slug: "buitenverf" },
+  { img: catBeits, title: "Beits", sub: "Bescherming voor hout", slug: "beits" },
+  { img: catGrondverf, title: "Grondverf", sub: "De perfecte basis", slug: "grondverf" },
+  { img: catBenodigdheden, title: "Benodigdheden", sub: "Alles voor een strak resultaat", slug: "benodigdheden" },
 ] as const;
+
 
 const trustItems = [
   { icon: Truck, title: "Gratis verzending", sub: "vanaf €50" },
@@ -226,22 +234,29 @@ function Home() {
         {/* KLUSBLOKKEN */}
         <section className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {klusBlokken.map(({ icon: Icon, title, sub, slug, tint, icoTint }) => (
+            {klusBlokken.map(({ img, title, sub, slug }) => (
               <Link
                 key={title}
                 to="/categorie/$slug"
                 params={{ slug }}
-                className="group relative flex h-36 flex-col justify-between overflow-hidden rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+                className="group relative flex h-44 flex-col justify-end overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
               >
-                <span className={`grid h-9 w-9 place-items-center rounded-lg ${tint} ${icoTint}`}>
-                  <Icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <div className="text-sm font-extrabold text-ink">{title}</div>
-                  <div className="text-[11px] leading-tight text-ink-soft">{sub}</div>
+                <img
+                  src={img}
+                  alt={title}
+                  loading="lazy"
+                  width={768}
+                  height={576}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                <div className="relative p-4 text-white">
+                  <div className="text-sm font-extrabold">{title}</div>
+                  <div className="text-[11px] leading-tight text-white/80">{sub}</div>
                 </div>
               </Link>
             ))}
+
           </div>
         </section>
 
