@@ -28,16 +28,65 @@ export const Route = createFileRoute("/product/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.product;
-    const title = p ? `${p.name} ${p.volume ?? ""} | VerfOnlineWinkel` : "Product";
-    const desc = p?.shortDescription ?? "Bestel professionele verf online.";
+    const title = p ? `${p.name} ${p.volume ?? ""} kopen | VerfOnlineWinkel.nl` : "Product";
+    const desc = p
+      ? `${p.name} — ${p.shortDescription} ✓ Voor 23:00 besteld, morgen in huis ✓ Gratis verzending vanaf €50 — Bestel direct online!`
+      : "Bestel professionele verf online.";
+    const url = p ? `https://cozy-check-hub.lovable.app/product/${p.slug}` : "";
     return {
       meta: [
         { title },
         { name: "description", content: desc },
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
-        ...(p?.image ? [{ property: "og:image", content: p.image }] : []),
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: url },
       ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: p
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Product",
+                name: p.name,
+                image: p.image,
+                description: p.shortDescription,
+                brand: {
+                  "@type": "Brand",
+                  name: p.brand,
+                },
+                sku: p.id,
+                offers: {
+                  "@type": "Offer",
+                  url,
+                  priceCurrency: "EUR",
+                  price: p.price.toFixed(2),
+                  availability: p.inStock
+                    ? "https://schema.org/InStock"
+                    : "https://schema.org/OutOfStock",
+                  priceValidUntil: "2026-12-31",
+                  shippingDetails: {
+                    "@type": "OfferShippingDetails",
+                    shippingRate: {
+                      "@type": "MonetaryAmount",
+                      value: "0.00",
+                      currency: "EUR",
+                    },
+                  },
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: p.rating.toFixed(1),
+                  reviewCount: String(p.reviews),
+                  bestRating: "5",
+                  worstRating: "1",
+                },
+              }),
+            },
+          ]
+        : undefined,
     };
   },
   notFoundComponent: () => (
