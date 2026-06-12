@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
-import { RalStrip } from "./RalStrip";
+import { basicRalColors } from "@/lib/ral";
 
 type FooterLink = { label: string; to?: string; params?: Record<string, string> };
 
@@ -58,8 +58,6 @@ function PayBadge({ label }: { label: string }) {
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground">
-      <RalStrip />
-
       <div className="container mx-auto grid gap-8 px-4 py-8 md:grid-cols-2 lg:grid-cols-6">
         {columns.map((c) => (
           <div key={c.h}>
@@ -81,28 +79,51 @@ export function Footer() {
         ))}
 
         <div>
-          <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Volg ons</h4>
-          <div className="flex items-center gap-2">
-            <a href="#" aria-label="Facebook" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-              <Facebook className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="Instagram" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="YouTube" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-              <Youtube className="h-4 w-4" />
-            </a>
+          <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">RAL-kleuren</h4>
+          <div className="grid grid-cols-2 gap-1">
+            {basicRalColors.map((c) => (
+              <Link
+                key={c.code}
+                to="/ral/$code"
+                params={{ code: c.code }}
+                className="flex h-8 items-center justify-center rounded-sm text-xs font-bold text-white transition hover:opacity-90"
+                style={{
+                  backgroundColor: c.hex,
+                  textShadow: "0 1px 2px rgba(0,0,0,0.6)",
+                }}
+                title={`RAL ${c.code} ${c.name}`}
+                aria-label={`Bekijk RAL ${c.code}`}
+              >
+                RAL {c.code}
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div>
-          <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Betaal veilig met</h4>
-          <div className="flex flex-wrap items-center gap-2">
-            <PayBadge label="iDEAL" />
-            <PayBadge label="Klarna" />
-            <PayBadge label="VISA" />
-            <PayBadge label="Master" />
-            <PayBadge label="Pay" />
+        <div className="space-y-4">
+          <div>
+            <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Betaal veilig met</h4>
+            <div className="flex flex-wrap items-center gap-2">
+              <PayBadge label="iDEAL" />
+              <PayBadge label="Klarna" />
+              <PayBadge label="VISA" />
+              <PayBadge label="Master" />
+              <PayBadge label="Pay" />
+            </div>
+          </div>
+          <div>
+            <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Volg ons</h4>
+            <div className="flex items-center gap-2">
+              <a href="#" aria-label="Facebook" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a href="#" aria-label="Instagram" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a href="#" aria-label="YouTube" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+                <Youtube className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
