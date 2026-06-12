@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Check, Palette, Headphones, ShieldCheck, Phone, Mail } from "lucide-react";
 
 const services = [
@@ -7,10 +8,54 @@ const services = [
   { icon: ShieldCheck, title: "Veilig betalen", sub: "zoals jij wilt" },
 ];
 
+type FooterLink = { label: string; to?: string; params?: Record<string, string> };
+
+const columns: { h: string; links: FooterLink[] }[] = [
+  {
+    h: "Klantenservice",
+    links: [
+      { label: "Contact", to: "/contact" },
+      { label: "Veelgestelde vragen", to: "/faq" },
+      { label: "Verzending & retour", to: "/verzending-en-retour" },
+      { label: "Mijn account", to: "/account" },
+      { label: "Verlanglijst", to: "/verlanglijst" },
+    ],
+  },
+  {
+    h: "Over VerfOnlineWinkel",
+    links: [
+      { label: "Over ons", to: "/over-ons" },
+      { label: "Demonstraties", to: "/demonstraties" },
+      { label: "Blog", to: "/blog" },
+      { label: "Algemene voorwaarden", to: "/algemene-voorwaarden" },
+      { label: "Privacy", to: "/privacy" },
+    ],
+  },
+  {
+    h: "Merken",
+    links: [
+      { label: "Sikkens", to: "/merk/$slug", params: { slug: "sikkens" } },
+      { label: "Sigma", to: "/merk/$slug", params: { slug: "sigma" } },
+      { label: "Wijzonol", to: "/merk/$slug", params: { slug: "wijzonol" } },
+      { label: "Flexa", to: "/merk/$slug", params: { slug: "flexa" } },
+      { label: "Histor", to: "/merk/$slug", params: { slug: "histor" } },
+    ],
+  },
+  {
+    h: "Inspiratie",
+    links: [
+      { label: "Kleuradvies", to: "/kleuradvies" },
+      { label: "RAL kleurenwaaier", to: "/ral" },
+      { label: "Verfcalculator", to: "/verfcalculator" },
+      { label: "Verfmengservice", to: "/verfmengservice" },
+      { label: "Hulp & advies", to: "/hulp-en-advies" },
+    ],
+  },
+];
+
 export function Footer() {
   return (
     <footer>
-      {/* service strip */}
       <div className="bg-primary text-primary-foreground">
         <div className="container mx-auto grid gap-6 px-4 py-7 sm:grid-cols-2 lg:grid-cols-4">
           {services.map(({ icon: Icon, title, sub }) => (
@@ -25,13 +70,12 @@ export function Footer() {
         </div>
       </div>
 
-      {/* newsletter + rating */}
       <div className="border-b border-border bg-background">
         <div className="container mx-auto grid gap-8 px-4 py-10 md:grid-cols-2">
           <div>
             <h3 className="text-lg font-bold text-ink">Altijd als eerste op de hoogte?</h3>
             <p className="mt-1 text-sm text-ink-soft">Ontvang verftips, inspiratie en exclusieve aanbiedingen.</p>
-            <form className="mt-4 flex max-w-md gap-2">
+            <form className="mt-4 flex max-w-md gap-2" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="E-mailadres"
@@ -60,16 +104,21 @@ export function Footer() {
 
       <div className="bg-surface">
         <div className="container mx-auto grid gap-8 px-4 py-12 md:grid-cols-4">
-          {[
-            { h: "Klantenservice", links: ["Contact", "Veelgestelde vragen", "Verzending", "Retourneren", "Betalen"] },
-            { h: "Over VerfOnlineWinkel", links: ["Over ons", "Vestigingen", "Werken bij", "Nieuws", "Algemene voorwaarden"] },
-            { h: "Merken", links: ["Sikkens", "Sigma", "Wijzonol", "Flexa", "Histor"] },
-            { h: "Inspiratie", links: ["Kleurinspiratie", "Verftips", "Kleuradvies", "Lookbook", "Blog"] },
-          ].map((c) => (
+          {columns.map((c) => (
             <div key={c.h}>
               <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-ink">{c.h}</h4>
               <ul className="space-y-2 text-sm text-ink-soft">
-                {c.links.map((l) => (<li key={l}><a href="#" className="hover:text-accent">{l}</a></li>))}
+                {c.links.map((l) => (
+                  <li key={l.label}>
+                    {l.to ? (
+                      <Link to={l.to} params={l.params as never} className="hover:text-accent">
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <span>{l.label}</span>
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           ))}
