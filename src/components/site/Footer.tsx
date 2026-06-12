@@ -47,9 +47,12 @@ const columns: { h: string; links: FooterLink[] }[] = [
   },
 ];
 
-function PayBadge({ label }: { label: string }) {
+function PayBadge({ label, bg, text }: { label: string; bg: string; text: string }) {
   return (
-    <span className="inline-flex h-7 min-w-[44px] items-center justify-center rounded bg-white px-2 text-[10px] font-extrabold uppercase tracking-wider text-navy">
+    <span
+      className="inline-flex h-5 items-center rounded px-1.5 text-[9px] font-extrabold uppercase tracking-wider"
+      style={{ backgroundColor: bg, color: text }}
+    >
       {label}
     </span>
   );
@@ -58,7 +61,7 @@ function PayBadge({ label }: { label: string }) {
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground">
-      <div className="container mx-auto grid gap-8 px-4 py-8 md:grid-cols-2 lg:grid-cols-6">
+      <div className="container mx-auto grid gap-8 px-4 py-8 md:grid-cols-2 lg:grid-cols-5">
         {columns.map((c) => (
           <div key={c.h}>
             <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">{c.h}</h4>
@@ -99,39 +102,32 @@ export function Footer() {
             ))}
           </div>
         </div>
-
-        <div className="space-y-4">
-          <div>
-            <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Betaal veilig met</h4>
-            <div className="flex flex-wrap items-center gap-2">
-              <PayBadge label="iDEAL" />
-              <PayBadge label="Klarna" />
-              <PayBadge label="VISA" />
-              <PayBadge label="Master" />
-              <PayBadge label="Pay" />
-            </div>
-          </div>
-          <div>
-            <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Volg ons</h4>
-            <div className="flex items-center gap-2">
-              <a href="#" aria-label="Facebook" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-                <Facebook className="h-4 w-4" />
-              </a>
-              <a href="#" aria-label="Instagram" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a href="#" aria-label="YouTube" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-                <Youtube className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-xs text-white/70">
-          <span>© {new Date().getFullYear()} VerfOnlineWinkel.nl — Alle rechten voorbehouden</span>
-          <span>KvK 12345678 · BTW NL000000000B01</span>
+          <span>&copy; {new Date().getFullYear()} VerfOnlineWinkel.nl</span>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <PayBadge label="iDEAL" bg="#FF6B00" text="#fff" />
+            <PayBadge label="Klarna" bg="#FFB3C7" text="#0A0B09" />
+            <PayBadge label="VISA" bg="#1A1F71" text="#fff" />
+            <PayBadge label="Master" bg="#EB001B" text="#fff" />
+            <PayBadge label="Pay" bg="#000" text="#fff" />
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a href="#" aria-label="Facebook" className="text-white/60 hover:text-cta">
+              <Facebook className="h-4 w-4" />
+            </a>
+            <a href="#" aria-label="Instagram" className="text-white/60 hover:text-cta">
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a href="#" aria-label="YouTube" className="text-white/60 hover:text-cta">
+              <Youtube className="h-4 w-4" />
+            </a>
+            <span className="ml-2 text-white/50">KvK 12345678 &middot; BTW NL000000000B01</span>
+          </div>
         </div>
       </div>
     </footer>
