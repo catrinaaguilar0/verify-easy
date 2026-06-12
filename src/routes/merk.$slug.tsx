@@ -31,12 +31,49 @@ const BRAND_INFO: Record<string, { description: string; founded: string; usp: st
     founded: "1924 — Sassenheim, Nederland",
     usp: ["Extra dekkend", "Snel droog", "Honderden kleuren"],
   },
-  Histor: {
+  Farrow: {
     description:
-      "Histor is generaties lang het vertrouwde merk voor schilders en doe-het-zelvers. Topkwaliteit lakken en muurverven.",
-    founded: "1898 — Amsterdam, Nederland",
-    usp: ["Klassiek merk", "Topkwaliteit lakken", "Breed assortiment"],
+      "Farrow & Ball is het Britse premium-merk dat bekendstaat om diepe, complexe kleuren en hoogwaardige, milieubewuste verven voor binnen en buiten.",
+    founded: "1946 — Dorset, Verenigd Koninkrijk",
+    usp: ["Diepe, complexe kleuren", "Premium kwaliteit", "Milieubewuste samenstelling"],
   },
+  Benjamin: {
+    description:
+      "Benjamin Moore is het Amerikaanse topmerk voor muurverf en lakken: extreem dekkend, kleurzuiver en geliefd bij interieurontwerpers wereldwijd.",
+    founded: "1883 — New Jersey, Verenigde Staten",
+    usp: ["Topkwaliteit muurverf", "Kleurzuiverheid", "Brede kleurwaaier"],
+  },
+  Dulux: {
+    description:
+      "Dulux is een wereldwijd toonaangevend muurverf-merk van AkzoNobel, bekend om gemak in gebruik, hoge dekking en het iconische kleurenpalet.",
+    founded: "1931 — Slough, Verenigd Koninkrijk",
+    usp: ["Wereldwijde nr. 1", "Hoge dekking", "Iconisch palet"],
+  },
+  ProGold: {
+    description:
+      "ProGold levert professionele schildersmaterialen en lakken voor de vakman: betrouwbaar, prijs/kwaliteit-sterk en breed verkrijgbaar bij de groothandel.",
+    founded: "Nederland",
+    usp: ["Vakman-favoriet", "Sterke prijs-kwaliteit", "Compleet assortiment"],
+  },
+  Trimetal: {
+    description:
+      "Trimetal is het Belgische premium-merk binnen de PPG-familie: hoogwaardige lakken en muurverven met een uitgesproken kleurgevoel.",
+    founded: "België — onderdeel van PPG",
+    usp: ["Premium lakken", "Uitgesproken kleuren", "Vakman-kwaliteit"],
+  },
+};
+
+const SLUG_TO_BRAND: Record<string, (typeof BRANDS)[number]> = {
+  sikkens: "Sikkens",
+  sigma: "Sigma",
+  wijzonol: "Wijzonol",
+  flexa: "Flexa",
+  histor: "Histor",
+  "farrow-ball": "Farrow & Ball",
+  "benjamin-moore": "Benjamin Moore",
+  dulux: "Dulux",
+  progold: "ProGold",
+  trimetal: "Trimetal",
 };
 
 export const Route = createFileRoute("/merk/$slug")({
