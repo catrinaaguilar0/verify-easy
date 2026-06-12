@@ -1,47 +1,29 @@
 import { Link } from "@tanstack/react-router";
-import { ralColors } from "@/lib/ral";
+import { basicRalColors } from "@/lib/ral";
 
 export function RalStrip() {
   return (
     <section className="border-t border-border bg-surface">
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div className="max-w-2xl">
-            <h2 className="text-2xl font-extrabold text-ink md:text-3xl">
-              RAL kleuren — laat elke tint mengen
-            </h2>
-            <p className="mt-2 text-sm text-ink-soft">
-              Klik op een RAL-kleur voor uitleg, toepassing en bijpassende combinaties.
-              Wij mengen elke RAL-tint op maat in de verfsoort van jouw keuze.
-            </p>
-          </div>
-          <Link
-            to="/ral"
-            className="text-sm font-semibold text-accent hover:underline"
-          >
-            Bekijk alle RAL-kleuren →
-          </Link>
-        </div>
-
+      <div className="container mx-auto px-4 py-4">
         <ul
-          className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
-          aria-label="Populaire RAL kleuren"
+          className="flex flex-wrap items-center justify-center gap-2"
+          aria-label="Basis RAL kleuren"
         >
-          {ralColors.map((c) => (
+          {basicRalColors.map((c) => (
             <li key={c.code}>
               <Link
                 to="/ral/$code"
                 params={{ code: c.code }}
-                className="group block rounded-md border border-border bg-card px-3 py-2 transition hover:-translate-y-0.5 hover:border-accent"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2 py-1 text-xs font-semibold text-ink transition hover:border-accent hover:text-accent"
                 title={`RAL ${c.code} ${c.name}`}
-                aria-label={`Bekijk RAL ${c.code} ${c.name}`}
+                aria-label={`Bekijk RAL ${c.code}`}
               >
-                <span className="block text-[10px] font-semibold uppercase tracking-wider text-accent">
-                  RAL {c.code}
-                </span>
-                <span className="block truncate text-xs font-bold text-ink group-hover:text-accent">
-                  {c.name}
-                </span>
+                <span
+                  className="inline-block h-3 w-3 rounded-sm border border-border"
+                  style={{ backgroundColor: c.hex }}
+                  aria-hidden="true"
+                />
+                RAL {c.code}
               </Link>
             </li>
           ))}
