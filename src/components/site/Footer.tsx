@@ -58,6 +58,8 @@ function PayBadge({ label }: { label: string }) {
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground">
+      <RalStrip />
+
       <div className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-6">
         {columns.map((c) => (
           <div key={c.h}>
