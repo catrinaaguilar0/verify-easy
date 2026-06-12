@@ -1,33 +1,41 @@
-# Plan: 3 producten per merk
+# Plan: Verrijk categoriepagina's met beschrijvingen en kenmerken
 
-## Huidige stand
-- 10 merken in `BRANDS`, maar `PRODUCTS` bevat alleen Sikkens (3), Sigma (3), Wijzonol (2), Flexa (2). Histor, Farrow & Ball, Benjamin Moore, Dulux, ProGold en Trimetal hebben 0 producten — hun `/merk/<slug>`-pagina toont "Binnenkort verkrijgbaar".
-- Doel: elk merk krijgt precies 3 realistische producten (totaal 30).
+## Doel
+Elke categoriepagina (muurverf, lakverf, beits, grondverf, buitenverf, benodigdheden) krijgt — net als de merkpagina's — een eigen beschrijving, USP's en een informatieve sidebar. Hierdoor verschijnen de nieuwe producten in een rijkere context met SEO-vriendelijke tekst.
 
-## Wat ik toevoeg
+## Aanpak
 
-Per merk 3 producten met realistische naam, categorie, prijs, volume, dekking, applicaties, finish, korte beschrijving en rating/reviews. Mix per merk: minimaal 1 muurverf of lakverf zodat er variatie zit. Verdeling per merk (samenvatting):
+### 1. Uitbreiden CATALOG in `src/lib/catalog.ts`
+Toevoegen aan de export:
 
-- **Sikkens** — al 3, geen toevoegingen.
-- **Sigma** — al 3, geen toevoegingen.
-- **Wijzonol** — +1 (muurverf mat).
-- **Flexa** — +1 (lakverf zijdeglans binnen).
-- **Histor** — 3 nieuw: Perfect Base grondverf, Schone Muur muurverf mat, Cabinet Paint zijdeglans lak.
-- **Farrow & Ball** — 3 nieuw: Estate Emulsion mat, Modern Eggshell zijdeglans, Exterior Masonry muurverf buiten.
-- **Benjamin Moore** — 3 nieuw: Regal Select muurverf mat, Advance Satin lak, Aura Bath & Spa badkamer muurverf.
-- **Dulux** — 3 nieuw: Diamond Matt muurverf, Weathershield buitenmuurverf, Quick Dry Satinwood lak.
-- **ProGold** — 3 nieuw: Premium Muurverf Mat, Aqua Grondverf, Zijdeglans Lak Universeel.
-- **Trimetal** — 3 nieuw: Polyurethane Satin lak, Décor Mat muurverf, Cryltane buitenlak.
+```typescript
+export const CATEGORY_INFO: Record<string, { 
+  description: string; 
+  whenToUse: string[]; 
+  tips: string[];
+}> = {
+  muurverf: {
+    description: "...",
+    whenToUse: ["...", "...", "..."],
+    tips: ["...", "...", "..."]
+  },
+  // etc. voor alle 6 categorieën
+}
+```
 
-Totaal: 20 nieuwe producten + 10 bestaande = 30.
+### 2. Herbouw `src/routes/categorie.$slug.tsx`
+- Vervang de huidige eenvoudige header door een rijkere layout zoals `merk.$slug.tsx`.
+- Voeg een sidebar toe met:
+  - Categoriebeschrijving
+  - "Wanneer gebruik je ..." lijst
+  - Tips voor het beste resultaat
+  - Verfmengservice CTA
+- Behoud het bestaande filter- en productgrid-gedrag.
 
-## Beelden
-Er zijn vier product-afbeeldingen beschikbaar (`prod-sikkens`, `prod-sigma`, `prod-wijzonol`, `prod-flexa`). Voor de 6 nieuwe merken hergebruik ik per merk één van deze foto's op basis van categorie (muurverf → sikkens/sigma, lakverf → wijzonol/flexa). Functioneel ziet de pagina er dan gevuld uit zonder dat ik 18 nieuwe foto's hoef te genereren.
-
-> Wil je liever per nieuw merk een echte unieke productfoto laten genereren (6 extra afbeeldingen, één per merk), zeg het dan — dan voeg ik die stap toe.
+### 3. SEO
+Elke categorie krijgt een uniekere meta-description gebaseerd op de categorie-inhoud.
 
 ## Technische details
-- Bestand: `src/lib/catalog.ts` — `PRODUCTS`-array uitbreiden met 20 nieuwe entries (id `p-011` t/m `p-030`).
-- Slugs blijven uniek (`<merk>-<product>-<volume>`).
-- `BRAND_INFO` en sitemap (`PRODUCTS.map`) hoeven niet aangepast — pikken nieuwe entries automatisch op.
-- Geen andere bestanden raken.
+- Geen nieuwe dependencies.
+- Hergebruik bestaande iconen (ShieldCheck, Lightbulb, Paintbrush, etc.).
+- Layout: `lg:grid-cols-[1fr_320px]` (grid + sidebar), consistent met merkpagina.

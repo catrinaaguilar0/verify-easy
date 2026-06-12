@@ -558,6 +558,110 @@ export const CATEGORIES: { key: Product["category"]; label: string }[] = [
   { key: "benodigdheden", label: "Verfbenodigdheden" },
 ];
 
+export const CATEGORY_INFO: Record<Product["category"], {
+  intro: string;
+  whenToUse: string[];
+  tips: string[];
+  metaDescription: string;
+}> = {
+  muurverf: {
+    intro:
+      "Muurverf vormt de basis van elk interieur. Of je nu een fluweelmatte uitstraling wilt of een afwasbare muur voor hal en keuken — een goede muurverf dekt in één à twee lagen, vloeit egaal uit en houdt jarenlang z'n kleur.",
+    whenToUse: [
+      "Woon- en slaapkamermuren met een rustige, matte uitstraling",
+      "Hal, gang en keuken waar afwasbaarheid telt",
+      "Plafonds — kies altijd voor een diepmat plafondverf zonder glansreflectie",
+    ],
+    tips: [
+      "Schuur glanzende muren licht op en stof goed af voor optimale hechting",
+      "Gebruik een primer op kale gips, nieuwe stuc of sterk zuigende ondergronden",
+      "Twee dunne lagen geven altijd een mooier resultaat dan één dikke laag",
+    ],
+    metaDescription:
+      "Muurverf van Sikkens, Sigma, Flexa, Histor en meer. Mat, afwasbaar of zijdeglans — in elke kleur gemengd. Voor 21:00 besteld, morgen in huis.",
+  },
+  lakverf: {
+    intro:
+      "Lakverf beschermt en verfraait hout en metaal binnen- én buitenshuis. Van krasvaste meubel- en deurenlak tot weerbestendige kozijnlak: kies de juiste afwerking (mat, satijn, zijdeglans of hoogglans) voor het beste resultaat.",
+    whenToUse: [
+      "Deuren, kozijnen, plinten en trapleuningen binnenshuis",
+      "Meubels, kasten en houten panelen die intensief gebruikt worden",
+      "Radiatoren en metalen elementen (met de juiste primer)",
+    ],
+    tips: [
+      "Werk altijd in dunne lagen — dikke lagen geven loopneuzen en langere droogtijd",
+      "Schuur tussen lagen licht op met korrel 240 voor een glad eindresultaat",
+      "Watergedragen lak is reukarm en vergeelt niet; ideaal voor binnen",
+    ],
+    metaDescription:
+      "Lakverf voor hout en metaal: mat, satijn, zijdeglans en hoogglans. Topmerken zoals Sikkens, Sigma en Wijzonol. Snel geleverd en op kleur gemengd.",
+  },
+  beits: {
+    intro:
+      "Beits laat de natuurlijke houtnerf zichtbaar en beschermt tegelijk tegen vocht, UV en vervuiling. Kies transparant voor een naturel uiterlijk, of dekkend voor maximale levensduur buitenshuis.",
+    whenToUse: [
+      "Houten gevels, schuttingen en tuinhuizen",
+      "Boeidelen, kozijnen en buitendeuren van hout",
+      "Tuinmeubelen en pergola's",
+    ],
+    tips: [
+      "Verwijder oude losse beits altijd grondig voor opnieuw aanbrengen",
+      "Werk bij voorkeur niet in volle zon — de beits trekt dan te snel in",
+      "Plan onderhoud elke 3 tot 5 jaar in afhankelijk van weersinvloeden",
+    ],
+    metaDescription:
+      "Beits voor binnen en buiten: transparant of dekkend. Sikkens Cetol, Sigma Decor en meer. Bescherm hout duurzaam tegen weer en wind.",
+  },
+  grondverf: {
+    intro:
+      "Grondverf is de basislaag die zorgt voor optimale hechting, egalisatie en een lagere verfopname. Sla deze stap nooit over op kaal hout, metaal of een sterk zuigende ondergrond.",
+    whenToUse: [
+      "Kaal of nieuw hout dat nog niet eerder geschilderd is",
+      "Metaal (gebruik dan altijd een roestwerende primer)",
+      "Vlekkerige, sterk zuigende of nicotine-bedekte ondergronden",
+    ],
+    tips: [
+      "Stof en ontvet de ondergrond grondig voor je grondverf aanbrengt",
+      "Schuur na het drogen licht op voor de beste hechting van de aflak",
+      "Kies een grondverf in een kleur die dicht bij je eindkleur ligt",
+    ],
+    metaDescription:
+      "Grondverf en primers voor hout, metaal en moeilijke ondergronden. Universele hechtprimers van Sikkens, Wijzonol, Histor en meer.",
+  },
+  buitenverf: {
+    intro:
+      "Buitenverf moet meer kunnen: bestand zijn tegen UV, regen, vorst en temperatuurschommelingen. Onze buitenlakken en gevelverven zijn formuleerd voor jarenlange standtijd onder alle weersomstandigheden.",
+    whenToUse: [
+      "Kozijnen, deuren en boeidelen van hout",
+      "Gevels, tuinmuren en buitenmuurvlakken",
+      "Tuinhekken, schuttingen en buitenmeubelen",
+    ],
+    tips: [
+      "Schilder bij minimaal 8 °C en droog weer — controleer de weersvoorspelling",
+      "Werk altijd met grondverf én twee lagen aflak voor maximale bescherming",
+      "Vermijd directe zon op het te schilderen vlak (blaasvorming)",
+    ],
+    metaDescription:
+      "Buitenverf voor kozijnen, gevels en houtwerk. Weerbestendige lakken en muurverven van Farrow & Ball, Dulux, Flexa en Trimetal.",
+  },
+  benodigdheden: {
+    intro:
+      "Goed gereedschap maakt het verfwerk twee keer zo prettig. Van kwaliteitskwasten en microvezelrollers tot afplaktape, schuurpapier en afdekzeil — alles wat je nodig hebt voor een strak eindresultaat.",
+    whenToUse: [
+      "Voorbereiding: schuurpapier, plamuur, afplaktape en afdekzeil",
+      "Aanbrengen: kwasten, rollers, verfbakken en verlengstelen",
+      "Afwerking: krimpfolie, kwastreiniger en opbergblikjes",
+    ],
+    tips: [
+      "Investeer in goede kwasten — ze geven minder strepen en gaan jaren mee",
+      "Microvezelroller voor muurverf, schuimroller voor lak op vlakke vlakken",
+      "Reinig kwasten direct na gebruik; uitgeharde verf is niet te verwijderen",
+    ],
+    metaDescription:
+      "Verfbenodigdheden: kwasten, rollers, afplaktape, schuurpapier en afdekmateriaal. Alles voor een professioneel verfresultaat.",
+  },
+};
+
 export const POPULAR_RAL = [
   { code: "RAL 9010", name: "Zuiver wit", hex: "#F1ECE0" },
   { code: "RAL 9016", name: "Verkeerswit", hex: "#F1F1F1" },
