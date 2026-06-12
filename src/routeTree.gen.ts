@@ -19,11 +19,14 @@ import { Route as MuurverfRouteImport } from './routes/muurverf'
 import { Route as HulpEnAdviesRouteImport } from './routes/hulp-en-advies'
 import { Route as DemonstratiesRouteImport } from './routes/demonstraties'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BestellingBevestigdRouteImport } from './routes/bestelling-bevestigd'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AfrekenenRouteImport } from './routes/afrekenen'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RalCodeRouteImport } from './routes/ral.$code'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as CategorieSlugRouteImport } from './routes/categorie.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedAdminBrandsRouteImport } from './routes/_authenticated/admin.brands'
 
@@ -77,9 +80,19 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BestellingBevestigdRoute = BestellingBevestigdRouteImport.update({
+  id: '/bestelling-bevestigd',
+  path: '/bestelling-bevestigd',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AfrekenenRoute = AfrekenenRouteImport.update({
+  id: '/afrekenen',
+  path: '/afrekenen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -101,6 +114,11 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
   path: '/product/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CategorieSlugRoute = CategorieSlugRouteImport.update({
+  id: '/categorie/$slug',
+  path: '/categorie/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -115,7 +133,9 @@ const AuthenticatedAdminBrandsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/afrekenen': typeof AfrekenenRoute
   '/auth': typeof AuthRoute
+  '/bestelling-bevestigd': typeof BestellingBevestigdRoute
   '/blog': typeof BlogRouteWithChildren
   '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
@@ -127,13 +147,16 @@ export interface FileRoutesByFullPath {
   '/winkelwagen': typeof WinkelwagenRoute
   '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/categorie/$slug': typeof CategorieSlugRoute
   '/product/$slug': typeof ProductSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/admin/brands': typeof AuthenticatedAdminBrandsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/afrekenen': typeof AfrekenenRoute
   '/auth': typeof AuthRoute
+  '/bestelling-bevestigd': typeof BestellingBevestigdRoute
   '/blog': typeof BlogRouteWithChildren
   '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
@@ -145,6 +168,7 @@ export interface FileRoutesByTo {
   '/winkelwagen': typeof WinkelwagenRoute
   '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/categorie/$slug': typeof CategorieSlugRoute
   '/product/$slug': typeof ProductSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/admin/brands': typeof AuthenticatedAdminBrandsRoute
@@ -153,7 +177,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/afrekenen': typeof AfrekenenRoute
   '/auth': typeof AuthRoute
+  '/bestelling-bevestigd': typeof BestellingBevestigdRoute
   '/blog': typeof BlogRouteWithChildren
   '/demonstraties': typeof DemonstratiesRoute
   '/hulp-en-advies': typeof HulpEnAdviesRoute
@@ -165,6 +191,7 @@ export interface FileRoutesById {
   '/winkelwagen': typeof WinkelwagenRoute
   '/zoeken': typeof ZoekenRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/categorie/$slug': typeof CategorieSlugRoute
   '/product/$slug': typeof ProductSlugRoute
   '/ral/$code': typeof RalCodeRoute
   '/_authenticated/admin/brands': typeof AuthenticatedAdminBrandsRoute
@@ -173,7 +200,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/afrekenen'
     | '/auth'
+    | '/bestelling-bevestigd'
     | '/blog'
     | '/demonstraties'
     | '/hulp-en-advies'
@@ -185,13 +214,16 @@ export interface FileRouteTypes {
     | '/winkelwagen'
     | '/zoeken'
     | '/blog/$slug'
+    | '/categorie/$slug'
     | '/product/$slug'
     | '/ral/$code'
     | '/admin/brands'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/afrekenen'
     | '/auth'
+    | '/bestelling-bevestigd'
     | '/blog'
     | '/demonstraties'
     | '/hulp-en-advies'
@@ -203,6 +235,7 @@ export interface FileRouteTypes {
     | '/winkelwagen'
     | '/zoeken'
     | '/blog/$slug'
+    | '/categorie/$slug'
     | '/product/$slug'
     | '/ral/$code'
     | '/admin/brands'
@@ -210,7 +243,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/afrekenen'
     | '/auth'
+    | '/bestelling-bevestigd'
     | '/blog'
     | '/demonstraties'
     | '/hulp-en-advies'
@@ -222,6 +257,7 @@ export interface FileRouteTypes {
     | '/winkelwagen'
     | '/zoeken'
     | '/blog/$slug'
+    | '/categorie/$slug'
     | '/product/$slug'
     | '/ral/$code'
     | '/_authenticated/admin/brands'
@@ -230,7 +266,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AfrekenenRoute: typeof AfrekenenRoute
   AuthRoute: typeof AuthRoute
+  BestellingBevestigdRoute: typeof BestellingBevestigdRoute
   BlogRoute: typeof BlogRouteWithChildren
   DemonstratiesRoute: typeof DemonstratiesRoute
   HulpEnAdviesRoute: typeof HulpEnAdviesRoute
@@ -241,6 +279,7 @@ export interface RootRouteChildren {
   VerfmengserviceRoute: typeof VerfmengserviceRoute
   WinkelwagenRoute: typeof WinkelwagenRoute
   ZoekenRoute: typeof ZoekenRoute
+  CategorieSlugRoute: typeof CategorieSlugRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
 
@@ -316,11 +355,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bestelling-bevestigd': {
+      id: '/bestelling-bevestigd'
+      path: '/bestelling-bevestigd'
+      fullPath: '/bestelling-bevestigd'
+      preLoaderRoute: typeof BestellingBevestigdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/afrekenen': {
+      id: '/afrekenen'
+      path: '/afrekenen'
+      fullPath: '/afrekenen'
+      preLoaderRoute: typeof AfrekenenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -349,6 +402,13 @@ declare module '@tanstack/react-router' {
       path: '/product/$slug'
       fullPath: '/product/$slug'
       preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categorie/$slug': {
+      id: '/categorie/$slug'
+      path: '/categorie/$slug'
+      fullPath: '/categorie/$slug'
+      preLoaderRoute: typeof CategorieSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -402,7 +462,9 @@ const RalRouteWithChildren = RalRoute._addFileChildren(RalRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AfrekenenRoute: AfrekenenRoute,
   AuthRoute: AuthRoute,
+  BestellingBevestigdRoute: BestellingBevestigdRoute,
   BlogRoute: BlogRouteWithChildren,
   DemonstratiesRoute: DemonstratiesRoute,
   HulpEnAdviesRoute: HulpEnAdviesRoute,
@@ -413,18 +475,9 @@ const rootRouteChildren: RootRouteChildren = {
   VerfmengserviceRoute: VerfmengserviceRoute,
   WinkelwagenRoute: WinkelwagenRoute,
   ZoekenRoute: ZoekenRoute,
+  CategorieSlugRoute: CategorieSlugRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
