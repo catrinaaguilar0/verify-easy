@@ -2,10 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { Heart, ShoppingBag, Star, SlidersHorizontal, X } from "lucide-react";
+import { Heart, ShoppingBag, Star, SlidersHorizontal, X, Lightbulb, ShieldCheck, Paintbrush, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { PRODUCTS, CATEGORIES, formatPrice, type Product } from "@/lib/catalog";
+import { PRODUCTS, CATEGORIES, CATEGORY_INFO, formatPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 
 const SITE_URL = "https://cozy-check-hub.lovable.app";
