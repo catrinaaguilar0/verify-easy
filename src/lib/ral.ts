@@ -574,3 +574,20 @@ export const ralColors: RalColor[] = [
 ];
 
 export const getRal = (code: string) => ralColors.find((r) => r.code === code);
+
+export const basicRalCodes = [
+  "9010",
+  "9002",
+  "7016",
+  "7039",
+  "9016",
+  "9005",
+  "1019",
+  "8017",
+  "6005",
+  "9011",
+];
+
+export const basicRalColors = basicRalCodes
+  .map((code) => ralColors.find((r) => r.code === code))
+  .filter((r): r is RalColor => Boolean(r));
