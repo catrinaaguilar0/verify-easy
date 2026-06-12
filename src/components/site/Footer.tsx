@@ -85,24 +85,20 @@ export function Footer() {
 
         <div>
           <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">RAL-kleuren</h4>
-          <div className="grid grid-cols-2 gap-1">
-            {basicRalColors.map((c) => (
-              <Link
-                key={c.code}
-                to="/ral/$code"
-                params={{ code: c.code }}
-                className="flex h-8 items-center justify-center rounded-sm text-xs font-bold text-white transition hover:opacity-90"
-                style={{
-                  backgroundColor: c.hex,
-                  textShadow: "0 1px 2px rgba(0,0,0,0.6)",
-                }}
-                title={`RAL ${c.code} ${c.name}`}
-                aria-label={`Bekijk RAL ${c.code}`}
-              >
-                RAL {c.code}
-              </Link>
+          <ul className="space-y-1 text-sm text-white/80">
+            {basicRalColors.slice(0, 5).map((c) => (
+              <li key={c.code}>
+                <Link
+                  to="/ral/$code"
+                  params={{ code: c.code }}
+                  className="hover:text-cta"
+                  title={`RAL ${c.code} ${c.name}`}
+                >
+                  RAL {c.code} – {c.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
 
