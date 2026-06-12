@@ -1,0 +1,24 @@
+# Verfwebshop
+
+> Nederlandse verfwebshop met muurverf, lakverf, beits, grondverf en benodigdheden van topmerken. Inclusief RAL-kleurenwaaier, verfmengservice, verfcalculator en kleuradvies.
+
+## Pages
+
+- [Home](/): Overzicht van categorieën, populaire producten en RAL-kleuren.
+- [Muurverf](/muurverf): Muurverf voor binnen en buiten.
+- [Kleuradvies](/kleuradvies): Persoonlijk kleuradvies en kleurinspiratie.
+- [Verfmengservice](/verfmengservice): Op kleur mengen van verf in elke gewenste tint.
+- [Verfcalculator](/verfcalculator): Bereken hoeveel verf je nodig hebt voor je project.
+- [RAL-kleuren](/ral): Volledige RAL-kleurenwaaier.
+- [Hulp en advies](/hulp-en-advies): Praktische tips en uitlegartikelen.
+- [Demonstraties](/demonstraties): Productdemonstraties in de winkel.
+- [Blog](/blog): Artikelen over schilderen, kleur en onderhoud.
+- [Over ons](/over-ons): Verhaal en team achter de winkel.
+- [Contact](/contact): Openingstijden, adres en contactformulier.
+- [FAQ](/faq): Veelgestelde vragen.
+
+## Optional
+
+- [Verzending en retour](/verzending-en-retour): Verzendkosten, levertijden en retourbeleid.
+- [Algemene voorwaarden](/algemene-voorwaarden)
+- [Privacy](/privacy)
