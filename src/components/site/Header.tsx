@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Search, User, ShoppingBag, Check, Menu, X, ArrowRight } from "lucide-react";
+import { Search, User, ShoppingBag, Check, Menu, X, ArrowRight, Heart } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
 import { searchCatalog, formatPrice } from "@/lib/catalog";
 
 const trust = [
@@ -12,20 +13,21 @@ const trust = [
 ];
 
 const nav = [
-  { label: "Muurverf", to: "/muurverf" as const },
-  { label: "Lakverf", to: "/" as const },
-  { label: "Beits", to: "/" as const },
-  { label: "Grondverf", to: "/" as const },
-  { label: "Buitenverf", to: "/" as const },
-  { label: "Verfbenodigdheden", to: "/" as const },
-  { label: "RAL kleuren", to: "/ral" as const },
-  { label: "Hulp & Advies", to: "/hulp-en-advies" as const },
+  { label: "Muurverf", to: "/categorie/$slug" as const, params: { slug: "muurverf" } },
+  { label: "Lakverf", to: "/categorie/$slug" as const, params: { slug: "lakverf" } },
+  { label: "Beits", to: "/categorie/$slug" as const, params: { slug: "beits" } },
+  { label: "Grondverf", to: "/categorie/$slug" as const, params: { slug: "grondverf" } },
+  { label: "Buitenverf", to: "/categorie/$slug" as const, params: { slug: "buitenverf" } },
+  { label: "Kleuradvies", to: "/kleuradvies" as const, params: undefined },
+  { label: "RAL kleuren", to: "/ral" as const, params: undefined },
+  { label: "Hulp & Advies", to: "/hulp-en-advies" as const, params: undefined },
 ];
 
 const popularSearches = ["muurverf wit", "Sikkens", "RAL 9010", "hoogglans lak", "buitenverf"];
 
 export function Header() {
   const { count } = useCart();
+  const { count: wishlistCount } = useWishlist();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -238,7 +240,18 @@ export function Header() {
         </div>
 
         <nav className="hidden items-center gap-4 text-sm md:flex">
-          <Link to="/" className="flex flex-col items-center text-ink hover:text-accent">
+          <Link to="/verlanglijst" className="relative flex flex-col items-center text-ink hover:text-accent">
+            <span className="relative">
+              <Heart className="h-5 w-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute -right-2 -top-1 grid h-4 w-4 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                  {wishlistCount}
+                </span>
+              )}
+            </span>
+            <span className="mt-0.5 text-[10px]">Wensen</span>
+          </Link>
+          <Link to="/account" className="flex flex-col items-center text-ink hover:text-accent">
             <User className="h-5 w-5" />
             <span className="mt-0.5 text-[10px]">Account</span>
           </Link>
