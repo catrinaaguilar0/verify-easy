@@ -22,11 +22,7 @@ const ralLinks: FooterLink[] = [
 
 const columns: { h: string; links: FooterLink[] }[] = [
   {
-    h: "Populaire producten",
-    links: popularProducts,
-  },
-  {
-    h: "Klantenservice",
+    h: "Contact",
     links: [
       { label: "Contact", to: "/contact" },
       { label: "Veelgestelde vragen", to: "/faq" },
@@ -36,7 +32,7 @@ const columns: { h: string; links: FooterLink[] }[] = [
     ],
   },
   {
-    h: "Advies & inspiratie",
+    h: "Verfkeuze",
     links: [
       { label: "Verfkeuze", to: "/kleuradvies" },
       { label: "Kleuradvies", to: "/kleuradvies" },
@@ -46,7 +42,7 @@ const columns: { h: string; links: FooterLink[] }[] = [
     ],
   },
   {
-    h: "Over VerfOnlineWinkel",
+    h: "Over ons",
     links: [
       { label: "Over ons", to: "/over-ons" },
       { label: "Zakelijk bestellen", to: "/contact" },
@@ -56,7 +52,11 @@ const columns: { h: string; links: FooterLink[] }[] = [
     ],
   },
   {
-    h: "Ralkleur",
+    h: "Populair producten",
+    links: popularProducts,
+  },
+  {
+    h: "Ralkleuren",
     links: ralLinks,
   },
 ];
