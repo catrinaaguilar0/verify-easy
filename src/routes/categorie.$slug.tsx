@@ -94,9 +94,9 @@ function CategoryPage() {
   }, [base, search]);
 
   function toggle(key: "merk" | "afwerking" | "inhoud" | "toepassing", value: string) {
-    const current = search[key];
-    const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
-    navigate({ search: (prev) => ({ ...prev, [key]: next }) });
+    const current = search[key] as string[];
+    const next = current.includes(value) ? current.filter((v: string) => v !== value) : [...current, value];
+    navigate({ search: (prev: typeof search) => ({ ...prev, [key]: next }) });
   }
   function clearAll() {
     navigate({ search: { merk: [], afwerking: [], inhoud: [], toepassing: [], voorraad: false, sort: "populair" } });
