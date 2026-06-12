@@ -250,7 +250,54 @@ export const posts: BlogPost[] = [
       { type: "p", text: "Lees het volledige verhaal en bekijk meer beeld op de website van Sigma." },
     ],
   },
+  {
+    slug: "glas-verven-stappenplan",
+    title: "Glas verven: stappenplan voor een strak resultaat",
+    excerpt: "Glas schilderen vraagt om de juiste voorbereiding en een speciale primer. In dit stappenplan lees je hoe je ramen, glas-in-lood en decoratief glas duurzaam en strak verft.",
+    image: blogGlas,
+    category: "Doe-het-zelf",
+    author: "Mark de Wit",
+    date: "11 juni 2026",
+    readMin: 7,
+    tags: ["glas schilderen", "glas verven", "doe-het-zelf", "lak", "advies"],
+    relatedProductSlugs: ["sikkens-alphacryl-pure-mat", "verfmengservice"],
+    body: [
+      { type: "p", text: "Glas verven is geen onmogelijke klus, maar het oppervlak is glad, niet-poreus en hecht niet vanzelf. Met de juiste voorbehandeling, een speciale glasprimer (zoals een multiprimer) en de juiste lak krijg je een strak en duurzaam resultaat — of het nu om een raam, een glazen deur of een decoratieve fles gaat." },
+      { type: "h2", text: "Wat heb je nodig?" },
+      { type: "ul", items: [
+        "Multiprimer of glasprimer (essentieel voor hechting)",
+        "Watergedragen of alkyd lak in gewenste kleur en glansgraad",
+        "Ontvetter (ammonia of speciale glasreiniger)",
+        "Schuurpapier korrel 240 en een fijn schuursponsje",
+        "Fijne lakkwast en/of een vachtroller met korte pool",
+        "Afplaktape (low-tack) en afdekfolie",
+      ] },
+      { type: "h2", text: "1. Voorbereiding: schoon en vetvrij" },
+      { type: "p", text: "Reinig het glas grondig met een ontvetter of een oplossing van ammonia. Stof, vingerafdrukken en silicoonresten zorgen ervoor dat verf later loslaat. Plak randen, kozijnen en sponningen netjes af." },
+      { type: "h2", text: "2. Licht opruwen" },
+      { type: "p", text: "Schuur het glas heel licht op met een fijn schuursponsje of korrel 240. Je hoeft geen krassen aan te brengen — een mat oppervlak is genoeg om de primer beter te laten hechten. Veeg het schuurstof weg en ontvet opnieuw." },
+      { type: "h2", text: "3. Multiprimer aanbrengen" },
+      { type: "p", text: "Dit is de belangrijkste stap. Breng een dunne, gelijkmatige laag multiprimer of glasprimer aan met een fijne kwast of vachtroller. Een goede primer zoals een acryl multiprimer hecht op gladde oppervlakken én vormt een ideale ondergrond voor de eindlak. Laat drogen volgens de instructies op de verpakking — meestal 4 tot 6 uur." },
+      { type: "h2", text: "4. Eerste laklaag" },
+      { type: "p", text: "Werk met een goede lakkwast voor detailwerk en een vachtroller voor grotere vlakken. Breng dunne lagen aan — twee dunne lagen geven altijd een mooier resultaat dan één dikke. Werk in één richting voor een gelijkmatige structuur." },
+      { type: "h2", text: "5. Tussenschuren en tweede laag" },
+      { type: "p", text: "Laat de eerste laag minimaal 16 uur drogen. Schuur licht tussendoor met korrel 320 voor een fluweelzachte ondergrond. Stof afnemen en breng dan de tweede en laatste laag aan. Voor maximale slijtvastheid, vooral op deuren of buitenglas, kan een derde laag verstandig zijn." },
+      { type: "h2", text: "Tips voor specifieke situaties" },
+      { type: "ul", items: [
+        "Glas-in-lood: gebruik een fijne kwast en werk in korte, gecontroleerde streken",
+        "Buitenramen: kies een UV-bestendige buitenlak en behandel ook de kozijnranden",
+        "Decoratief / hobby glas: glasverf met inbrandfunctie (oven) is een alternatief voor blijvend resultaat",
+        "Spiegels en gehard glas: hechting blijft moeilijker — test eerst op een onopvallend deel",
+      ] },
+      { type: "h2", text: "Welke verf adviseren wij?" },
+      { type: "p", text: "Voor binnentoepassingen is een watergedragen lak in combinatie met een acryl multiprimer een prima keuze: reukarm, snel droog en goed reinigbaar. Voor buiten of intensief gebruik kies je een alkyd lak voor extra slijtvastheid. Twijfel je over de juiste combinatie? Wij denken graag met je mee en mengen elke gewenste kleur via onze verfmengservice." },
+    ],
+  },
 ];
+
+
+
+
 
 
 
