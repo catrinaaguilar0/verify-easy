@@ -251,7 +251,7 @@ function Home() {
             <Link
               to="/blog/$slug"
               params={{ slug: "flexa-kleurfamilie-2026" }}
-              className="group block overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              className="group relative block overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
               aria-label="Lees: Flexa Kleurfamilie 2026"
             >
               <div className="aspect-[16/9] overflow-hidden bg-surface">
@@ -262,11 +262,15 @@ function Home() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-12">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-white/80">Inspiratie</span>
+                <h3 className="mt-1 text-lg font-extrabold text-white md:text-xl">Flexa Kleurfamilie 2026</h3>
+              </div>
             </Link>
             <Link
               to="/blog/$slug"
               params={{ slug: "sigma-secret-safari-2026" }}
-              className="group block overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              className="group relative block overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
               aria-label="Lees: Sigma Secret Safari — Kleur van het Jaar 2026"
             >
               <div className="aspect-[16/9] overflow-hidden bg-surface">
@@ -276,6 +280,10 @@ function Home() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-12">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-white/80">Inspiratie</span>
+                <h3 className="mt-1 text-lg font-extrabold text-white md:text-xl">Sigma Secret Safari — Kleur van het Jaar 2026</h3>
               </div>
             </Link>
           </div>
