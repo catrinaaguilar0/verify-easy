@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { CartProvider } from "@/lib/cart";
+import { WishlistProvider } from "@/lib/wishlist";
 
 
 function NotFoundComponent() {
@@ -153,7 +154,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <Outlet />
+        <WishlistProvider>
+          <Outlet />
+        </WishlistProvider>
       </CartProvider>
     </QueryClientProvider>
   );
