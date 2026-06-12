@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
+import { RalStrip } from "./RalStrip";
 
 type FooterLink = { label: string; to?: string; params?: Record<string, string> };
 
