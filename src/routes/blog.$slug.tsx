@@ -16,7 +16,7 @@ export const Route = createFileRoute("/blog/$slug")({
     const post = loaderData?.post;
     const origin = loaderData?.origin ?? "https://cozy-check-hub.lovable.app";
     const url = `${origin}/blog/${params.slug}`;
-    const image = post ? `${origin}${post.image}` : undefined;
+    const image = post ? (post.image.startsWith("http") ? post.image : `${origin}${post.image}`) : undefined;
     return {
       meta: post
         ? [
@@ -125,6 +125,30 @@ function BlogPost() {
               })}
             </div>
 
+            {post.sourceUrl && (
+              <p className="mt-6 text-xs text-ink-soft">
+                Bron:{" "}
+                <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                  {post.sourceLabel ?? post.sourceUrl}
+                </a>
+              </p>
+            )}
+
+            {post.mixCta && (
+              <div className="mt-8 rounded-2xl border border-accent/30 bg-accent/5 p-6">
+                <h2 className="text-lg font-bold text-ink">{post.mixCta.label}</h2>
+                {post.mixCta.description && (
+                  <p className="mt-2 text-sm text-ink-soft">{post.mixCta.description}</p>
+                )}
+                <Link
+                  to="/verfmengservice"
+                  className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-cta px-5 py-2.5 text-sm font-semibold text-cta-foreground transition hover:opacity-90"
+                >
+                  Naar de verfmengservice →
+                </Link>
+              </div>
+            )}
+
             {post.tags.length > 0 && (
               <div className="mt-10 flex flex-wrap items-center gap-2 border-t border-border pt-6">
                 <span className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Onderwerpen:</span>
@@ -140,6 +164,7 @@ function BlogPost() {
                 ))}
               </div>
             )}
+
           </div>
         </article>
 
