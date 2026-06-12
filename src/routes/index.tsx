@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { posts as blogPosts } from "@/lib/blog";
 import hero from "@/assets/hero-cans.jpg";
 import inspColors from "@/assets/insp-colors.jpg";
 import inspInterior from "@/assets/insp-interior.jpg";
@@ -326,6 +327,43 @@ function Home() {
               </form>
               <p className="mt-2 text-[11px] text-ink-soft">Je ontvangt max. 1 e-mail per week.</p>
             </article>
+          </div>
+        </section>
+
+        {/* LAATSTE ARTIKELEN */}
+        <section className="container mx-auto px-4 pb-10">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-extrabold text-ink md:text-2xl">Laatste artikelen</h2>
+              <p className="mt-1 text-xs text-ink-soft">Kleurinspiratie, advies en doe-het-zelf tips van onze verfspecialisten.</p>
+            </div>
+            <Link to="/blog" className="shrink-0 text-xs font-bold text-ink hover:text-cta-foreground">
+              Naar alle artikelen →
+            </Link>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {blogPosts.slice(0, 3).map((p) => (
+              <Link
+                key={p.slug}
+                to="/blog/$slug"
+                params={{ slug: p.slug }}
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-surface">
+                  <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-cta-foreground">{p.category}</span>
+                  <h3 className="text-base font-bold text-ink group-hover:text-cta-foreground">{p.title}</h3>
+                  <p className="line-clamp-2 text-xs text-ink-soft">{p.excerpt}</p>
+                  <div className="mt-auto flex items-center gap-3 pt-2 text-[11px] text-ink-soft">
+                    <span>{p.date}</span>
+                    <span>·</span>
+                    <span>{p.readMin} min lezen</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 

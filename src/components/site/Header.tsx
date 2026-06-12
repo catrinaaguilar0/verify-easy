@@ -20,7 +20,7 @@ const nav = [
   { label: "GRONDVERF", to: "/categorie/$slug" as const, params: { slug: "grondverf" }, dropdown: true },
   { label: "BENODIGDHEDEN", to: "/categorie/$slug" as const, params: { slug: "benodigdheden" }, dropdown: false },
   { label: "MERKEN", to: "/merk/$slug" as const, params: { slug: "sikkens" }, dropdown: false },
-  { label: "ADVIES & INSPIRATIE", to: "/kleuradvies" as const, params: undefined, dropdown: false },
+  { label: "ADVIES & INSPIRATIE", to: "/blog" as const, params: undefined, dropdown: false },
 ];
 
 const popularSearches = ["muurverf wit", "Sikkens", "RAL 9010", "hoogglans lak", "buitenverf"];
