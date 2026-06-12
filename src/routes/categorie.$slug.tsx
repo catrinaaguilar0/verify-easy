@@ -142,7 +142,7 @@ function CategoryPage() {
                 <input
                   type="checkbox"
                   checked={search.voorraad}
-                  onChange={(e) => navigate({ search: (p) => ({ ...p, voorraad: e.target.checked }) })}
+                  onChange={(e) => navigate({ search: (p: typeof search) => ({ ...p, voorraad: e.target.checked }) })}
                   className="h-4 w-4 rounded border-border accent-accent"
                 />
                 <span className="flex-1 text-ink">Direct leverbaar</span>
@@ -175,7 +175,7 @@ function CategoryPage() {
                 Sorteren:
                 <select
                   value={search.sort}
-                  onChange={(e) => navigate({ search: (p) => ({ ...p, sort: e.target.value as typeof search.sort }) })}
+                  onChange={(e) => navigate({ search: (p: typeof search) => ({ ...p, sort: e.target.value as typeof search.sort }) })}
                   className="rounded border border-border bg-background px-2 py-1.5 text-sm text-ink"
                 >
                   <option value="populair">Meest populair</option>
