@@ -366,7 +366,6 @@ function Home() {
         {/* TOPMERKEN STRIP */}
         <section className="border-y border-border bg-background">
           <div className="container mx-auto flex items-center gap-6 px-4 py-5">
-            <span className="shrink-0 text-sm font-extrabold text-ink">Topmerken</span>
             <Suspense fallback={<div className="h-10 flex-1 animate-pulse rounded bg-surface" />}>
               <BrandsRow />
             </Suspense>
@@ -421,7 +420,7 @@ function BrandsRow() {
             key={b.id}
             to="/merk/$slug"
             params={{ slug: b.slug }}
-            className="grid h-12 shrink-0 place-items-center grayscale opacity-80 transition hover:opacity-100 hover:grayscale-0"
+            className="grid h-12 shrink-0 place-items-center transition hover:opacity-80"
             aria-label={b.name}
           >
             <img src={src} alt={b.name} className="max-h-10 w-auto object-contain" />
