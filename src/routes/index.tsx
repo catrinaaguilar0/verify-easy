@@ -1,24 +1,42 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery, queryOptions } from "@tanstack/react-query";
-import { Suspense, useState } from "react";
-import { ArrowRight, Heart, Star, ShoppingBag, Sparkles, Check, ChevronDown, ChevronUp, Quote } from "lucide-react";
+import { Suspense } from "react";
+import {
+  ArrowRight,
+  Star,
+  ShoppingBag,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Home as HomeIcon,
+  Sun,
+  TreePine,
+  Wrench,
+  PaintRoller,
+  Brush,
+  Building2,
+  Layers,
+  PaintBucket,
+  Truck,
+  Clock,
+  RotateCcw,
+  ShieldCheck,
+  Facebook,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import hero from "@/assets/hero-cans.jpg";
-import catMuur from "@/assets/cat-muurverf2.jpg";
-import catLak from "@/assets/cat-lakverf2.jpg";
-import catBeits from "@/assets/cat-beits2.jpg";
-import catGrond from "@/assets/cat-grondverf2.jpg";
+import inspColors from "@/assets/insp-colors.jpg";
+import inspInterior from "@/assets/insp-interior.jpg";
 import brandSikkens from "@/assets/brand-sikkens.png";
 import brandSigma from "@/assets/brand-sigma.png";
 import brandWijzonol from "@/assets/brand-wijzonol.png";
 import brandFlexa from "@/assets/brand-flexa.png";
 import brandHistor from "@/assets/brand-histor.png";
-import inspInterior from "@/assets/insp-interior.jpg";
-import inspColors from "@/assets/insp-colors.jpg";
 import { getVisibleBrands } from "@/lib/brands.functions";
-import { categoryLabel } from "@/lib/brand-categories";
-import { PRODUCTS, POPULAR_RAL, formatPrice, type Product } from "@/lib/catalog";
+import { PRODUCTS, formatPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 
 const brandFallback: Record<string, string> = {
@@ -39,116 +57,98 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VerfOnlineWinkel — Professionele verf voor elk project" },
-      { name: "description", content: "De beste kwaliteit verf en materialen voor vakman en doe-het-zelver. Sikkens, Sigma, Wijzonol, Flexa en Histor — gratis verzending vanaf €50." },
-      { property: "og:title", content: "VerfOnlineWinkel — Professionele verf voor elk project" },
+      { title: "VerfOnlineWinkel — Professionele verf voor elke klus" },
+      { name: "description", content: "Topmerken verf, kleur op maat en deskundig advies. Gratis verzending vanaf €50. Voor 21:00 besteld, morgen in huis." },
+      { property: "og:title", content: "VerfOnlineWinkel — Professionele verf voor elke klus" },
       { property: "og:description", content: "Topmerken verf, kleur op maat en deskundig advies. Snel in huis." },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
       { property: "og:image", content: `${SITE_URL}/og-home.jpg` },
-      { name: "twitter:title", content: "VerfOnlineWinkel — Professionele verf voor elk project" },
-      { name: "twitter:description", content: "Topmerken verf, kleur op maat en deskundig advies." },
     ],
-    links: [
-      { rel: "canonical", href: `${SITE_URL}/` },
-    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
   component: Home,
 });
 
-const categories = [
-  { title: "MUURVERF", sub: "Binnen en buiten", img: catMuur },
-  { title: "LAKVERF", sub: "Voor hout en metaal", img: catLak },
-  { title: "BEITS", sub: "Transparant en dekkend", img: catBeits },
-  { title: "GRONDVERF", sub: "Voorbehandeling", img: catGrond },
+const klusKeuze = [
+  { icon: HomeIcon, title: "Binnen", sub: "Muren, plafonds, houtwerk", color: "text-success", bg: "bg-success/10" },
+  { icon: Sun, title: "Buiten", sub: "Gevels, kozijnen, schuttingen", color: "text-navy", bg: "bg-navy/10" },
+  { icon: TreePine, title: "Hout beschermen", sub: "Beitsen en oliën", color: "text-rating", bg: "bg-rating/15" },
+  { icon: Wrench, title: "Metaal & overig", sub: "Metaal, kunststof, beton", color: "text-ink", bg: "bg-surface" },
 ];
 
-const bestsellers = PRODUCTS.filter((p) => p.bestseller).slice(0, 4);
-const newProducts = PRODUCTS.filter((p) => p.isNew).slice(0, 4);
+const klusBlokken = [
+  { icon: PaintRoller, title: "Muurverf", sub: "Voor muren en plafonds", slug: "muurverf", tint: "bg-success/10", icoTint: "text-success" },
+  { icon: Brush, title: "Binnenlak", sub: "Voor deuren, kozijnen en meubels", slug: "lakverf", tint: "bg-navy/10", icoTint: "text-navy" },
+  { icon: Building2, title: "Buitenlak", sub: "Weerbestendige lakken", slug: "buitenverf", tint: "bg-navy/15", icoTint: "text-navy" },
+  { icon: TreePine, title: "Beits", sub: "Bescherming voor hout", slug: "beits", tint: "bg-cta/20", icoTint: "text-cta-foreground" },
+  { icon: Layers, title: "Grondverf", sub: "De perfecte basis", slug: "grondverf", tint: "bg-success/10", icoTint: "text-success" },
+  { icon: PaintBucket, title: "Benodigdheden", sub: "Alles voor een strak resultaat", slug: "benodigdheden", tint: "bg-surface", icoTint: "text-ink" },
+] as const;
 
-const reviews = [
-  { name: "Erik J.", role: "Schilder", text: "Snel geleverd en perfect gemengd. Mijn vaste leverancier voor projecten.", rating: 5 },
-  { name: "Marleen K.", role: "DHZ-er", text: "Goed advies via de chat, de muurverf dekte in één laag. Top!", rating: 5 },
-  { name: "Joost van D.", role: "Vakman", text: "Zeer scherpe prijzen op Sikkens. Volgende dag binnen, netjes verpakt.", rating: 5 },
+const trustItems = [
+  { icon: Truck, title: "Gratis verzending", sub: "vanaf €50" },
+  { icon: Clock, title: "Voor 21:00 besteld,", sub: "morgen in huis" },
+  { icon: RotateCcw, title: "Gratis retourneren", sub: "binnen 30 dagen" },
+  { icon: ShieldCheck, title: "Veilig betalen", sub: "zoals jij wilt" },
 ];
 
-const faq = [
-  {
-    q: "Hoeveel verf heb ik nodig voor mijn project?",
-    a: "Gebruik onze verfcalculator: vul je oppervlakte, type verf en het aantal lagen in en wij berekenen exact het aantal liters dat je nodig hebt.",
-  },
-  {
-    q: "Wat zijn de levertijden?",
-    a: "Voor 23:00 besteld is de volgende werkdag in huis. Op zaterdag voor 16:00 besteld leveren we de eerstvolgende werkdag.",
-  },
-  {
-    q: "Kan ik kleur op maat laten mengen?",
-    a: "Ja. Wij mengen elke RAL-, NCS- of merkkleur op bestelling. Maatwerkkleuren worden binnen 1-2 werkdagen verzonden.",
-  },
-  {
-    q: "Hoe werkt retourneren?",
-    a: "Ongeopende blikken kun je binnen 14 dagen kosteloos retourneren. Op maat gemengde verf is uitgesloten van retour.",
-  },
-];
-
-function Stars({ n = 5 }: { n?: number }) {
+function TrustpilotStars() {
   return (
-    <div className="flex items-center gap-0.5 text-rating">
+    <div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className={`h-3.5 w-3.5 ${i < n ? "fill-current" : "opacity-30"}`} />
+        <span key={i} className="grid h-5 w-5 place-items-center bg-success">
+          <Star className="h-3 w-3 fill-white text-white" />
+        </span>
       ))}
     </div>
   );
 }
 
-function ProductCard({ p }: { p: Product }) {
+function ProductCardSmall({ p }: { p: Product }) {
   const { add } = useCart();
+  const hasSale = !!p.oldPrice;
   return (
-    <article className="group relative flex flex-col rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
-      {p.isNew && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent-foreground">
-          Nieuw
+    <article className="group relative flex flex-col rounded-xl border border-border bg-card p-3 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta">
+      {hasSale && (
+        <span className="absolute left-0 top-3 z-10 rounded-r bg-destructive px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-destructive-foreground">
+          ACTIE
         </span>
       )}
-      {p.oldPrice && (
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-destructive px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-destructive-foreground">
-          Sale
+      {!hasSale && p.bestseller && (
+        <span className="absolute left-0 top-3 z-10 rounded-r bg-cta px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-cta-foreground">
+          POPULAIR
         </span>
       )}
-      <button aria-label="Bewaar" className="absolute right-3 top-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-background/80 text-ink-soft transition hover:text-accent">
-        <Heart className="h-4 w-4" />
-      </button>
       <Link to="/product/$slug" params={{ slug: p.slug }} className="block">
-        <div className="aspect-square overflow-hidden rounded-lg bg-surface">
-          <img src={p.image} alt={p.name} width={800} height={800} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
+        <div className="aspect-square overflow-hidden rounded-md bg-surface">
+          <img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
         </div>
-        <div className="mt-3 text-[11px] uppercase tracking-wider text-ink-soft">{p.brand}</div>
-        <h3 className="mt-0.5 line-clamp-2 text-sm font-semibold text-ink">{p.name}</h3>
-        <div className="mt-1 text-xs text-ink-soft">{p.volume}</div>
+        <h3 className="mt-3 line-clamp-1 text-sm font-bold text-ink">{p.name}</h3>
+        <div className="mt-0.5 line-clamp-1 text-xs text-ink-soft">{p.shortDescription}</div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-base font-bold text-ink">{formatPrice(p.price)}</span>
-          {p.oldPrice && <span className="text-xs text-ink-soft line-through">{formatPrice(p.oldPrice)}</span>}
+          <span className={`text-base font-extrabold ${hasSale ? "text-destructive" : "text-ink"}`}>€ {p.price.toFixed(2).replace(".", ",")}</span>
+          {p.oldPrice && <span className="text-xs text-ink-soft line-through">€{p.oldPrice.toFixed(2).replace(".", ",")}</span>}
         </div>
-        <div className="mt-1 flex items-center gap-2">
-          <Stars n={Math.round(p.rating)} />
-          <span className="text-xs text-ink-soft">({p.reviews})</span>
+        <div className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-success">
+          <Check className="h-3 w-3" /> Op voorraad
         </div>
       </Link>
       <button
         type="button"
         onClick={() => add(p)}
         disabled={!p.inStock}
-        className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-3 py-2 text-xs font-bold uppercase tracking-wider text-accent-foreground transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-50"
+        aria-label="In winkelwagen"
+        className="absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-md bg-navy text-navy-foreground transition hover:bg-cta hover:text-cta-foreground disabled:opacity-40"
       >
-        <ShoppingBag className="h-3.5 w-3.5" />
-        {p.inStock ? "In winkelwagen" : "Niet leverbaar"}
+        <ShoppingBag className="h-4 w-4" />
       </button>
     </article>
   );
 }
 
 function Home() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const featured = PRODUCTS.slice(0, 6);
 
   return (
     <div className="min-h-screen bg-background">
@@ -157,232 +157,198 @@ function Home() {
       <main>
         {/* HERO */}
         <section className="bg-surface">
-          <div className="container mx-auto grid gap-8 px-4 py-14 md:grid-cols-[1fr_1.4fr] md:items-center md:gap-10 md:py-20 lg:grid-cols-[1fr_1.55fr] lg:gap-14 lg:py-24">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent">
-                <Sparkles className="h-3 w-3" /> Vakwinkel sinds 1998
-              </span>
-              <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl lg:text-6xl">
-                Professionele verf<br />voor elk project
-              </h1>
-              <p className="mt-5 max-w-md text-base text-ink-soft md:text-lg">
-                De beste kwaliteit verf en materialen voor vakman en doe-het-zelver. Bestel snel en voordelig online.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link to="/muurverf" className="inline-flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-bold uppercase tracking-wide text-accent-foreground transition hover:bg-accent-strong">
-                  Shop verf <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link to="/verfcalculator" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-6 py-3 text-sm font-bold uppercase tracking-wide text-ink transition hover:border-ink">
-                  Verfcalculator
-                </Link>
-              </div>
-              <div className="mt-7 flex items-center gap-4 text-xs text-ink-soft">
-                <div className="flex items-center gap-1.5"><Stars /> <span className="font-semibold text-ink">4,8/5</span> (2.341 reviews)</div>
-              </div>
-            </div>
-            <div className="md:-mr-4 lg:-mr-8">
+          <div className="container mx-auto px-4 py-6 md:py-10">
+            <div className="relative overflow-hidden rounded-xl">
               <img
                 src={hero}
-                alt="Sikkens, Sigma en Wijzonol professionele verfblikken"
-                width={1600}
-                height={1100}
-                className="w-full rounded-xl object-cover shadow-[var(--shadow-soft)] aspect-[16/11] md:aspect-[4/3] lg:aspect-[16/11]"
+                alt="Professionele verf in actie"
+                className="absolute inset-0 h-full w-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent md:to-background/0" />
+              <div className="relative grid gap-8 px-6 py-10 md:grid-cols-[1.1fr_1fr] md:px-10 md:py-16 lg:py-20">
+                <div className="max-w-lg">
+                  <h1 className="text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl lg:text-[3.25rem]">
+                    Professionele verf,
+                    <br />snel in huis
+                  </h1>
+                  <p className="mt-5 max-w-md text-base text-ink-soft">
+                    Kies eenvoudig op klus, merk of kleur.
+                    <br />Voor binnen, buiten en professioneel gebruik.
+                  </p>
+                  <div className="mt-7 flex flex-wrap gap-3">
+                    <Link to="/kleuradvies" className="inline-flex items-center gap-2 rounded-md bg-cta px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-cta-foreground transition hover:bg-cta-strong">
+                      Shop op klus
+                    </Link>
+                    <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="inline-flex items-center gap-2 rounded-md border-2 border-ink bg-background px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-background">
+                      Bekijk alle producten
+                    </Link>
+                  </div>
+                  <div className="mt-8 flex flex-wrap items-center gap-3 text-xs">
+                    <TrustpilotStars />
+                    <span className="font-extrabold text-ink">9,2/10</span>
+                    <span className="text-ink-soft">|</span>
+                    <span className="font-semibold text-ink">Uitstekend</span>
+                    <span className="text-ink-soft">|</span>
+                    <span className="text-ink-soft">12.500+ reviews</span>
+                  </div>
+                </div>
+
+                {/* Keuzehulp card */}
+                <aside className="self-center justify-self-end w-full max-w-sm rounded-xl border border-border bg-background p-6 shadow-[var(--shadow-soft)]">
+                  <h2 className="text-xl font-extrabold text-ink">Waar ga je mee aan de slag?</h2>
+                  <p className="mt-1 text-sm text-ink-soft">Vind snel de juiste verf voor jouw project.</p>
+                  <ul className="mt-5 space-y-2">
+                    {klusKeuze.map(({ icon: Icon, title, sub, color, bg }) => (
+                      <li key={title}>
+                        <Link to="/kleuradvies" className="flex items-center gap-3 rounded-lg border border-border p-3 transition hover:border-cta hover:bg-surface">
+                          <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${bg} ${color}`}>
+                            <Icon className="h-5 w-5" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block text-sm font-bold text-ink">{title}</span>
+                            <span className="block truncate text-xs text-ink-soft">{sub}</span>
+                          </span>
+                          <ArrowRight className="ml-auto h-4 w-4 text-ink-soft" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link to="/kleuradvies" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-cta-foreground">
+                    Naar keuzehulp <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </aside>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* CATEGORIES */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="mb-8 flex items-end justify-between">
-            <h2 className="text-2xl font-bold text-ink md:text-3xl">Shop per categorie</h2>
-            <Link to="/muurverf" className="text-xs font-bold uppercase tracking-wider text-accent hover:text-accent-strong">Alle categorieën →</Link>
-          </div>
-          <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-            {categories.map((c) => (
-              <Link key={c.title} to="/muurverf" className="group rounded-xl border border-border bg-card p-5 text-center shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-accent">
-                <div className="aspect-square overflow-hidden rounded-lg bg-surface">
-                  <img src={c.img} alt={c.title} width={640} height={640} loading="lazy" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" />
+        {/* KLUSBLOKKEN */}
+        <section className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {klusBlokken.map(({ icon: Icon, title, sub, slug, tint, icoTint }) => (
+              <Link
+                key={title}
+                to="/categorie/$slug"
+                params={{ slug }}
+                className="group relative flex h-36 flex-col justify-between overflow-hidden rounded-xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              >
+                <span className={`grid h-9 w-9 place-items-center rounded-lg ${tint} ${icoTint}`}>
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <div className="text-sm font-extrabold text-ink">{title}</div>
+                  <div className="text-[11px] leading-tight text-ink-soft">{sub}</div>
                 </div>
-                <div className="mt-4 text-sm font-bold tracking-wide text-ink">{c.title}</div>
-                <div className="text-xs text-ink-soft">{c.sub}</div>
-                <div className="mt-3 text-xs font-bold uppercase tracking-wider text-accent">Bekijk →</div>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* BESTSELLERS */}
-        <section className="border-y border-border bg-surface">
-          <div className="container mx-auto px-4 py-16">
-            <div className="mb-8 flex items-end justify-between">
-              <div>
-                <h2 className="text-2xl font-bold text-ink md:text-3xl">Bestsellers</h2>
-                <p className="mt-1 text-sm text-ink-soft">De favorieten van onze klanten.</p>
-              </div>
-              <Link to="/muurverf" className="text-xs font-bold uppercase tracking-wider text-accent hover:text-accent-strong">Bekijk alle</Link>
-            </div>
-            <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-              {bestsellers.map((p) => <ProductCard key={p.id} p={p} />)}
-            </div>
-          </div>
-        </section>
-
-        {/* COLOR ADVICE */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-accent">
-                Kleuradvies
-              </span>
-              <h2 className="mt-3 text-2xl font-bold text-ink md:text-3xl">Vind jouw perfecte kleur</h2>
-              <p className="mt-3 text-sm text-ink-soft">
-                Meer dan 2.000 RAL-, NCS- en merkkleuren op bestelling gemengd. Twijfel je nog? Bestel een
-                kleurtester van 50 ml en kijk hoe de kleur in jouw ruimte valt.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Link to="/ral" className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary-dark">
-                  RAL kleurenkaart <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link to="/verfmengservice" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-ink hover:border-ink">
-                  Kleur laten mengen
-                </Link>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-3 sm:grid-cols-6 lg:grid-cols-3 xl:grid-cols-6">
-              {POPULAR_RAL.map((r) => (
-                <Link
-                  key={r.code}
-                  to="/ral/$code"
-                  params={{ code: r.code.replace("RAL ", "") }}
-                  className="group rounded-lg border border-border bg-card p-3 text-left transition hover:-translate-y-0.5 hover:border-accent"
-                >
-                  <div className="aspect-square w-full rounded-md border border-border" style={{ backgroundColor: r.hex }} />
-                  <div className="mt-2 text-[11px] font-bold text-ink">{r.code}</div>
-                  <div className="truncate text-[11px] text-ink-soft">{r.name}</div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* NEW PRODUCTS */}
-        {newProducts.length > 0 && (
-          <section className="border-t border-border bg-surface">
-            <div className="container mx-auto px-4 py-16">
-              <div className="mb-8 flex items-end justify-between">
-                <h2 className="text-2xl font-bold text-ink md:text-3xl">Nieuw in het assortiment</h2>
-                <Link to="/muurverf" className="text-xs font-bold uppercase tracking-wider text-accent hover:text-accent-strong">Bekijk alle</Link>
-              </div>
-              <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
-                {newProducts.map((p) => <ProductCard key={p.id} p={p} />)}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* BRANDS */}
-        <section className="border-t border-border">
-          <div className="container mx-auto px-4 py-14">
-            <h2 className="mb-8 text-2xl font-bold text-ink md:text-3xl">Shop per merk</h2>
-            <Suspense fallback={<div className="h-20 animate-pulse rounded-lg bg-surface" />}>
-              <BrandsGrid />
+        {/* TOPMERKEN STRIP */}
+        <section className="border-y border-border bg-background">
+          <div className="container mx-auto flex items-center gap-6 px-4 py-5">
+            <span className="shrink-0 text-sm font-extrabold text-ink">Topmerken</span>
+            <Suspense fallback={<div className="h-10 flex-1 animate-pulse rounded bg-surface" />}>
+              <BrandsRow />
             </Suspense>
+            <button aria-label="Volgende merken" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border text-ink-soft hover:border-cta hover:text-cta-foreground">
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </section>
 
-        {/* INSPIRATION */}
-        <section id="inspiratie" className="border-y border-border bg-surface">
-          <div className="container mx-auto px-4 py-16">
-            <h2 className="mb-8 text-2xl font-bold text-ink md:text-3xl">Inspiratie & kleuradvies</h2>
-            <div className="grid gap-5 md:grid-cols-2">
-              {[
-                { img: inspInterior, h: "Kleurinspiratie voor elk interieur", cta: "Laat je inspireren" },
-                { img: inspColors, h: "Vind de perfecte kleur voor jouw project", cta: "Bekijk kleuren" },
-              ].map((c) => (
-                <a key={c.h} href="#" className="group relative block aspect-[3/2] overflow-hidden rounded-xl">
-                  <img src={c.img} alt={c.h} width={900} height={700} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent" />
-                  <div className="relative z-10 flex h-full flex-col justify-end p-8 text-primary-foreground">
-                    <h3 className="max-w-xs text-2xl font-bold leading-tight">{c.h}</h3>
-                    <span className="mt-4 inline-flex w-fit items-center gap-2 rounded-md bg-background px-4 py-2 text-xs font-bold uppercase tracking-wider text-ink transition group-hover:bg-accent group-hover:text-accent-foreground">
-                      {c.cta} <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </div>
-                </a>
-              ))}
+        {/* MEEST VERKOCHT */}
+        <section className="container mx-auto px-4 py-10">
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-xl font-extrabold text-ink md:text-2xl">Meest verkocht</h2>
+            <div className="flex items-center gap-3">
+              <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="text-xs font-bold text-ink hover:text-cta-foreground">Bekijk alles</Link>
+              <button aria-label="Vorige" className="grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button aria-label="Volgende" className="grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta">
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+            {featured.map((p) => <ProductCardSmall key={p.id} p={p} />)}
+          </div>
         </section>
 
-        {/* REVIEWS */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <h2 className="text-2xl font-bold text-ink md:text-3xl">Wat klanten zeggen</h2>
-              <div className="mt-2 flex items-center gap-2 text-sm">
-                <Stars /> <span className="font-bold text-ink">4,8 / 5</span>
-                <span className="text-ink-soft">op basis van 2.341 reviews</span>
+        {/* TRIO BAND */}
+        <section className="container mx-auto px-4 pb-10">
+          <div className="grid gap-4 md:grid-cols-3">
+            {/* Kies je kleur */}
+            <article className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+              <div className="min-w-0">
+                <h3 className="text-lg font-extrabold text-ink">Kies je kleur</h3>
+                <p className="mt-1 text-xs text-ink-soft">Laat jouw verf mengen in 50.000+ kleuren van bekende merken.</p>
+                <Link to="/ral" className="mt-4 inline-flex items-center gap-2 rounded-md bg-navy px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-navy-foreground hover:bg-navy-soft">
+                  Naar kleurkiezer
+                </Link>
               </div>
-            </div>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {reviews.map((r) => (
-              <article key={r.name} className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
-                <Quote className="h-6 w-6 text-accent/40" />
-                <p className="mt-3 text-sm leading-relaxed text-ink">"{r.text}"</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-bold text-ink">{r.name}</div>
-                    <div className="text-xs text-ink-soft">{r.role}</div>
-                  </div>
-                  <Stars n={r.rating} />
+              <img src={inspColors} alt="Kleurwaaier" className="h-24 w-24 shrink-0 rounded-lg object-cover" />
+            </article>
+
+            {/* Verfadvies */}
+            <article className="relative overflow-hidden rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+              <div className="grid grid-cols-[1fr_auto] items-start gap-3">
+                <div className="min-w-0">
+                  <h3 className="text-lg font-extrabold text-ink">Verfadvies nodig?</h3>
+                  <p className="mt-1 text-xs text-ink-soft">Onze verfspecialisten helpen je graag met kleur, ondergrond en productkeuze.</p>
+                  <ul className="mt-3 space-y-1 text-xs text-ink">
+                    <li className="flex items-center gap-2"><Check className="h-3 w-3 text-success" /> Persoonlijk advies</li>
+                    <li className="flex items-center gap-2"><Check className="h-3 w-3 text-success" /> WhatsApp, chat of telefoon</li>
+                    <li className="flex items-center gap-2"><Check className="h-3 w-3 text-success" /> Snelle reactie</li>
+                  </ul>
+                  <Link to="/contact" className="mt-4 inline-flex items-center gap-2 rounded-md bg-navy px-4 py-2 text-xs font-extrabold uppercase tracking-wide text-navy-foreground hover:bg-navy-soft">
+                    Vraag advies
+                  </Link>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="border-t border-border bg-surface">
-          <div className="container mx-auto px-4 py-16">
-            <div className="mx-auto max-w-3xl">
-              <h2 className="text-2xl font-bold text-ink md:text-3xl">Veelgestelde vragen</h2>
-              <div className="mt-6 space-y-3">
-                {faq.map((item, i) => {
-                  const open = openFaq === i;
-                  return (
-                    <div key={item.q} className="overflow-hidden rounded-xl border border-border bg-background">
-                      <button
-                        onClick={() => setOpenFaq(open ? null : i)}
-                        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                      >
-                        <span className="text-sm font-semibold text-ink">{item.q}</span>
-                        {open ? <ChevronUp className="h-4 w-4 shrink-0 text-ink-soft" /> : <ChevronDown className="h-4 w-4 shrink-0 text-ink-soft" />}
-                      </button>
-                      {open && <div className="px-5 pb-4 text-sm leading-relaxed text-ink-soft">{item.a}</div>}
-                    </div>
-                  );
-                })}
+                <img src={inspInterior} alt="Verfadviseur" className="h-28 w-24 shrink-0 rounded-lg object-cover" />
               </div>
-            </div>
+            </article>
+
+            {/* Nieuwsbrief */}
+            <article className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+              <h3 className="text-lg font-extrabold text-ink">Nieuwsbrief</h3>
+              <p className="mt-1 text-xs text-ink-soft">Meld je aan en ontvang acties, verftips en inspiratie.</p>
+              <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="Jouw e-mailadres"
+                  className="h-10 flex-1 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-cta focus:ring-2 focus:ring-cta/30"
+                />
+                <button className="grid h-10 w-10 place-items-center rounded-md bg-navy text-navy-foreground hover:bg-cta hover:text-cta-foreground" aria-label="Aanmelden">
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </form>
+              <p className="mt-2 text-[11px] text-ink-soft">Je ontvangt max. 1 e-mail per week.</p>
+            </article>
           </div>
         </section>
 
         {/* TRUST STRIP */}
-        <section className="container mx-auto px-4 py-12">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { t: "Gratis verzending", s: "Vanaf €50 in heel NL" },
-              { t: "Snel in huis", s: "Voor 23:00 = morgen" },
-              { t: "14 dagen retour", s: "Ongeopend retourneren" },
-              { t: "Veilig betalen", s: "iDEAL, Bancontact, AfterPay" },
-            ].map((b) => (
-              <div key={b.t} className="flex items-center gap-3 rounded-xl border border-border bg-card p-4">
-                <Check className="h-5 w-5 shrink-0 text-accent" />
-                <div>
-                  <div className="text-sm font-bold text-ink">{b.t}</div>
-                  <div className="text-xs text-ink-soft">{b.s}</div>
+        <section className="border-y border-border bg-surface">
+          <div className="container mx-auto grid gap-4 px-4 py-5 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-rating text-rating" />
+                ))}
+              </div>
+              <div className="text-xs">
+                <div className="font-extrabold text-ink">Klanten beoordelen ons met een 9,2/10</div>
+                <div className="text-ink-soft">Gebaseerd op 12.500+ reviews · Kiyoh</div>
+              </div>
+            </div>
+            {trustItems.map(({ icon: Icon, title, sub }) => (
+              <div key={title} className="flex items-center gap-3">
+                <Icon className="h-6 w-6 shrink-0 text-navy" />
+                <div className="text-xs leading-tight">
+                  <div className="font-extrabold text-ink">{title}</div>
+                  <div className="text-ink-soft">{sub}</div>
                 </div>
               </div>
             ))}
@@ -395,35 +361,28 @@ function Home() {
   );
 }
 
-function BrandsGrid() {
+function BrandsRow() {
   const { data: brands } = useSuspenseQuery(brandsQueryOptions);
-  if (brands.length === 0) {
-    return <p className="text-center text-sm text-ink-soft">Nog geen merken beschikbaar.</p>;
-  }
+  const items = brands.length > 0 ? brands : Object.keys(brandFallback).map((slug) => ({ id: slug, slug, name: slug, link_url: null, logo_url: null }));
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-      {brands.map((b) => {
+    <div className="flex flex-1 items-center gap-8 overflow-x-auto">
+      {items.map((b) => {
         const src = b.logo_url ?? brandFallback[b.slug];
         return (
-          <a
+          <Link
             key={b.id}
-            href={b.link_url ?? "#"}
-            title={`${b.name} — ${categoryLabel(b.category)}`}
-            className="grid h-20 place-items-center rounded-lg border border-border bg-background px-4 transition hover:border-accent"
+            to="/merk/$slug"
+            params={{ slug: b.slug }}
+            className="grid h-12 shrink-0 place-items-center grayscale opacity-80 transition hover:opacity-100 hover:grayscale-0"
+            aria-label={b.name}
           >
-            {src ? (
-              <img
-                src={src}
-                alt={`${b.name} logo`}
-                loading="lazy"
-                className="max-h-12 w-auto object-contain"
-              />
-            ) : (
-              <span className="text-sm font-bold tracking-tight text-ink">{b.name}</span>
-            )}
-          </a>
+            <img src={src} alt={b.name} className="max-h-10 w-auto object-contain" />
+          </Link>
         );
       })}
     </div>
   );
 }
+
+// Footer "Volg ons" icon set is referenced in Footer.tsx; kept here in case of reuse.
+export const _icons = { Facebook, Instagram, Youtube };
