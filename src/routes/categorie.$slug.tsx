@@ -52,6 +52,7 @@ function CategoryPage() {
 
   const category = CATEGORIES.find((c) => c.key === slug);
   if (!category) throw notFound();
+  const catInfo = CATEGORY_INFO[category.key];
 
   const base = useMemo(() => PRODUCTS.filter((p) => p.category === slug), [slug]);
 
