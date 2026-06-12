@@ -1,6 +1,15 @@
 import { Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { Facebook, Instagram, Youtube } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { subscribeNewsletter } from "@/lib/newsletter.functions";
 import { RalStrip } from "./RalStrip";
+
+const emailSchema = z.string().trim().toLowerCase().email().max(255);
 
 type FooterLink = { label: string; to?: string; params?: Record<string, string> };
 
@@ -80,20 +89,7 @@ export function Footer() {
           </div>
         ))}
 
-        <div>
-          <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Volg ons</h4>
-          <div className="flex items-center gap-2">
-            <a href="#" aria-label="Facebook" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-              <Facebook className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="Instagram" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="YouTube" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
-              <Youtube className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
+        <NewsletterColumn />
 
         <div>
           <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Betaal veilig met</h4>
