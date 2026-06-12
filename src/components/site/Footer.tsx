@@ -64,6 +64,63 @@ function PayBadge({ label }: { label: string }) {
   );
 }
 
+function NewsletterColumn() {
+  const subscribe = useServerFn(subscribeNewsletter);
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
+      toast.error("Voer een geldig e-mailadres in");
+      return;
+    }
+    setLoading(true);
+    try {
+      await subscribe({ data: { email: parsed.data } });
+      toast.success("Bedankt voor je aanmelding!");
+      setEmail("");
+    } catch {
+      toast.error("Aanmelden mislukt, probeer het later opnieuw.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div>
+      <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Nieuwsbrief</h4>
+      <p className="mb-2 text-sm text-white/80">Ontvang acties en kleurinspiratie</p>
+      <form onSubmit={onSubmit} className="flex flex-col gap-2">
+        <Input
+          type="email"
+          required
+          placeholder="je@email.nl"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          maxLength={255}
+          className="h-9 bg-white text-navy placeholder:text-navy/50"
+        />
+        <Button type="submit" disabled={loading} size="sm" className="bg-cta text-cta-foreground hover:bg-cta/90">
+          {loading ? "Bezig..." : "Aanmelden"}
+        </Button>
+      </form>
+      <div className="mt-3 flex items-center gap-2">
+        <a href="#" aria-label="Facebook" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+          <Facebook className="h-4 w-4" />
+        </a>
+        <a href="#" aria-label="Instagram" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+          <Instagram className="h-4 w-4" />
+        </a>
+        <a href="#" aria-label="YouTube" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+          <Youtube className="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground">
