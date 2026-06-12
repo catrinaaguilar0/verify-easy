@@ -78,7 +78,11 @@ export type BlogPost = {
   tags: string[];
   relatedProductSlugs: string[];
   body: { type: "p" | "h2" | "ul"; text?: string; items?: string[] }[];
+  sourceUrl?: string;
+  sourceLabel?: string;
+  mixCta?: { label: string; description?: string };
 };
+
 
 export const posts: BlogPost[] = [
   {
