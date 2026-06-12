@@ -245,14 +245,14 @@ function Home() {
           </div>
         </section>
 
-        {/* EXTERNE BLOGS */}
+        {/* UITGELICHTE BLOGS */}
         <section className="container mx-auto px-4 py-10">
           <div className="grid gap-5 md:grid-cols-2">
-            <a
-              href="https://www.flexa.nl/nl/flexa-kleurfamilie-van-2026"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/blog/$slug"
+              params={{ slug: "flexa-kleurfamilie-2026" }}
               className="group block overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              aria-label="Lees: Flexa Kleurfamilie 2026"
             >
               <div className="aspect-[16/9] overflow-hidden bg-surface">
                 <img
@@ -262,12 +262,12 @@ function Home() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-            </a>
-            <a
-              href="https://www.sigma.nl/blog/secret-safari-sigma-kleur-van-het-jaar-2026"
-              target="_blank"
-              rel="noopener noreferrer"
+            </Link>
+            <Link
+              to="/blog/$slug"
+              params={{ slug: "sigma-secret-safari-2026" }}
               className="group block overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              aria-label="Lees: Sigma Secret Safari — Kleur van het Jaar 2026"
             >
               <div className="aspect-[16/9] overflow-hidden bg-surface">
                 <img
@@ -277,9 +277,10 @@ function Home() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-            </a>
+            </Link>
           </div>
         </section>
+
 
 
         {/* MEEST VERKOCHT */}

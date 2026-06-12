@@ -78,7 +78,11 @@ export type BlogPost = {
   tags: string[];
   relatedProductSlugs: string[];
   body: { type: "p" | "h2" | "ul"; text?: string; items?: string[] }[];
+  sourceUrl?: string;
+  sourceLabel?: string;
+  mixCta?: { label: string; description?: string };
 };
+
 
 export const posts: BlogPost[] = [
   {
@@ -180,7 +184,74 @@ export const posts: BlogPost[] = [
       { type: "ul", items: ["Werk in een stofvrije ruimte", "Tussenschuren met korrel 240", "Tweede laag pas na 16 uur droging"] },
     ],
   },
+  {
+    slug: "flexa-kleurfamilie-2026",
+    title: "Flexa Kleurfamilie 2026: warme, verbindende tinten voor je interieur",
+    excerpt: "Flexa presenteert voor 2026 een kleurfamilie waarin warmte, verbinding en natuurlijke nuances centraal staan. We zetten de richting en bijpassende tinten op een rij.",
+    image: "https://digital.brand.akzonobel.com/m/70c1676473bced0c/CF26_Dulux-Consumer_C12_Hero-Banner_1900x765_Desktop.png",
+    category: "Inspiratie",
+    author: "VerfOnlineWinkel-redactie",
+    date: "10 juni 2026",
+    readMin: 4,
+    tags: ["kleur", "trends", "flexa", "inspiratie", "muurverf"],
+    relatedProductSlugs: ["flexa-powerdek-mat", "verfmengservice"],
+    sourceUrl: "https://www.flexa.nl/nl/flexa-kleurfamilie-van-2026",
+    sourceLabel: "flexa.nl",
+    mixCta: {
+      label: "Laat de Flexa Kleur van het Jaar mengen",
+      description: "Wij mengen elke tint uit de Flexa Kleurfamilie 2026 in jouw favoriete afwerking — gratis advies, scherp geprijsd.",
+    },
+    body: [
+      { type: "p", text: "Met de Kleurfamilie van 2026 zet Flexa in op tinten die warmte en verbondenheid uitstralen. Geen koele grijzen meer als vanzelfsprekende basis, maar zachte, aardse nuances die ruimtes laten ademen en mensen samenbrengen." },
+      { type: "h2", text: "De richting voor 2026" },
+      { type: "p", text: "De kleurfamilie draait om balans tussen rust en karakter. Zachte beiges, romige witten en gedempte aardetinten vormen de basis; krachtigere accenten in terracotta, mosgroen en diepblauw geven elke ruimte een eigen verhaal." },
+      { type: "h2", text: "Hoe je de kleuren combineert" },
+      { type: "p", text: "Een matte afwerking versterkt het natuurlijke karakter van deze tinten. Combineer ze met hout, linnen en keramiek voor een tijdloos resultaat. Werk met één hoofdkleur op de grote muurvlakken en gebruik een accenttint op een nis, deur of kozijn." },
+      { type: "h2", text: "Welke verf past hierbij?" },
+      { type: "p", text: "Flexa Powerdek Muurverf Mat is de logische keuze voor de muren: hoge dekking, fluweelmatte afwerking en eenvoudig te verwerken. Wil je een specifieke kleur uit de Kleurfamilie 2026? Wij mengen elke tint in de verf en afwerking van jouw keuze." },
+      { type: "p", text: "Meer inspiratie en het volledige verhaal lees je op de website van Flexa." },
+    ],
+  },
+  {
+    slug: "sigma-secret-safari-2026",
+    title: "Sigma Secret Safari — Kleur van het Jaar 2026",
+    excerpt: "Sigma kroont Secret Safari (PPG1110-4) tot Kleur van het Jaar 2026: een subtiel olijf-limoengroen uit het PARALLELS-thema dat balans en optimisme brengt.",
+    image: "https://stcacnlsigmanlprd01.blob.core.windows.net/content/kleur-van-het-jaar-2026-secret-safari-hoofdbeeld.jpg",
+    category: "Inspiratie",
+    author: "VerfOnlineWinkel-redactie",
+    date: "10 juni 2026",
+    readMin: 5,
+    tags: ["kleur", "trends", "sigma", "inspiratie", "muurverf"],
+    relatedProductSlugs: ["sigma-perfect-matt", "verfmengservice"],
+    sourceUrl: "https://www.sigma.nl/blog/secret-safari-sigma-kleur-van-het-jaar-2026",
+    sourceLabel: "sigma.nl",
+    mixCta: {
+      label: "Laat Secret Safari (PPG1110-4) mengen",
+      description: "We mengen Secret Safari en alle andere PARALLELS-tinten in elk Sigma-product — van mat tot zijdeglans.",
+    },
+    body: [
+      { type: "p", text: "Sigma kiest voor 2026 een tint die rust en lichtheid combineert: Secret Safari (PPG1110-4), een zacht olijf-limoengroen met een minerale, organische uitstraling. De kleur past in het overkoepelende PARALLELS-thema dat draait om authenticiteit, verbeelding en expressie." },
+      { type: "h2", text: "Waarom Secret Safari?" },
+      { type: "p", text: "Secret Safari is een neutrale, kalme groentint die nét genoeg karakter heeft om een ruimte te dragen zonder te overheersen. Hij brengt de natuur naar binnen en werkt zowel in een woonkamer als in een werkruimte of slaapkamer." },
+      { type: "h2", text: "Combineren met andere tinten" },
+      { type: "p", text: "De kleur combineert prachtig met warme aardetinten, natuurlijke materialen als eikenhout en linnen, en glanzende metalen accenten in messing of brons. Voor een rustige basis: combineer met gebroken wit of een zachte beige. Voor meer spanning: een diepere groene of bruine accentkleur." },
+      { type: "h2", text: "Een greep uit het PARALLELS-palet" },
+      { type: "ul", items: [
+        "Secret Safari (PPG1110-4) — Kleur van het Jaar 2026",
+        "Auburn Tress (PPG1070-6) — warm roodbruin accent",
+        "Roman Bath (PPG1198-5) — gedempt grijsblauw",
+        "Pinetop (PPG1125-7) — diep dennengroen",
+        "Hint Of Ginger (PPG1077-2) — zachte gemberbeige",
+        "Boudoir Blue (PPG1244-4) — fluweelig pauwblauw",
+      ] },
+      { type: "h2", text: "Welke verf past hierbij?" },
+      { type: "p", text: "Sigma Perfect Matt is een veelgekozen optie voor de muur: diep matte afwerking, hoge dekking en goed reinigbaar. Wij mengen Secret Safari en het volledige PPG-palet in elk Sigma-product van jouw keuze." },
+      { type: "p", text: "Lees het volledige verhaal en bekijk meer beeld op de website van Sigma." },
+    ],
+  },
 ];
+
+
 
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
 
