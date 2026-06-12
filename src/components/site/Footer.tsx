@@ -60,11 +60,11 @@ export function Footer() {
     <footer className="bg-navy text-navy-foreground">
       <RalStrip />
 
-      <div className="container mx-auto grid gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-6">
+      <div className="container mx-auto grid gap-8 px-4 py-8 md:grid-cols-2 lg:grid-cols-6">
         {columns.map((c) => (
           <div key={c.h}>
             <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">{c.h}</h4>
-            <ul className="space-y-2 text-sm text-white/80">
+            <ul className="space-y-1 text-sm text-white/80">
               {c.links.map((l) => (
                 <li key={l.label}>
                   {l.to ? (
@@ -83,13 +83,13 @@ export function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">Volg ons</h4>
           <div className="flex items-center gap-2">
-            <a href="#" aria-label="Facebook" className="grid h-9 w-9 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+            <a href="#" aria-label="Facebook" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
               <Facebook className="h-4 w-4" />
             </a>
-            <a href="#" aria-label="Instagram" className="grid h-9 w-9 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+            <a href="#" aria-label="Instagram" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href="#" aria-label="YouTube" className="grid h-9 w-9 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
+            <a href="#" aria-label="YouTube" className="grid h-8 w-8 place-items-center rounded-full bg-white text-navy hover:bg-cta hover:text-cta-foreground">
               <Youtube className="h-4 w-4" />
             </a>
           </div>
@@ -108,7 +108,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-4 text-xs text-white/70">
+        <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-xs text-white/70">
           <span>© {new Date().getFullYear()} VerfOnlineWinkel.nl — Alle rechten voorbehouden</span>
           <span>KvK 12345678 · BTW NL000000000B01</span>
         </div>
