@@ -84,7 +84,7 @@ const SLUG_TO_BRAND: Record<string, (typeof BRANDS)[number]> = {
 
 export const Route = createFileRoute("/merk/$slug")({
   head: ({ params }) => {
-    const brand = BRANDS.find((b) => b.toLowerCase() === params.slug.toLowerCase());
+    const brand = SLUG_TO_BRAND[params.slug.toLowerCase()] ?? BRANDS.find((b) => b.toLowerCase() === params.slug.toLowerCase());
     const title = brand ? `${brand} kopen — alle producten | VerfOnlineWinkel` : "Merk | VerfOnlineWinkel";
     const desc = brand
       ? `Alle ${brand}-producten op één plek. Snel geleverd, op kleur gemengd, eerlijke prijs.`
@@ -106,7 +106,7 @@ export const Route = createFileRoute("/merk/$slug")({
 function BrandPage() {
   const { slug } = Route.useParams();
   const { add } = useCart();
-  const brand = BRANDS.find((b) => b.toLowerCase() === slug.toLowerCase());
+  const brand = SLUG_TO_BRAND[slug.toLowerCase()] ?? BRANDS.find((b) => b.toLowerCase() === slug.toLowerCase());
   if (!brand) throw notFound();
   const info = BRAND_INFO[brand] ?? { description: "", founded: "", usp: [] };
   const products = PRODUCTS.filter((p) => p.brand === brand);
