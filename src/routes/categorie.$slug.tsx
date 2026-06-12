@@ -2,10 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { Heart, ShoppingBag, Star, SlidersHorizontal, X } from "lucide-react";
+import { Heart, ShoppingBag, Star, SlidersHorizontal, X, Lightbulb, ShieldCheck, Paintbrush, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { PRODUCTS, CATEGORIES, formatPrice, type Product } from "@/lib/catalog";
+import { PRODUCTS, CATEGORIES, CATEGORY_INFO, formatPrice, type Product } from "@/lib/catalog";
 import { useCart } from "@/lib/cart";
 
 const SITE_URL = "https://cozy-check-hub.lovable.app";
@@ -23,10 +23,11 @@ export const Route = createFileRoute("/categorie/$slug")({
   validateSearch: zodValidator(searchSchema),
   head: ({ params }) => {
     const cat = CATEGORIES.find((c) => c.key === params.slug);
+    const info = cat ? CATEGORY_INFO[cat.key] : undefined;
     const title = cat ? `${cat.label} kopen | VerfOnlineWinkel` : "Categorie | VerfOnlineWinkel";
-    const desc = cat
+    const desc = info?.metaDescription ?? (cat
       ? `${cat.label} van topmerken zoals Sikkens, Sigma en Flexa. Snel geleverd, op kleur gemengd, eerlijke prijs.`
-      : "Bekijk onze categorieën.";
+      : "Bekijk onze categorieën.");
     return {
       meta: [
         { title },
@@ -51,6 +52,7 @@ function CategoryPage() {
 
   const category = CATEGORIES.find((c) => c.key === slug);
   if (!category) throw notFound();
+  const catInfo = CATEGORY_INFO[category.key];
 
   const base = useMemo(() => PRODUCTS.filter((p) => p.category === slug), [slug]);
 
@@ -114,12 +116,47 @@ function CategoryPage() {
           <span className="text-ink">{category.label}</span>
         </nav>
 
-        <header className="mt-4 max-w-2xl">
+        <header className="mt-4 max-w-3xl">
           <h1 className="text-3xl font-extrabold text-ink md:text-4xl">{category.label}</h1>
+          <p className="mt-3 text-base text-ink-soft">{catInfo.intro}</p>
           <p className="mt-2 text-sm text-ink-soft">
-            {base.length} producten van topmerken. Voor 23:00 besteld, morgen in huis. Op kleur gemengd in onze verfmengservice.
+            <strong className="text-ink">{base.length} producten</strong> van topmerken. Voor 21:00 besteld, morgen in huis. Op kleur gemengd in onze verfmengservice.
           </p>
         </header>
+
+        {/* Info-blokken */}
+        <section className="mt-6 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+            <div className="flex items-center gap-2 text-sm font-bold text-ink">
+              <Paintbrush className="h-4 w-4 text-accent" /> Wanneer kies je voor {category.label.toLowerCase()}?
+            </div>
+            <ul className="mt-3 space-y-2 text-sm text-ink-soft">
+              {catInfo.whenToUse.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+            <div className="flex items-center gap-2 text-sm font-bold text-ink">
+              <Lightbulb className="h-4 w-4 text-rating" /> Tips voor een strak resultaat
+            </div>
+            <ul className="mt-3 space-y-2 text-sm text-ink-soft">
+              {catInfo.tips.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <Link to="/verfmengservice" className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-navy hover:text-cta-foreground">
+              Naar verfmengservice <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
+
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[260px_1fr]">
           {/* Filters */}
