@@ -11,7 +11,20 @@ const popularProducts: FooterLink[] = PRODUCTS.slice(0, 5).map((p) => ({
   params: { slug: p.slug },
 }));
 
+const ralLinks: FooterLink[] = [
+  ...basicRalColors.slice(0, 4).map((c) => ({
+    label: `RAL ${c.code}`,
+    to: "/ral/$code",
+    params: { code: c.code },
+  })),
+  { label: "Alle RAL-kleuren", to: "/ral" },
+];
+
 const columns: { h: string; links: FooterLink[] }[] = [
+  {
+    h: "Populaire producten",
+    links: popularProducts,
+  },
   {
     h: "Klantenservice",
     links: [
@@ -43,8 +56,8 @@ const columns: { h: string; links: FooterLink[] }[] = [
     ],
   },
   {
-    h: "Populaire producten",
-    links: popularProducts,
+    h: "Ralkleur",
+    links: ralLinks,
   },
 ];
 
@@ -82,24 +95,6 @@ export function Footer() {
             </ul>
           </div>
         ))}
-
-        <div>
-          <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">RAL-kleuren</h4>
-          <ul className="space-y-1 text-sm text-white/80">
-            {basicRalColors.slice(0, 5).map((c) => (
-              <li key={c.code}>
-                <Link
-                  to="/ral/$code"
-                  params={{ code: c.code }}
-                  className="hover:text-cta"
-                  title={`RAL ${c.code} ${c.name}`}
-                >
-                  RAL {c.code} – {c.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
 
       <div className="border-t border-white/10">
