@@ -289,6 +289,7 @@ export function Header() {
             <Link
               key={n.label}
               to={n.to}
+              params={n.params as never}
               className="text-ink hover:text-accent transition"
               activeProps={{ className: "text-accent" }}
             >
@@ -306,6 +307,7 @@ export function Header() {
               <Link
                 key={n.label}
                 to={n.to}
+                params={n.params as never}
                 onClick={() => setMobileOpen(false)}
                 className="border-b border-border py-3 text-ink last:border-0"
               >
