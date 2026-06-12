@@ -1,8 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { basicRalColors } from "@/lib/ral";
+import { PRODUCTS } from "@/lib/catalog";
 
 type FooterLink = { label: string; to?: string; params?: Record<string, string> };
+
+const popularProducts: FooterLink[] = PRODUCTS.slice(0, 5).map((p) => ({
+  label: p.name,
+  to: "/product/$slug",
+  params: { slug: p.slug },
+}));
 
 const columns: { h: string; links: FooterLink[] }[] = [
   {
@@ -36,16 +43,11 @@ const columns: { h: string; links: FooterLink[] }[] = [
     ],
   },
   {
-    h: "Merken",
-    links: [
-      { label: "Sikkens", to: "/merk/$slug", params: { slug: "sikkens" } },
-      { label: "Sigma Coatings", to: "/merk/$slug", params: { slug: "sigma" } },
-      { label: "Wijzonol", to: "/merk/$slug", params: { slug: "wijzonol" } },
-      { label: "Flexa", to: "/merk/$slug", params: { slug: "flexa" } },
-      { label: "Alle merken", to: "/merk/$slug", params: { slug: "histor" } },
-    ],
+    h: "Populaire producten",
+    links: popularProducts,
   },
 ];
+
 
 function PayBadge({ label, bg, text }: { label: string; bg: string; text: string }) {
   return (
