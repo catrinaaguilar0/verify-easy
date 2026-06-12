@@ -24,7 +24,7 @@ export function RalStrip() {
         </div>
 
         <ul
-          className="mt-6 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8"
+          className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
           aria-label="Populaire RAL kleuren"
         >
           {ralColors.map((c) => (
@@ -32,17 +32,11 @@ export function RalStrip() {
               <Link
                 to="/ral/$code"
                 params={{ code: c.code }}
-                className="group block rounded-lg border border-border bg-card p-2 transition hover:-translate-y-0.5 hover:border-accent"
+                className="group block rounded-md border border-border bg-card px-3 py-2 transition hover:-translate-y-0.5 hover:border-accent"
                 title={`RAL ${c.code} ${c.name}`}
                 aria-label={`Bekijk RAL ${c.code} ${c.name}`}
               >
-                <span
-                  className="block aspect-square w-full rounded border border-border"
-                  style={{ backgroundColor: c.hex }}
-                  role="img"
-                  aria-label={`Kleurstaal RAL ${c.code} ${c.name}: ${c.hex.toUpperCase()}`}
-                />
-                <span className="mt-1.5 block text-[10px] font-semibold uppercase tracking-wider text-accent">
+                <span className="block text-[10px] font-semibold uppercase tracking-wider text-accent">
                   RAL {c.code}
                 </span>
                 <span className="block truncate text-xs font-bold text-ink group-hover:text-accent">
