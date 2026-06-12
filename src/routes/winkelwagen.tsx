@@ -118,14 +118,12 @@ function CartPage() {
                 <span className="text-sm font-bold text-ink">Totaal</span>
                 <span className="text-2xl font-extrabold text-ink">{formatPrice(total)}</span>
               </div>
-              <button
-                disabled
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-bold uppercase tracking-wide text-accent-foreground transition hover:bg-accent-strong disabled:opacity-60"
-                title="Checkout volgt"
+              <Link
+                to="/afrekenen"
+                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-bold uppercase tracking-wide text-accent-foreground transition hover:bg-accent-strong"
               >
                 <Lock className="h-4 w-4" /> Naar afrekenen
-              </button>
-              <p className="mt-2 text-center text-[11px] text-ink-soft">Checkout-flow volgt in de volgende ronde.</p>
+              </Link>
 
               <ul className="mt-5 space-y-2 text-xs text-ink-soft">
                 <li className="flex items-center gap-2"><Truck className="h-3.5 w-3.5 text-accent" /> Voor 23:00 besteld, morgen in huis</li>
