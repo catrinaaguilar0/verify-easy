@@ -245,18 +245,43 @@ function Home() {
           </div>
         </section>
 
-        {/* TOPMERKEN STRIP */}
-        <section className="border-y border-border bg-background">
-          <div className="container mx-auto flex items-center gap-6 px-4 py-5">
-            <span className="shrink-0 text-sm font-extrabold text-ink">Topmerken</span>
-            <Suspense fallback={<div className="h-10 flex-1 animate-pulse rounded bg-surface" />}>
-              <BrandsRow />
-            </Suspense>
-            <button aria-label="Volgende merken" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border text-ink-soft hover:border-cta hover:text-cta-foreground">
-              <ChevronRight className="h-4 w-4" />
-            </button>
+        {/* LAATSTE ARTIKELEN */}
+        <section className="container mx-auto px-4 py-10">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-xl font-extrabold text-ink md:text-2xl">Laatste artikelen</h2>
+              <p className="mt-1 text-xs text-ink-soft">Kleurinspiratie, advies en doe-het-zelf tips van onze verfspecialisten.</p>
+            </div>
+            <Link to="/blog" className="shrink-0 text-xs font-bold text-ink hover:text-cta-foreground">
+              Naar alle artikelen →
+            </Link>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {blogPosts.slice(0, 3).map((p) => (
+              <Link
+                key={p.slug}
+                to="/blog/$slug"
+                params={{ slug: p.slug }}
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-surface">
+                  <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-cta-foreground">{p.category}</span>
+                  <h3 className="text-base font-bold text-ink group-hover:text-cta-foreground">{p.title}</h3>
+                  <p className="line-clamp-2 text-xs text-ink-soft">{p.excerpt}</p>
+                  <div className="mt-auto flex items-center gap-3 pt-2 text-[11px] text-ink-soft">
+                    <span>{p.date}</span>
+                    <span>·</span>
+                    <span>{p.readMin} min lezen</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
+
 
         {/* MEEST VERKOCHT */}
         <section className="container mx-auto px-4 py-10">
@@ -330,42 +355,19 @@ function Home() {
           </div>
         </section>
 
-        {/* LAATSTE ARTIKELEN */}
-        <section className="container mx-auto px-4 pb-10">
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <div>
-              <h2 className="text-xl font-extrabold text-ink md:text-2xl">Laatste artikelen</h2>
-              <p className="mt-1 text-xs text-ink-soft">Kleurinspiratie, advies en doe-het-zelf tips van onze verfspecialisten.</p>
-            </div>
-            <Link to="/blog" className="shrink-0 text-xs font-bold text-ink hover:text-cta-foreground">
-              Naar alle artikelen →
-            </Link>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {blogPosts.slice(0, 3).map((p) => (
-              <Link
-                key={p.slug}
-                to="/blog/$slug"
-                params={{ slug: p.slug }}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
-              >
-                <div className="aspect-[4/3] overflow-hidden bg-surface">
-                  <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                </div>
-                <div className="flex flex-1 flex-col gap-2 p-5">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-cta-foreground">{p.category}</span>
-                  <h3 className="text-base font-bold text-ink group-hover:text-cta-foreground">{p.title}</h3>
-                  <p className="line-clamp-2 text-xs text-ink-soft">{p.excerpt}</p>
-                  <div className="mt-auto flex items-center gap-3 pt-2 text-[11px] text-ink-soft">
-                    <span>{p.date}</span>
-                    <span>·</span>
-                    <span>{p.readMin} min lezen</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+        {/* TOPMERKEN STRIP */}
+        <section className="border-y border-border bg-background">
+          <div className="container mx-auto flex items-center gap-6 px-4 py-5">
+            <span className="shrink-0 text-sm font-extrabold text-ink">Topmerken</span>
+            <Suspense fallback={<div className="h-10 flex-1 animate-pulse rounded bg-surface" />}>
+              <BrandsRow />
+            </Suspense>
+            <button aria-label="Volgende merken" className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border text-ink-soft hover:border-cta hover:text-cta-foreground">
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </section>
+
 
         {/* TRUST STRIP */}
         <section className="border-y border-border bg-surface">
