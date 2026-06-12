@@ -12,11 +12,6 @@ import {
   Sun,
   TreePine,
   Wrench,
-  PaintRoller,
-  Brush,
-  Building2,
-  Layers,
-  PaintBucket,
   Truck,
   Clock,
   RotateCcw,
@@ -25,6 +20,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
+
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
