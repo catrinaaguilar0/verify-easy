@@ -31,13 +31,19 @@ const BRAND_INFO: Record<string, { description: string; founded: string; usp: st
     founded: "1924 — Sassenheim, Nederland",
     usp: ["Extra dekkend", "Snel droog", "Honderden kleuren"],
   },
-  Farrow: {
+  Histor: {
+    description:
+      "Histor is generaties lang het vertrouwde merk voor schilders en doe-het-zelvers. Topkwaliteit lakken en muurverven.",
+    founded: "1898 — Amsterdam, Nederland",
+    usp: ["Klassiek merk", "Topkwaliteit lakken", "Breed assortiment"],
+  },
+  "Farrow & Ball": {
     description:
       "Farrow & Ball is het Britse premium-merk dat bekendstaat om diepe, complexe kleuren en hoogwaardige, milieubewuste verven voor binnen en buiten.",
     founded: "1946 — Dorset, Verenigd Koninkrijk",
     usp: ["Diepe, complexe kleuren", "Premium kwaliteit", "Milieubewuste samenstelling"],
   },
-  Benjamin: {
+  "Benjamin Moore": {
     description:
       "Benjamin Moore is het Amerikaanse topmerk voor muurverf en lakken: extreem dekkend, kleurzuiver en geliefd bij interieurontwerpers wereldwijd.",
     founded: "1883 — New Jersey, Verenigde Staten",
