@@ -378,20 +378,9 @@ function Home() {
 
         {/* TRUST STRIP */}
         <section className="border-y border-border bg-surface">
-          <div className="container mx-auto grid gap-4 px-4 py-5 sm:grid-cols-2 lg:grid-cols-5">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-rating text-rating" />
-                ))}
-              </div>
-              <div className="text-xs">
-                <div className="font-extrabold text-ink">Klanten beoordelen ons met een 9,2/10</div>
-                <div className="text-ink-soft">Gebaseerd op 12.500+ reviews · Kiyoh</div>
-              </div>
-            </div>
+          <div className="container mx-auto flex flex-wrap items-center gap-4 px-4 py-5">
             {trustItems.map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex items-center gap-3">
+              <div key={title} className="flex flex-1 min-w-[160px] items-center gap-3">
                 <Icon className="h-6 w-6 shrink-0 text-navy" />
                 <div className="text-xs leading-tight">
                   <div className="font-extrabold text-ink">{title}</div>
@@ -399,8 +388,20 @@ function Home() {
                 </div>
               </div>
             ))}
+            <div className="flex items-center gap-2 ml-auto">
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3 w-3 fill-rating text-rating" />
+                ))}
+              </div>
+              <div className="text-[11px] leading-tight">
+                <div className="font-bold text-ink">9,2/10</div>
+                <div className="text-ink-soft">12.500+ reviews</div>
+              </div>
+            </div>
           </div>
         </section>
+
       </main>
 
       <Footer />
