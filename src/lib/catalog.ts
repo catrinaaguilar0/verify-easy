@@ -201,7 +201,7 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export const BRANDS = ["Sikkens", "Sigma", "Wijzonol", "Flexa", "Histor"] as const;
+export const BRANDS = ["Sikkens", "Sigma", "Wijzonol", "Flexa", "Histor", "Farrow & Ball", "Benjamin Moore", "Dulux", "ProGold", "Trimetal"] as const;
 
 export const CATEGORIES: { key: Product["category"]; label: string }[] = [
   { key: "muurverf", label: "Muurverf" },
