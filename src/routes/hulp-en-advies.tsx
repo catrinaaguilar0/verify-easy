@@ -117,7 +117,65 @@ function HulpEnAdviesPage() {
           </div>
         </section>
 
+        <section className="border-t border-border bg-background">
+          <div className="container mx-auto px-4 py-16">
+            <h2 className="text-2xl font-bold text-ink md:text-3xl">Uitgelichte blogs</h2>
+            <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+              De nieuwste kleurtrends van topmerken, met direct passend productadvies en de optie om de tinten op maat te laten mengen.
+            </p>
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              <Link
+                to="/blog/$slug"
+                params={{ slug: "flexa-kleurfamilie-2026" }}
+                className="group block overflow-hidden rounded-xl border border-border bg-background shadow-sm transition hover:-translate-y-1 hover:border-accent hover:shadow-md"
+              >
+                <div className="aspect-[16/9] overflow-hidden bg-surface">
+                  <img
+                    src="https://digital.brand.akzonobel.com/m/70c1676473bced0c/CF26_Dulux-Consumer_C12_Hero-Banner_1900x765_Desktop.png"
+                    alt="Flexa Kleurfamilie van 2026"
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-accent">Inspiratie · Flexa</div>
+                  <h3 className="mt-2 text-lg font-bold text-ink group-hover:text-accent">
+                    Flexa Kleurfamilie 2026
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-soft">
+                    Warme, verbindende tinten voor je interieur — met productadvies en mengservice.
+                  </p>
+                </div>
+              </Link>
+              <Link
+                to="/blog/$slug"
+                params={{ slug: "sigma-secret-safari-2026" }}
+                className="group block overflow-hidden rounded-xl border border-border bg-background shadow-sm transition hover:-translate-y-1 hover:border-accent hover:shadow-md"
+              >
+                <div className="aspect-[16/9] overflow-hidden bg-surface">
+                  <img
+                    src="https://stcacnlsigmanlprd01.blob.core.windows.net/content/kleur-van-het-jaar-2026-secret-safari-hoofdbeeld.jpg"
+                    alt="Sigma Kleur van het Jaar 2026: Secret Safari"
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="text-[10px] font-semibold uppercase tracking-wider text-accent">Inspiratie · Sigma</div>
+                  <h3 className="mt-2 text-lg font-bold text-ink group-hover:text-accent">
+                    Sigma Secret Safari — Kleur van het Jaar 2026
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-soft">
+                    PPG1110-4 in het PARALLELS-thema, met passende Sigma-producten en mengservice.
+                  </p>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section className="border-t border-border bg-surface">
+
           <div className="container mx-auto px-4 py-16">
             <h2 className="text-2xl font-bold text-ink md:text-3xl">
               Veelgestelde vragen
