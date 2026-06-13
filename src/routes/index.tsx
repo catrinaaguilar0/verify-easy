@@ -256,8 +256,8 @@ function Home() {
         </section>
 
         {/* UITGELICHTE BLOGS */}
-        <section className="container mx-auto px-4 py-10">
-          <div className="grid gap-5 md:grid-cols-2">
+        <section className="container mx-auto px-4 py-6 md:py-10">
+          <div className="grid gap-4 md:grid-cols-2 md:gap-5">
             <Link
               to="/blog/$slug"
               params={{ slug: "flexa-kleurfamilie-2026" }}
