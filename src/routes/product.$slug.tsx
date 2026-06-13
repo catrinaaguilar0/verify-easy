@@ -335,7 +335,7 @@ function ProductPage() {
 
         {/* Tabs */}
         <section className="mt-12">
-          <div className="flex flex-wrap gap-1 border-b border-border">
+          <div className="-mx-4 flex gap-1 overflow-x-auto border-b border-border px-4 md:mx-0 md:flex-wrap md:px-0">
             {(
               [
                 ["beschrijving", "Beschrijving"],
