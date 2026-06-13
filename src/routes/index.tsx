@@ -162,63 +162,62 @@ function Home() {
       <main>
         {/* HERO */}
         <section className="bg-surface">
-          <div className="container mx-auto px-4 py-6 md:py-10">
+          <div className="container mx-auto px-4 py-4 md:py-10">
             <div className="relative overflow-hidden rounded-xl">
               <img
                 src={hero}
                 alt="Professionele verf in actie"
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent md:to-background/0" />
-              <div className="relative grid gap-8 px-6 py-10 md:grid-cols-[1.1fr_1fr] md:px-10 md:py-16 lg:py-20">
+              <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/80 to-background/40 md:bg-gradient-to-r md:from-background md:via-background/85 md:to-transparent" />
+              <div className="relative grid gap-6 px-5 py-8 sm:px-6 md:grid-cols-[1.1fr_1fr] md:gap-8 md:px-10 md:py-16 lg:py-20">
                 <div className="max-w-lg">
-                  <h1 className="text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl lg:text-[3.25rem]">
+                  <h1 className="text-3xl font-extrabold leading-[1.1] text-ink sm:text-4xl md:text-5xl lg:text-[3.25rem]">
                     Professionele verf,
                     <br />snel in huis
                   </h1>
-                  <p className="mt-5 max-w-md text-base text-ink-soft">
-                    Kies eenvoudig op klus, merk of kleur.
-                    <br />Voor binnen, buiten en professioneel gebruik.
+                  <p className="mt-4 max-w-md text-[15px] text-ink-soft md:mt-5 md:text-base">
+                    Kies eenvoudig op klus, merk of kleur. Voor binnen, buiten en professioneel gebruik.
                   </p>
-                  <div className="mt-7 flex flex-wrap gap-3">
-                    <Link to="/kleuradvies" className="inline-flex items-center gap-2 rounded-md bg-cta px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-cta-foreground transition hover:bg-cta-strong">
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-7">
+                    <Link to="/kleuradvies" className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-cta px-7 text-sm font-extrabold uppercase tracking-wide text-cta-foreground transition hover:bg-cta-strong">
                       Shop op klus
                     </Link>
-                    <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="inline-flex items-center gap-2 rounded-md border-2 border-ink bg-background px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-background">
+                    <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="inline-flex h-12 items-center justify-center gap-2 rounded-md border-2 border-ink bg-background px-7 text-sm font-extrabold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-background">
                       Bekijk alle producten
                     </Link>
                   </div>
-                  <div className="mt-8 flex flex-wrap items-center gap-3 text-xs">
+                  <div className="mt-6 flex flex-wrap items-center gap-2 text-xs md:mt-8 md:gap-3">
                     <TrustpilotStars />
                     <span className="font-extrabold text-ink">9,2/10</span>
                     <span className="text-ink-soft">|</span>
                     <span className="font-semibold text-ink">Uitstekend</span>
-                    <span className="text-ink-soft">|</span>
-                    <span className="text-ink-soft">12.500+ reviews</span>
+                    <span className="hidden text-ink-soft sm:inline">|</span>
+                    <span className="hidden text-ink-soft sm:inline">12.500+ reviews</span>
                   </div>
                 </div>
 
                 {/* Keuzehulp card */}
-                <aside className="self-center justify-self-end w-full max-w-sm rounded-xl border border-border bg-background p-6 shadow-[var(--shadow-soft)]">
-                  <h2 className="text-xl font-extrabold text-ink">Waar ga je mee aan de slag?</h2>
+                <aside className="w-full self-center justify-self-stretch rounded-xl border border-border bg-background p-5 shadow-[var(--shadow-soft)] md:max-w-sm md:justify-self-end md:p-6">
+                  <h2 className="text-lg font-extrabold text-ink md:text-xl">Waar ga je mee aan de slag?</h2>
                   <p className="mt-1 text-sm text-ink-soft">Vind snel de juiste verf voor jouw project.</p>
-                  <ul className="mt-5 space-y-2">
+                  <ul className="mt-4 space-y-2 md:mt-5">
                     {klusKeuze.map(({ icon: Icon, title, sub, color, bg }) => (
                       <li key={title}>
                         <Link to="/kleuradvies" className="flex items-center gap-3 rounded-lg border border-border p-3 transition hover:border-cta hover:bg-surface">
                           <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${bg} ${color}`}>
                             <Icon className="h-5 w-5" />
                           </span>
-                          <span className="min-w-0">
+                          <span className="min-w-0 flex-1">
                             <span className="block text-sm font-bold text-ink">{title}</span>
                             <span className="block truncate text-xs text-ink-soft">{sub}</span>
                           </span>
-                          <ArrowRight className="ml-auto h-4 w-4 text-ink-soft" />
+                          <ArrowRight className="h-4 w-4 shrink-0 text-ink-soft" />
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <Link to="/kleuradvies" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-cta-foreground">
+                  <Link to="/kleuradvies" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-cta-foreground md:mt-5">
                     Naar keuzehulp <ArrowRight className="h-4 w-4" />
                   </Link>
                 </aside>
