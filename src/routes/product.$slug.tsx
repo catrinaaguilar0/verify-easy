@@ -152,12 +152,12 @@ function ProductPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-6">
-        <nav className="flex flex-wrap items-center gap-1 text-xs text-ink-soft">
+      <main className="container mx-auto px-4 py-6 pb-28 lg:pb-6">
+        <nav className="flex items-center gap-1 overflow-x-auto whitespace-nowrap text-xs text-ink-soft">
           <Link to="/" className="hover:text-accent">Home</Link>
-          <ChevronRight className="h-3 w-3" />
+          <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="capitalize">{product.category}</span>
-          <ChevronRight className="h-3 w-3" />
+          <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="text-ink">{product.brand}</span>
         </nav>
 
@@ -192,7 +192,7 @@ function ProductPage() {
           {/* Info */}
           <section className="flex flex-col">
             <div className="text-[11px] uppercase tracking-[0.18em] text-ink-soft">{product.brand}</div>
-            <h1 className="mt-1 text-3xl font-extrabold leading-tight text-ink md:text-4xl">
+            <h1 className="mt-1 text-2xl font-extrabold leading-tight text-ink sm:text-3xl md:text-4xl">
               {product.name}
             </h1>
             <div className="mt-2 flex items-center gap-3 text-sm">
@@ -335,7 +335,7 @@ function ProductPage() {
 
         {/* Tabs */}
         <section className="mt-12">
-          <div className="flex flex-wrap gap-1 border-b border-border">
+          <div className="-mx-4 flex gap-1 overflow-x-auto border-b border-border px-4 md:mx-0 md:flex-wrap md:px-0">
             {(
               [
                 ["beschrijving", "Beschrijving"],
@@ -347,7 +347,7 @@ function ProductPage() {
               <button
                 key={key}
                 onClick={() => setTab(key)}
-                className={`-mb-px border-b-2 px-4 py-3 text-sm font-semibold transition ${
+                className={`-mb-px shrink-0 whitespace-nowrap border-b-2 px-4 py-3 text-sm font-semibold transition ${
                   tab === key
                     ? "border-accent text-ink"
                     : "border-transparent text-ink-soft hover:text-ink"
@@ -459,6 +459,27 @@ function ProductPage() {
           </section>
         )}
       </main>
+
+      {/* Mobile sticky add-to-cart */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur lg:hidden" style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}>
+        <div className="container mx-auto flex items-center gap-3">
+          <div className="min-w-0">
+            <div className="text-lg font-extrabold leading-tight text-ink">{formatPrice(product.price)}</div>
+            <div className={`text-[11px] font-semibold ${product.inStock ? "text-accent" : "text-destructive"}`}>
+              {product.inStock ? "Op voorraad — morgen in huis" : "Tijdelijk uitverkocht"}
+            </div>
+          </div>
+          <button
+            onClick={() => add(product, qty)}
+            disabled={!product.inStock}
+            className="ml-auto inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-bold uppercase tracking-wide text-accent-foreground transition hover:bg-accent-strong disabled:opacity-50"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            In winkelwagen
+          </button>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );

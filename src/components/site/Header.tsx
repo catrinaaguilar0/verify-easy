@@ -325,13 +325,18 @@ export function Header() {
                 to={n.to}
                 params={n.params as never}
                 onClick={() => setMobileOpen(false)}
-                className="border-b border-border py-3 text-ink last:border-0"
+                className="flex min-h-[44px] items-center justify-between border-b border-border py-3 font-semibold text-ink"
               >
-                {n.label}
+                <span>{n.label}</span>
+                <ArrowRight className="h-4 w-4 text-ink-soft" />
               </Link>
             ))}
-            <Link to="/account" onClick={() => setMobileOpen(false)} className="border-b border-border py-3 text-ink">Mijn account</Link>
-            <Link to="/verlanglijst" onClick={() => setMobileOpen(false)} className="py-3 text-ink">Verlanglijst</Link>
+            <Link to="/account" onClick={() => setMobileOpen(false)} className="flex min-h-[44px] items-center gap-2 border-b border-border py-3 text-ink">
+              <User className="h-4 w-4" /> Mijn account
+            </Link>
+            <Link to="/verlanglijst" onClick={() => setMobileOpen(false)} className="flex min-h-[44px] items-center gap-2 py-3 text-ink">
+              <Heart className="h-4 w-4" /> Verlanglijst {wishlistCount > 0 && <span className="ml-auto rounded-full bg-cta px-2 py-0.5 text-[10px] font-bold text-cta-foreground">{wishlistCount}</span>}
+            </Link>
           </nav>
         </div>
       )}

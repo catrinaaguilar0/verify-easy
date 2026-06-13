@@ -162,63 +162,62 @@ function Home() {
       <main>
         {/* HERO */}
         <section className="bg-surface">
-          <div className="container mx-auto px-4 py-6 md:py-10">
+          <div className="container mx-auto px-4 py-4 md:py-10">
             <div className="relative overflow-hidden rounded-xl">
               <img
                 src={hero}
                 alt="Professionele verf in actie"
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent md:to-background/0" />
-              <div className="relative grid gap-8 px-6 py-10 md:grid-cols-[1.1fr_1fr] md:px-10 md:py-16 lg:py-20">
+              <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/80 to-background/40 md:bg-gradient-to-r md:from-background md:via-background/85 md:to-transparent" />
+              <div className="relative grid gap-6 px-5 py-8 sm:px-6 md:grid-cols-[1.1fr_1fr] md:gap-8 md:px-10 md:py-16 lg:py-20">
                 <div className="max-w-lg">
-                  <h1 className="text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl lg:text-[3.25rem]">
+                  <h1 className="text-3xl font-extrabold leading-[1.1] text-ink sm:text-4xl md:text-5xl lg:text-[3.25rem]">
                     Professionele verf,
                     <br />snel in huis
                   </h1>
-                  <p className="mt-5 max-w-md text-base text-ink-soft">
-                    Kies eenvoudig op klus, merk of kleur.
-                    <br />Voor binnen, buiten en professioneel gebruik.
+                  <p className="mt-4 max-w-md text-[15px] text-ink-soft md:mt-5 md:text-base">
+                    Kies eenvoudig op klus, merk of kleur. Voor binnen, buiten en professioneel gebruik.
                   </p>
-                  <div className="mt-7 flex flex-wrap gap-3">
-                    <Link to="/kleuradvies" className="inline-flex items-center gap-2 rounded-md bg-cta px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-cta-foreground transition hover:bg-cta-strong">
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-7">
+                    <Link to="/kleuradvies" className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-cta px-7 text-sm font-extrabold uppercase tracking-wide text-cta-foreground transition hover:bg-cta-strong">
                       Shop op klus
                     </Link>
-                    <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="inline-flex items-center gap-2 rounded-md border-2 border-ink bg-background px-7 py-3 text-sm font-extrabold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-background">
+                    <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="inline-flex h-12 items-center justify-center gap-2 rounded-md border-2 border-ink bg-background px-7 text-sm font-extrabold uppercase tracking-wide text-ink transition hover:bg-ink hover:text-background">
                       Bekijk alle producten
                     </Link>
                   </div>
-                  <div className="mt-8 flex flex-wrap items-center gap-3 text-xs">
+                  <div className="mt-6 flex flex-wrap items-center gap-2 text-xs md:mt-8 md:gap-3">
                     <TrustpilotStars />
                     <span className="font-extrabold text-ink">9,2/10</span>
                     <span className="text-ink-soft">|</span>
                     <span className="font-semibold text-ink">Uitstekend</span>
-                    <span className="text-ink-soft">|</span>
-                    <span className="text-ink-soft">12.500+ reviews</span>
+                    <span className="hidden text-ink-soft sm:inline">|</span>
+                    <span className="hidden text-ink-soft sm:inline">12.500+ reviews</span>
                   </div>
                 </div>
 
                 {/* Keuzehulp card */}
-                <aside className="self-center justify-self-end w-full max-w-sm rounded-xl border border-border bg-background p-6 shadow-[var(--shadow-soft)]">
-                  <h2 className="text-xl font-extrabold text-ink">Waar ga je mee aan de slag?</h2>
+                <aside className="w-full self-center justify-self-stretch rounded-xl border border-border bg-background p-5 shadow-[var(--shadow-soft)] md:max-w-sm md:justify-self-end md:p-6">
+                  <h2 className="text-lg font-extrabold text-ink md:text-xl">Waar ga je mee aan de slag?</h2>
                   <p className="mt-1 text-sm text-ink-soft">Vind snel de juiste verf voor jouw project.</p>
-                  <ul className="mt-5 space-y-2">
+                  <ul className="mt-4 space-y-2 md:mt-5">
                     {klusKeuze.map(({ icon: Icon, title, sub, color, bg }) => (
                       <li key={title}>
                         <Link to="/kleuradvies" className="flex items-center gap-3 rounded-lg border border-border p-3 transition hover:border-cta hover:bg-surface">
                           <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${bg} ${color}`}>
                             <Icon className="h-5 w-5" />
                           </span>
-                          <span className="min-w-0">
+                          <span className="min-w-0 flex-1">
                             <span className="block text-sm font-bold text-ink">{title}</span>
                             <span className="block truncate text-xs text-ink-soft">{sub}</span>
                           </span>
-                          <ArrowRight className="ml-auto h-4 w-4 text-ink-soft" />
+                          <ArrowRight className="h-4 w-4 shrink-0 text-ink-soft" />
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <Link to="/kleuradvies" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-cta-foreground">
+                  <Link to="/kleuradvies" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-cta-foreground md:mt-5">
                     Naar keuzehulp <ArrowRight className="h-4 w-4" />
                   </Link>
                 </aside>
@@ -228,14 +227,14 @@ function Home() {
         </section>
 
         {/* KLUSBLOKKEN */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        <section className="container mx-auto px-4 py-6 md:py-10">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
             {klusBlokken.map(({ img, title, sub, slug }) => (
               <Link
                 key={title}
                 to="/categorie/$slug"
                 params={{ slug }}
-                className="group relative flex h-44 flex-col justify-end overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+                className="group relative flex h-36 flex-col justify-end overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta sm:h-40 md:h-44"
               >
                 <img
                   src={img}
@@ -257,8 +256,8 @@ function Home() {
         </section>
 
         {/* UITGELICHTE BLOGS */}
-        <section className="container mx-auto px-4 py-10">
-          <div className="grid gap-5 md:grid-cols-2">
+        <section className="container mx-auto px-4 py-6 md:py-10">
+          <div className="grid gap-4 md:grid-cols-2 md:gap-5">
             <Link
               to="/blog/$slug"
               params={{ slug: "flexa-kleurfamilie-2026" }}
@@ -303,20 +302,20 @@ function Home() {
 
 
         {/* MEEST VERKOCHT */}
-        <section className="container mx-auto px-4 py-10">
-          <div className="mb-5 flex items-center justify-between">
+        <section className="container mx-auto px-4 py-6 md:py-10">
+          <div className="mb-4 flex items-center justify-between gap-3 md:mb-5">
             <h2 className="text-xl font-extrabold text-ink md:text-2xl">Meest verkocht</h2>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="text-xs font-bold text-ink hover:text-cta-foreground">Bekijk alles</Link>
-              <button aria-label="Vorige" className="grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta">
+              <button aria-label="Vorige" className="hidden h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta sm:grid">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button aria-label="Volgende" className="grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta">
+              <button aria-label="Volgende" className="hidden h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta sm:grid">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
             {featured.map((p) => <ProductCardSmall key={p.id} p={p} />)}
           </div>
         </section>
@@ -389,17 +388,17 @@ function Home() {
 
         {/* TRUST STRIP */}
         <section className="border-y border-border bg-surface">
-          <div className="container mx-auto flex flex-wrap items-center gap-4 px-4 py-5">
+          <div className="container mx-auto grid grid-cols-2 gap-3 px-4 py-5 sm:grid-cols-4 md:flex md:flex-wrap md:items-center md:gap-4">
             {trustItems.map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex flex-1 min-w-[160px] items-center gap-3">
-                <Icon className="h-6 w-6 shrink-0 text-navy" />
-                <div className="text-xs leading-tight">
-                  <div className="font-extrabold text-ink">{title}</div>
-                  <div className="text-ink-soft">{sub}</div>
+              <div key={title} className="flex items-center gap-2.5 md:flex-1 md:min-w-[160px] md:gap-3">
+                <Icon className="h-5 w-5 shrink-0 text-navy md:h-6 md:w-6" />
+                <div className="min-w-0 text-[11px] leading-tight md:text-xs">
+                  <div className="truncate font-extrabold text-ink">{title}</div>
+                  <div className="truncate text-ink-soft">{sub}</div>
                 </div>
               </div>
             ))}
-            <div className="flex items-center gap-2 ml-auto">
+            <div className="col-span-2 flex items-center justify-center gap-2 border-t border-border pt-3 sm:col-span-4 md:col-auto md:ml-auto md:border-0 md:pt-0">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-3 w-3 fill-rating text-rating" />
@@ -424,7 +423,7 @@ function BrandsRow() {
   const { data: brands } = useSuspenseQuery(brandsQueryOptions);
   const items = brands.length > 0 ? brands : Object.keys(brandFallback).map((slug) => ({ id: slug, slug, name: slug, link_url: null, logo_url: null }));
   return (
-    <div className="flex flex-1 items-center gap-8 overflow-x-auto">
+    <div className="flex flex-1 snap-x snap-mandatory items-center gap-6 overflow-x-auto md:snap-none md:gap-8">
       {items.map((b) => {
         const src = b.logo_url ?? brandFallback[b.slug];
         return (
@@ -432,7 +431,7 @@ function BrandsRow() {
             key={b.id}
             to="/merk/$slug"
             params={{ slug: b.slug }}
-            className="grid h-12 shrink-0 place-items-center transition hover:opacity-80"
+            className="grid h-12 shrink-0 snap-start place-items-center transition hover:opacity-80"
             aria-label={b.name}
           >
             <img src={src} alt={b.name} className="max-h-10 w-auto object-contain" />

@@ -117,8 +117,8 @@ function CategoryPage() {
         </nav>
 
         <header className="mt-4 max-w-3xl">
-          <h1 className="text-3xl font-extrabold text-ink md:text-4xl">{category.label}</h1>
-          <p className="mt-3 text-base text-ink-soft">{catInfo.intro}</p>
+          <h1 className="text-2xl font-extrabold text-ink sm:text-3xl md:text-4xl">{category.label}</h1>
+          <p className="mt-3 text-[15px] text-ink-soft md:text-base">{catInfo.intro}</p>
           <p className="mt-2 text-sm text-ink-soft">
             <strong className="text-ink">{base.length} producten</strong> van topmerken. Voor 21:00 besteld, morgen in huis. Op kleur gemengd in onze verfmengservice.
           </p>
@@ -198,10 +198,10 @@ function CategoryPage() {
 
           {/* Grid */}
           <section>
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+            <div className="sticky top-[64px] z-20 -mx-4 mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border bg-background/95 px-4 py-3 backdrop-blur lg:static lg:mx-0 lg:mb-5 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
               <button
                 onClick={() => setMobileFilters(true)}
-                className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-sm text-ink lg:hidden"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-3 text-sm font-semibold text-ink lg:hidden"
               >
                 <SlidersHorizontal className="h-4 w-4" /> Filter {activeCount > 0 && <span className="rounded-full bg-accent px-1.5 text-[10px] text-accent-foreground">{activeCount}</span>}
               </button>
@@ -209,17 +209,17 @@ function CategoryPage() {
                 <strong className="text-ink">{filtered.length}</strong> {filtered.length === 1 ? "product" : "producten"}
               </span>
               <label className="flex items-center gap-2 text-sm text-ink-soft">
-                Sorteren:
+                <span className="hidden sm:inline">Sorteren:</span>
                 <select
                   value={search.sort}
                   onChange={(e) => navigate({ search: (p: typeof search) => ({ ...p, sort: e.target.value as typeof search.sort }) })}
-                  className="rounded border border-border bg-background px-2 py-1.5 text-sm text-ink"
+                  className="h-10 rounded border border-border bg-background px-2 text-sm text-ink"
                 >
-                  <option value="populair">Meest populair</option>
-                  <option value="prijs-laag">Prijs oplopend</option>
-                  <option value="prijs-hoog">Prijs aflopend</option>
-                  <option value="rating">Hoogst gewaardeerd</option>
-                  <option value="nieuw">Nieuwste eerst</option>
+                  <option value="populair">Populair</option>
+                  <option value="prijs-laag">Prijs ↑</option>
+                  <option value="prijs-hoog">Prijs ↓</option>
+                  <option value="rating">Beoordeling</option>
+                  <option value="nieuw">Nieuw</option>
                 </select>
               </label>
             </div>
