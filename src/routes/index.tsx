@@ -423,7 +423,7 @@ function BrandsRow() {
   const { data: brands } = useSuspenseQuery(brandsQueryOptions);
   const items = brands.length > 0 ? brands : Object.keys(brandFallback).map((slug) => ({ id: slug, slug, name: slug, link_url: null, logo_url: null }));
   return (
-    <div className="flex flex-1 items-center gap-8 overflow-x-auto">
+    <div className="flex flex-1 snap-x snap-mandatory items-center gap-6 overflow-x-auto md:snap-none md:gap-8">
       {items.map((b) => {
         const src = b.logo_url ?? brandFallback[b.slug];
         return (
