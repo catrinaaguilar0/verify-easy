@@ -15,7 +15,7 @@ export const Route = createFileRoute("/bestelling-bevestigd")({
   validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
-      { title: "Bestelling bevestigd | VerfOnlineWinkel" },
+      { title: "Bestelling bevestigd | Nieuweverf" },
       { name: "description", content: "Bedankt voor je bestelling." },
       { name: "robots", content: "noindex, nofollow" },
     ],

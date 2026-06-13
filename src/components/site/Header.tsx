@@ -91,7 +91,7 @@ export function Header() {
             </span>
             <span className="flex flex-col leading-tight">
               <span className="text-lg font-extrabold tracking-tight">
-                VerfOnlineWinkel<span className="text-cta">.nl</span>
+                Nieuweverf<span className="text-cta">.nl</span>
               </span>
               <span className="hidden text-[10px] uppercase tracking-wider text-white/70 sm:block">
                 Professionele verf voor elke klus

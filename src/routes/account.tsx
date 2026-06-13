@@ -6,7 +6,7 @@ import { formatPrice } from "@/lib/catalog";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "Mijn account | VerfOnlineWinkel" },
+      { title: "Mijn account | Nieuweverf" },
       { name: "description", content: "Bekijk je bestellingen, adressen en accountgegevens." },
       { name: "robots", content: "noindex, nofollow" },
     ],

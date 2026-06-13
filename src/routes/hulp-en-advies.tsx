@@ -6,13 +6,13 @@ import { Calculator, Palette, BookOpen, Play, ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/hulp-en-advies")({
   head: () => ({
     meta: [
-      { title: "Hulp & Advies — VerfOnlineWinkel" },
+      { title: "Hulp & Advies — Nieuweverf" },
       {
         name: "description",
         content:
           "Alles om je verfklus te laten slagen: bereken hoeveel verf je nodig hebt, laat een kleur op maat mengen of lees onze blog vol tips en kleurinspiratie.",
       },
-      { property: "og:title", content: "Hulp & Advies — VerfOnlineWinkel" },
+      { property: "og:title", content: "Hulp & Advies — Nieuweverf" },
       {
         property: "og:description",
         content:

@@ -13,13 +13,13 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/muurverf")({
   head: () => ({
     meta: [
-      { title: "Muurverf kopen — binnen en buiten | VerfOnlineWinkel" },
+      { title: "Muurverf kopen — binnen en buiten | Nieuweverf" },
       { name: "description", content: "Muurverf voor binnenmuren en plafonds. Ruim assortiment met topkwaliteit voor een perfect en duurzaam resultaat. Voor 23:00 besteld, morgen in huis." },
-      { property: "og:title", content: "Muurverf kopen — binnen en buiten | VerfOnlineWinkel" },
+      { property: "og:title", content: "Muurverf kopen — binnen en buiten | Nieuweverf" },
       { property: "og:description", content: "Muurverf van Sikkens, Sigma, Wijzonol en Flexa — kleur op maat gemengd." },
       { property: "og:type", content: "product.group" },
       { property: "og:url", content: `${SITE_URL}/muurverf` },
-      { name: "twitter:title", content: "Muurverf kopen | VerfOnlineWinkel" },
+      { name: "twitter:title", content: "Muurverf kopen | Nieuweverf" },
       { name: "twitter:description", content: "Muurverf van topmerken, kleur op maat." },
     ],
     links: [

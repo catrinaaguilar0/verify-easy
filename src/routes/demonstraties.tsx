@@ -6,13 +6,13 @@ import { Play, ArrowLeft, ExternalLink, ShieldCheck, Droplets, PaintRoller, Brus
 export const Route = createFileRoute("/demonstraties")({
   head: () => ({
     meta: [
-      { title: "Demonstraties — VerfOnlineWinkel" },
+      { title: "Demonstraties — Nieuweverf" },
       {
         name: "description",
         content:
           "Bekijk professionele demonstratiefilms over verftechnieken, kleurkeuzes en duurzaam schilderen. Leer van de experts bij Sigma.",
       },
-      { property: "og:title", content: "Demonstraties — VerfOnlineWinkel" },
+      { property: "og:title", content: "Demonstraties — Nieuweverf" },
       {
         property: "og:description",
         content:

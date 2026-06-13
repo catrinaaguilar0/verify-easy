@@ -8,7 +8,7 @@ import { formatPrice } from "@/lib/catalog";
 export const Route = createFileRoute("/winkelwagen")({
   head: () => ({
     meta: [
-      { title: "Winkelwagen | VerfOnlineWinkel" },
+      { title: "Winkelwagen | Nieuweverf" },
       { name: "description", content: "Bekijk je winkelwagen en reken veilig af." },
       { name: "robots", content: "noindex, nofollow" },
     ],

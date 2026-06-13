@@ -9,7 +9,7 @@ import { formatPrice } from "@/lib/catalog";
 export const Route = createFileRoute("/afrekenen")({
   head: () => ({
     meta: [
-      { title: "Afrekenen | VerfOnlineWinkel" },
+      { title: "Afrekenen | Nieuweverf" },
       { name: "description", content: "Reken veilig en snel af. Verzending vanaf €50 gratis." },
       { name: "robots", content: "noindex, nofollow" },
     ],

@@ -42,9 +42,9 @@ const FAQS = [
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "Veelgestelde vragen | VerfOnlineWinkel" },
+      { title: "Veelgestelde vragen | Nieuweverf" },
       { name: "description", content: "Antwoorden op vragen over bestellen, levering, kleur op maat en retourneren." },
-      { property: "og:title", content: "Veelgestelde vragen | VerfOnlineWinkel" },
+      { property: "og:title", content: "Veelgestelde vragen | Nieuweverf" },
       { property: "og:url", content: `${SITE_URL}/faq` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/faq` }],

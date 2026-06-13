@@ -7,10 +7,10 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/over-ons")({
   head: () => ({
     meta: [
-      { title: "Over ons | VerfOnlineWinkel" },
+      { title: "Over ons | Nieuweverf" },
       { name: "description", content: "Al meer dan 25 jaar dé online specialist in professionele verf voor vakman en doe-het-zelver." },
-      { property: "og:title", content: "Over ons | VerfOnlineWinkel" },
-      { property: "og:description", content: "Onze missie, ons verhaal en het team achter VerfOnlineWinkel." },
+      { property: "og:title", content: "Over ons | Nieuweverf" },
+      { property: "og:description", content: "Onze missie, ons verhaal en het team achter Nieuweverf." },
       { property: "og:url", content: `${SITE_URL}/over-ons` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/over-ons` }],
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/over-ons")({
 function AboutPage() {
   return (
     <PageLayout
-      title="Over VerfOnlineWinkel"
+      title="Over Nieuweverf"
       intro="Sinds 1999 helpen we vakschilders en doe-het-zelvers aan de juiste verf, eerlijk advies en topservice. Niet de grootste — wél de beste in service."
       breadcrumb={[{ label: "Over ons" }]}
     >
@@ -44,7 +44,7 @@ function AboutPage() {
         <div>
           <h2 className="text-2xl font-extrabold text-ink">Ons verhaal</h2>
           <p className="mt-4 text-sm text-ink-soft">
-            VerfOnlineWinkel begon in 1999 als een kleine winkel in Amsterdam-Noord. Geen showroom met flashy displays, maar
+            Nieuweverf begon in 1999 als een kleine winkel in Amsterdam-Noord. Geen showroom met flashy displays, maar
             een team van mensen die écht alles weten over verf. Klanten kwamen voor advies, en bleven voor de service.
           </p>
           <p className="mt-3 text-sm text-ink-soft">

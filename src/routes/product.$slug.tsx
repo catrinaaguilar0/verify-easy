@@ -28,7 +28,7 @@ export const Route = createFileRoute("/product/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.product;
-    const title = p ? `${p.name} ${p.volume ?? ""} kopen | VerfOnlineWinkel.nl` : "Product";
+    const title = p ? `${p.name} ${p.volume ?? ""} kopen | Nieuweverf.nl` : "Product";
     const desc = p
       ? `${p.name} — ${p.shortDescription} ✓ Voor 23:00 besteld, morgen in huis ✓ Gratis verzending vanaf €50 — Bestel direct online!`
       : "Bestel professionele verf online.";
