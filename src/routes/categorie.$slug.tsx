@@ -117,8 +117,8 @@ function CategoryPage() {
         </nav>
 
         <header className="mt-4 max-w-3xl">
-          <h1 className="text-3xl font-extrabold text-ink md:text-4xl">{category.label}</h1>
-          <p className="mt-3 text-base text-ink-soft">{catInfo.intro}</p>
+          <h1 className="text-2xl font-extrabold text-ink sm:text-3xl md:text-4xl">{category.label}</h1>
+          <p className="mt-3 text-[15px] text-ink-soft md:text-base">{catInfo.intro}</p>
           <p className="mt-2 text-sm text-ink-soft">
             <strong className="text-ink">{base.length} producten</strong> van topmerken. Voor 21:00 besteld, morgen in huis. Op kleur gemengd in onze verfmengservice.
           </p>
