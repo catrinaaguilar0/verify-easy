@@ -459,6 +459,27 @@ function ProductPage() {
           </section>
         )}
       </main>
+
+      {/* Mobile sticky add-to-cart */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.08)] backdrop-blur lg:hidden" style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}>
+        <div className="container mx-auto flex items-center gap-3">
+          <div className="min-w-0">
+            <div className="text-lg font-extrabold leading-tight text-ink">{formatPrice(product.price)}</div>
+            <div className={`text-[11px] font-semibold ${product.inStock ? "text-accent" : "text-destructive"}`}>
+              {product.inStock ? "Op voorraad — morgen in huis" : "Tijdelijk uitverkocht"}
+            </div>
+          </div>
+          <button
+            onClick={() => add(product, qty)}
+            disabled={!product.inStock}
+            className="ml-auto inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-bold uppercase tracking-wide text-accent-foreground transition hover:bg-accent-strong disabled:opacity-50"
+          >
+            <ShoppingBag className="h-4 w-4" />
+            In winkelwagen
+          </button>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
