@@ -76,11 +76,11 @@ function PayBadge({ label, bg, text }: { label: string; bg: string; text: string
 export function Footer() {
   return (
     <footer className="bg-navy text-navy-foreground">
-      <div className="container mx-auto grid gap-8 px-4 py-8 md:grid-cols-2 lg:grid-cols-5">
+      <div className="container mx-auto grid gap-8 px-4 py-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {columns.map((c) => (
           <div key={c.h}>
             <h4 className="mb-3 text-sm font-extrabold uppercase tracking-wide">{c.h}</h4>
-            <ul className="space-y-1 text-sm text-white/80">
+            <ul className="space-y-1.5 text-sm text-white/80">
               {c.links.map((l) => (
                 <li key={l.label}>
                   {l.to ? (
@@ -98,10 +98,10 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-xs text-white/70">
-          <span>&copy; {new Date().getFullYear()} VerfOnlineWinkel.nl</span>
+        <div className="container mx-auto flex flex-col items-center gap-3 px-4 py-4 text-xs text-white/70 md:flex-row md:flex-wrap md:justify-between">
+          <span className="order-2 md:order-1">&copy; {new Date().getFullYear()} VerfOnlineWinkel.nl</span>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="order-1 flex flex-wrap items-center justify-center gap-2 md:order-2">
             <PayBadge label="iDEAL" bg="#FF6B00" text="#fff" />
             <PayBadge label="Klarna" bg="#FFB3C7" text="#0A0B09" />
             <PayBadge label="VISA" bg="#1A1F71" text="#fff" />
@@ -109,7 +109,7 @@ export function Footer() {
             <PayBadge label="Pay" bg="#000" text="#fff" />
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="order-3 flex flex-wrap items-center justify-center gap-3">
             <a href="#" aria-label="Facebook" className="text-white/60 hover:text-cta">
               <Facebook className="h-4 w-4" />
             </a>
@@ -119,7 +119,7 @@ export function Footer() {
             <a href="#" aria-label="YouTube" className="text-white/60 hover:text-cta">
               <Youtube className="h-4 w-4" />
             </a>
-            <span className="ml-2 text-white/50">KvK 12345678 &middot; BTW NL000000000B01</span>
+            <span className="text-white/50">KvK 12345678 &middot; BTW NL000000000B01</span>
           </div>
         </div>
       </div>
