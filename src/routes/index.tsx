@@ -227,8 +227,8 @@ function Home() {
         </section>
 
         {/* KLUSBLOKKEN */}
-        <section className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        <section className="container mx-auto px-4 py-6 md:py-10">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
             {klusBlokken.map(({ img, title, sub, slug }) => (
               <Link
                 key={title}
