@@ -388,17 +388,17 @@ function Home() {
 
         {/* TRUST STRIP */}
         <section className="border-y border-border bg-surface">
-          <div className="container mx-auto flex flex-wrap items-center gap-4 px-4 py-5">
+          <div className="container mx-auto grid grid-cols-2 gap-3 px-4 py-5 sm:grid-cols-4 md:flex md:flex-wrap md:items-center md:gap-4">
             {trustItems.map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="flex flex-1 min-w-[160px] items-center gap-3">
-                <Icon className="h-6 w-6 shrink-0 text-navy" />
-                <div className="text-xs leading-tight">
-                  <div className="font-extrabold text-ink">{title}</div>
-                  <div className="text-ink-soft">{sub}</div>
+              <div key={title} className="flex items-center gap-2.5 md:flex-1 md:min-w-[160px] md:gap-3">
+                <Icon className="h-5 w-5 shrink-0 text-navy md:h-6 md:w-6" />
+                <div className="min-w-0 text-[11px] leading-tight md:text-xs">
+                  <div className="truncate font-extrabold text-ink">{title}</div>
+                  <div className="truncate text-ink-soft">{sub}</div>
                 </div>
               </div>
             ))}
-            <div className="flex items-center gap-2 ml-auto">
+            <div className="col-span-2 flex items-center justify-center gap-2 border-t border-border pt-3 sm:col-span-4 md:col-auto md:ml-auto md:border-0 md:pt-0">
               <div className="flex items-center gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-3 w-3 fill-rating text-rating" />
