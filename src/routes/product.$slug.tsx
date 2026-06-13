@@ -347,7 +347,7 @@ function ProductPage() {
               <button
                 key={key}
                 onClick={() => setTab(key)}
-                className={`-mb-px border-b-2 px-4 py-3 text-sm font-semibold transition ${
+                className={`-mb-px shrink-0 whitespace-nowrap border-b-2 px-4 py-3 text-sm font-semibold transition ${
                   tab === key
                     ? "border-accent text-ink"
                     : "border-transparent text-ink-soft hover:text-ink"
