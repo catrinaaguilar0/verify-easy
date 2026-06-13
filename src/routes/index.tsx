@@ -302,20 +302,20 @@ function Home() {
 
 
         {/* MEEST VERKOCHT */}
-        <section className="container mx-auto px-4 py-10">
-          <div className="mb-5 flex items-center justify-between">
+        <section className="container mx-auto px-4 py-6 md:py-10">
+          <div className="mb-4 flex items-center justify-between gap-3 md:mb-5">
             <h2 className="text-xl font-extrabold text-ink md:text-2xl">Meest verkocht</h2>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               <Link to="/categorie/$slug" params={{ slug: "muurverf" }} className="text-xs font-bold text-ink hover:text-cta-foreground">Bekijk alles</Link>
-              <button aria-label="Vorige" className="grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta">
+              <button aria-label="Vorige" className="hidden h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta sm:grid">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button aria-label="Volgende" className="grid h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta">
+              <button aria-label="Volgende" className="hidden h-9 w-9 place-items-center rounded-full border border-border text-ink-soft hover:border-cta sm:grid">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
             {featured.map((p) => <ProductCardSmall key={p.id} p={p} />)}
           </div>
         </section>
