@@ -152,12 +152,12 @@ function ProductPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 py-6">
-        <nav className="flex flex-wrap items-center gap-1 text-xs text-ink-soft">
+      <main className="container mx-auto px-4 py-6 pb-28 lg:pb-6">
+        <nav className="flex items-center gap-1 overflow-x-auto whitespace-nowrap text-xs text-ink-soft">
           <Link to="/" className="hover:text-accent">Home</Link>
-          <ChevronRight className="h-3 w-3" />
+          <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="capitalize">{product.category}</span>
-          <ChevronRight className="h-3 w-3" />
+          <ChevronRight className="h-3 w-3 shrink-0" />
           <span className="text-ink">{product.brand}</span>
         </nav>
 
