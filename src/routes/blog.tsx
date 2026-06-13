@@ -9,14 +9,14 @@ const baseUrl = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — kleurinspiratie, advies en doe-het-zelf | VerfOnlineWinkel" },
+      { title: "Blog — kleurinspiratie, advies en doe-het-zelf | Nieuweverf" },
       { name: "description", content: "Lees onze laatste artikelen over kleurtrends, schildertechnieken en praktisch advies van onze kleurspecialisten." },
-      { property: "og:title", content: "Blog — VerfOnlineWinkel" },
+      { property: "og:title", content: "Blog — Nieuweverf" },
       { property: "og:description", content: "Kleurinspiratie, advies en doe-het-zelf tips." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${baseUrl}/blog` },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Blog — VerfOnlineWinkel" },
+      { name: "twitter:title", content: "Blog — Nieuweverf" },
       { name: "twitter:description", content: "Kleurinspiratie, advies en doe-het-zelf tips." },
     ],
     links: [

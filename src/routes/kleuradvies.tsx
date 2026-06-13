@@ -7,9 +7,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/kleuradvies")({
   head: () => ({
     meta: [
-      { title: "Kleuradvies — welke verfkleur past bij jou? | VerfOnlineWinkel" },
+      { title: "Kleuradvies — welke verfkleur past bij jou? | Nieuweverf" },
       { name: "description", content: "Persoonlijk kleuradvies, kleurtrends 2026 en tips om de perfecte verfkleur te kiezen voor elke ruimte." },
-      { property: "og:title", content: "Kleuradvies — welke verfkleur past bij jou? | VerfOnlineWinkel" },
+      { property: "og:title", content: "Kleuradvies — welke verfkleur past bij jou? | Nieuweverf" },
       { property: "og:description", content: "Kleuradvies voor elke ruimte: inspiratie, trends en praktische tips." },
       { property: "og:url", content: `${SITE_URL}/kleuradvies` },
     ],

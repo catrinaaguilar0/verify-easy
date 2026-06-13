@@ -8,13 +8,13 @@ const baseUrl = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/ral")({
   head: () => ({
     meta: [
-      { title: "RAL kleuren — overzicht & inspiratie | VerfOnlineWinkel" },
+      { title: "RAL kleuren — overzicht & inspiratie | Nieuweverf" },
       {
         name: "description",
         content:
           "Bekijk populaire RAL-kleuren met uitleg, toepassing en combinatietips. Laat jouw RAL-kleur gratis mengen met onze verfmengservice.",
       },
-      { property: "og:title", content: "RAL kleuren — overzicht | VerfOnlineWinkel" },
+      { property: "og:title", content: "RAL kleuren — overzicht | Nieuweverf" },
       { property: "og:description", content: "Populaire RAL-kleuren met inspiratie en advies." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${baseUrl}/ral` },

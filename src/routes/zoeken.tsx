@@ -15,7 +15,7 @@ export const Route = createFileRoute("/zoeken")({
   validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
-      { title: "Zoekresultaten | VerfOnlineWinkel" },
+      { title: "Zoekresultaten | Nieuweverf" },
       { name: "description", content: "Zoek in onze webshop op product, merk, RAL-kleur of toepassing." },
       { name: "robots", content: "noindex, follow" },
     ],

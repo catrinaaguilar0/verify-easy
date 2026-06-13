@@ -61,9 +61,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VerfOnlineWinkel — Professionele verf voor elke klus" },
+      { title: "Nieuweverf — Professionele verf voor elke klus" },
       { name: "description", content: "Topmerken verf, kleur op maat en deskundig advies. Gratis verzending vanaf €50. Voor 21:00 besteld, morgen in huis." },
-      { property: "og:title", content: "VerfOnlineWinkel — Professionele verf voor elke klus" },
+      { property: "og:title", content: "Nieuweverf — Professionele verf voor elke klus" },
       { property: "og:description", content: "Topmerken verf, kleur op maat en deskundig advies. Snel in huis." },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },

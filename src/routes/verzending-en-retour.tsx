@@ -7,9 +7,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/verzending-en-retour")({
   head: () => ({
     meta: [
-      { title: "Verzending & retour | VerfOnlineWinkel" },
+      { title: "Verzending & retour | Nieuweverf" },
       { name: "description", content: "Alles over levertijden, verzendkosten en retourneren. Voor 23:00 besteld, morgen in huis." },
-      { property: "og:title", content: "Verzending & retour | VerfOnlineWinkel" },
+      { property: "og:title", content: "Verzending & retour | Nieuweverf" },
       { property: "og:description", content: "Snel geleverd, 14 dagen retourrecht." },
       { property: "og:url", content: `${SITE_URL}/verzending-en-retour` },
     ],

@@ -85,7 +85,7 @@ const SLUG_TO_BRAND: Record<string, (typeof BRANDS)[number]> = {
 export const Route = createFileRoute("/merk/$slug")({
   head: ({ params }) => {
     const brand = SLUG_TO_BRAND[params.slug.toLowerCase()] ?? BRANDS.find((b) => b.toLowerCase() === params.slug.toLowerCase());
-    const title = brand ? `${brand} kopen — alle producten | VerfOnlineWinkel` : "Merk | VerfOnlineWinkel";
+    const title = brand ? `${brand} kopen — alle producten | Nieuweverf` : "Merk | Nieuweverf";
     const desc = brand
       ? `Alle ${brand}-producten op één plek. Snel geleverd, op kleur gemengd, eerlijke prijs.`
       : "Bekijk onze merken.";

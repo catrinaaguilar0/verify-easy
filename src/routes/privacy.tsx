@@ -6,9 +6,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacybeleid | VerfOnlineWinkel" },
+      { title: "Privacybeleid | Nieuweverf" },
       { name: "description", content: "Hoe wij omgaan met jouw persoonsgegevens, in lijn met de AVG." },
-      { property: "og:title", content: "Privacybeleid | VerfOnlineWinkel" },
+      { property: "og:title", content: "Privacybeleid | Nieuweverf" },
       { property: "og:url", content: `${SITE_URL}/privacy` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/privacy` }],
@@ -22,7 +22,7 @@ const SECTIONS = [
   { h: "Hoe lang bewaren we gegevens?", p: "We bewaren je gegevens zo lang als nodig voor het doel waarvoor we ze verzamelden en voor wettelijke bewaartermijnen (zoals 7 jaar voor financiële administratie)." },
   { h: "Met wie delen we gegevens?", p: "Met onze logistieke partners (PostNL, DPD), betaaldienstverleners (Mollie, Stripe) en hostingpartners — uitsluitend om jouw bestelling mogelijk te maken." },
   { h: "Cookies", p: "Wij gebruiken functionele cookies (winkelwagen, login) en — met jouw toestemming — analytische en marketingcookies. Je kunt cookies altijd weigeren via je browser." },
-  { h: "Jouw rechten", p: "Je hebt recht op inzage, correctie, verwijdering en bezwaar. Stuur een e-mail naar privacy@verfonlinewinkel.nl en we reageren binnen 14 dagen." },
+  { h: "Jouw rechten", p: "Je hebt recht op inzage, correctie, verwijdering en bezwaar. Stuur een e-mail naar privacy@nieuweverf.nl en we reageren binnen 14 dagen." },
 ];
 
 function PrivacyPage() {

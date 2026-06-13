@@ -24,7 +24,7 @@ export const Route = createFileRoute("/categorie/$slug")({
   head: ({ params }) => {
     const cat = CATEGORIES.find((c) => c.key === params.slug);
     const info = cat ? CATEGORY_INFO[cat.key] : undefined;
-    const title = cat ? `${cat.label} kopen | VerfOnlineWinkel` : "Categorie | VerfOnlineWinkel";
+    const title = cat ? `${cat.label} kopen | Nieuweverf` : "Categorie | Nieuweverf";
     const desc = info?.metaDescription ?? (cat
       ? `${cat.label} van topmerken zoals Sikkens, Sigma en Flexa. Snel geleverd, op kleur gemengd, eerlijke prijs.`
       : "Bekijk onze categorieën.");

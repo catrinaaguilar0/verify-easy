@@ -8,7 +8,7 @@ import { useCart } from "@/lib/cart";
 export const Route = createFileRoute("/verlanglijst")({
   head: () => ({
     meta: [
-      { title: "Verlanglijst | VerfOnlineWinkel" },
+      { title: "Verlanglijst | Nieuweverf" },
       { name: "description", content: "Bewaar je favoriete producten en bestel ze later." },
       { name: "robots", content: "noindex, nofollow" },
     ],

@@ -99,7 +99,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-col items-center gap-3 px-4 py-4 text-xs text-white/70 md:flex-row md:flex-wrap md:justify-between">
-          <span className="order-2 md:order-1">&copy; {new Date().getFullYear()} VerfOnlineWinkel.nl</span>
+          <span className="order-2 md:order-1">&copy; {new Date().getFullYear()} Nieuweverf.nl</span>
 
           <div className="order-1 flex flex-wrap items-center justify-center gap-2 md:order-2">
             <PayBadge label="iDEAL" bg="#FF6B00" text="#fff" />

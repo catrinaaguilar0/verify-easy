@@ -13,9 +13,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/verfcalculator")({
   head: () => ({
     meta: [
-      { title: "Verfcalculator: bereken hoeveel verf je nodig hebt | VerfOnlineWinkel" },
+      { title: "Verfcalculator: bereken hoeveel verf je nodig hebt | Nieuweverf" },
       { name: "description", content: "Bereken in seconden hoeveel liter verf je nodig hebt. Vul je oppervlakte in, kies je type verf en ontdek exact het aantal liters inclusief dekking en lagen." },
-      { property: "og:title", content: "Verfcalculator: bereken hoeveel verf je nodig hebt | VerfOnlineWinkel" },
+      { property: "og:title", content: "Verfcalculator: bereken hoeveel verf je nodig hebt | Nieuweverf" },
       { property: "og:description", content: "Bereken snel het aantal liters verf dat je nodig hebt op basis van oppervlakte, type verf en aantal lagen." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/verfcalculator` },

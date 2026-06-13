@@ -8,9 +8,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact | VerfOnlineWinkel" },
+      { title: "Contact | Nieuweverf" },
       { name: "description", content: "Neem contact op voor advies, bestellingen of klantenservice. Bereikbaar via telefoon, mail of formulier." },
-      { property: "og:title", content: "Contact | VerfOnlineWinkel" },
+      { property: "og:title", content: "Contact | Nieuweverf" },
       { property: "og:description", content: "Bereik ons via telefoon, e-mail of het contactformulier." },
       { property: "og:url", content: `${SITE_URL}/contact` },
     ],
@@ -72,8 +72,8 @@ function ContactPage() {
             <a href="tel:+31201234567" className="mt-4 flex items-center gap-3 rounded-md border border-border bg-background px-4 py-3 text-sm font-semibold text-ink hover:border-accent">
               <Phone className="h-4 w-4 text-accent" /> 020 - 123 45 67
             </a>
-            <a href="mailto:advies@verfonlinewinkel.nl" className="mt-2 flex items-center gap-3 rounded-md border border-border bg-background px-4 py-3 text-sm font-semibold text-ink hover:border-accent">
-              <Mail className="h-4 w-4 text-accent" /> advies@verfonlinewinkel.nl
+            <a href="mailto:advies@nieuweverf.nl" className="mt-2 flex items-center gap-3 rounded-md border border-border bg-background px-4 py-3 text-sm font-semibold text-ink hover:border-accent">
+              <Mail className="h-4 w-4 text-accent" /> advies@nieuweverf.nl
             </a>
           </div>
           <div className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] text-sm text-ink-soft">

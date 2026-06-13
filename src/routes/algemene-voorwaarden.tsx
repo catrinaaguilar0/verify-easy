@@ -6,9 +6,9 @@ const SITE_URL = "https://cozy-check-hub.lovable.app";
 export const Route = createFileRoute("/algemene-voorwaarden")({
   head: () => ({
     meta: [
-      { title: "Algemene voorwaarden | VerfOnlineWinkel" },
-      { name: "description", content: "Algemene voorwaarden van VerfOnlineWinkel.nl voor bestellingen en levering." },
-      { property: "og:title", content: "Algemene voorwaarden | VerfOnlineWinkel" },
+      { title: "Algemene voorwaarden | Nieuweverf" },
+      { name: "description", content: "Algemene voorwaarden van Nieuweverf.nl voor bestellingen en levering." },
+      { property: "og:title", content: "Algemene voorwaarden | Nieuweverf" },
       { property: "og:url", content: `${SITE_URL}/algemene-voorwaarden` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/algemene-voorwaarden` }],
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/algemene-voorwaarden")({
 });
 
 const SECTIONS = [
-  { h: "1. Algemeen", p: "Deze voorwaarden gelden voor elke aanbieding, bestelling en overeenkomst tussen VerfOnlineWinkel.nl en de klant. Door een bestelling te plaatsen ga je akkoord met deze voorwaarden." },
+  { h: "1. Algemeen", p: "Deze voorwaarden gelden voor elke aanbieding, bestelling en overeenkomst tussen Nieuweverf.nl en de klant. Door een bestelling te plaatsen ga je akkoord met deze voorwaarden." },
   { h: "2. Prijzen en betaling", p: "Alle prijzen zijn inclusief 21% btw en exclusief verzendkosten, tenzij anders vermeld. Betaling vindt plaats via de aangeboden betaalmethodes (iDEAL, Bancontact, creditcard, PayPal, achteraf via Klarna)." },
   { h: "3. Levering", p: "Voor 23:00 op werkdagen besteld, in de meeste gevallen de volgende werkdag in huis. Levertijden zijn indicatief; overschrijding geeft geen recht op schadevergoeding." },
   { h: "4. Herroepingsrecht", p: "Je hebt 14 dagen bedenktijd na ontvangst. Op kleur gemengde verf en geopende producten zijn uitgesloten van retour. Retourkosten zijn voor de klant, tenzij het product defect is." },
