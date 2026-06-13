@@ -234,7 +234,7 @@ function Home() {
                 key={title}
                 to="/categorie/$slug"
                 params={{ slug }}
-                className="group relative flex h-44 flex-col justify-end overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta"
+                className="group relative flex h-36 flex-col justify-end overflow-hidden rounded-xl border border-border shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:border-cta sm:h-40 md:h-44"
               >
                 <img
                   src={img}
