@@ -192,7 +192,7 @@ function ProductPage() {
           {/* Info */}
           <section className="flex flex-col">
             <div className="text-[11px] uppercase tracking-[0.18em] text-ink-soft">{product.brand}</div>
-            <h1 className="mt-1 text-3xl font-extrabold leading-tight text-ink md:text-4xl">
+            <h1 className="mt-1 text-2xl font-extrabold leading-tight text-ink sm:text-3xl md:text-4xl">
               {product.name}
             </h1>
             <div className="mt-2 flex items-center gap-3 text-sm">
