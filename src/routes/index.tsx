@@ -431,7 +431,7 @@ function BrandsRow() {
             key={b.id}
             to="/merk/$slug"
             params={{ slug: b.slug }}
-            className="grid h-12 shrink-0 place-items-center transition hover:opacity-80"
+            className="grid h-12 shrink-0 snap-start place-items-center transition hover:opacity-80"
             aria-label={b.name}
           >
             <img src={src} alt={b.name} className="max-h-10 w-auto object-contain" />
